@@ -1,17 +1,18 @@
 package com.yungnickyoung.minecraft.betterstrongholds.init;
 
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.world.BetterStrongholdStructure;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.StrongholdStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
@@ -19,13 +20,14 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -42,7 +44,7 @@ public class ModStructures {
         // Register event listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModStructures::commonSetup);
         MinecraftForge.EVENT_BUS.addListener(ModStructures::addDimensionalSpacing);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, ModStructures::onBiomeLoad);
+        MinecraftForge.EVENT_BUS.addListener(ModStructures::onBiomeLoad); // We use normal priority since we are both removing and adding stuff
     }
 
     /**
@@ -50,7 +52,7 @@ public class ModStructures {
      */
     private static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            // Add mineshaft to the structure map
+            // Add stronghold to the structure map
             Structure.NAME_STRUCTURE_BIMAP.put("Better Stronghold".toLowerCase(Locale.ROOT), BETTER_STRONGHOLD.get());
 
             // Add structure + spacing settings to default dimension structures.
@@ -59,17 +61,28 @@ public class ModStructures {
             DimensionStructuresSettings.field_236191_b_ =
                 ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
                     .putAll(DimensionStructuresSettings.field_236191_b_)
-                    .put(BETTER_STRONGHOLD.get(), new StructureSeparationSettings(1, 0, 596451784))
+                    .put(BETTER_STRONGHOLD.get(), new StructureSeparationSettings(85, 50, 596441294))
                     .build();
 
             // Register the configured structure feature
             Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterStrongholds.MOD_ID, "stronghold"), ModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
 
-            // Add structure feature to this to prevent any issues if other mods' custom ChunkGenerators use FlatGenerationSettings.STRUCTURES.
+            // Add structure feature to this to prevent any issues if other mods' custom ChunkGenerators use FlatGenerationSettings.STRUCTURES
             FlatGenerationSettings.STRUCTURES.put(BETTER_STRONGHOLD.get(), ModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
 
-            // Register pieces
-//            ModStructurePieces.init();
+            // Register separation settings for mods that might need it, like Terraforged
+            WorldGenRegistries.NOISE_SETTINGS.getEntries().forEach(settings -> {
+                Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().getStructures().func_236195_a_();
+
+                // Precaution in case a mod makes the structure map immutable like datapacks do
+                if (structureMap instanceof ImmutableMap){
+                    Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
+                    tempMap.put(BETTER_STRONGHOLD.get(), DimensionStructuresSettings.field_236191_b_.get(BETTER_STRONGHOLD.get()));
+                    settings.getValue().getStructures().field_236193_d_ = tempMap;
+                } else {
+                    structureMap.put(BETTER_STRONGHOLD.get(), DimensionStructuresSettings.field_236191_b_.get(BETTER_STRONGHOLD.get()));
+                }
+            });
         });
     }
 
@@ -99,9 +112,27 @@ public class ModStructures {
     /**
      * We must manually add the separation settings for our structure to spawn.
      */
+    private static Method GETCODEC_METHOD;
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
+
+            // Skip Terraforged's chunk generator as they are a special case of a mod locking down their chunkgenerator.
+            // They will handle your structure spacing for you if you add to WorldGenRegistries.NOISE_SETTINGS in FMLCommonSetupEvent.
+            // We use reflection here, but this can also be accomplished via getCodec with an invoker mixin.
+            try {
+                if (GETCODEC_METHOD == null) {
+                    GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "func_230347_a_");
+                }
+
+                ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
+
+                if (cgRL != null && cgRL.getNamespace().equals("terraforged")) {
+                    return;
+                }
+            } catch (Exception e){
+                BetterStrongholds.LOGGER.error("Was unable to check if " + serverWorld.getDimensionKey().getLocation() + " is using Terraforged's ChunkGenerator.");
+            }
 
             // Prevent spawning in superflat world
             if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {

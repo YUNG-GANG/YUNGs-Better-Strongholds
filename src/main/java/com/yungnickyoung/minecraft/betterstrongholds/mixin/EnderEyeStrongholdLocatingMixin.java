@@ -6,6 +6,7 @@
 
 package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
+import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModStructures;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
@@ -19,13 +20,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(EnderEyeItem.class)
 public class EnderEyeStrongholdLocatingMixin {
-
     @ModifyVariable(
         method = "onItemRightClick",
         at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/gen/ChunkGenerator;func_235956_a_(Lnet/minecraft/world/server/ServerWorld;Lnet/minecraft/world/gen/feature/structure/Structure;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;")
     )
     private BlockPos locateRSStrongholds(BlockPos blockPos, World world, PlayerEntity player) {
-        //RepurposedStructures.LOGGER.log(Level.INFO, "yip yip finding stronghold now");
+        BetterStrongholds.LOGGER.info("yip yip finding stronghold now");
         return returnClosestStronghold(blockPos, (ServerWorld)world, player.getPosition());
     }
 
