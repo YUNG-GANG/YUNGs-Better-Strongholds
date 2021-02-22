@@ -1,11 +1,11 @@
 {
-  "name": "betterstrongholds:hallway_end",
+  "name": "betterstrongholds:statue",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hallway_end",
+        "location": "betterstrongholds:statue_0",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,7 +14,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hallway_end_statue_0",
+        "location": "betterstrongholds:statue_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,7 +23,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hallway_end_statue_1",
+        "location": "betterstrongholds:statue_2",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -32,7 +32,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hallway_end_statue_2",
+        "location": "betterstrongholds:statue_3",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -41,16 +41,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hallway_end_statue_3",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterstrongholds:hallway_end_statue_4",
+        "location": "betterstrongholds:statue_4",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
