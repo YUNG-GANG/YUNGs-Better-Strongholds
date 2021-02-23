@@ -3,7 +3,7 @@
   "fallback": "betterstrongholds:hallway_end",
   "elements": [
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
         "location": "betterstrongholds:hall_doorway",
         "processors": "minecraft:empty",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 10,
       "element": {
         "location": "betterstrongholds:hall_doorway_2torch",
         "processors": "minecraft:empty",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 10,
       "element": {
         "location": "betterstrongholds:hall_doorway_2torch_soul",
         "processors": "minecraft:empty",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 30,
       "element": {
         "location": "betterstrongholds:hall_doorway_banner",
         "processors": "minecraft:empty",
@@ -39,7 +39,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 20,
       "element": {
         "location": "betterstrongholds:hall_doorway_small",
         "processors": "minecraft:empty",
@@ -48,7 +48,7 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 10,
       "element": {
         "location": "betterstrongholds:hall_door_wood",
         "processors": "minecraft:empty",
@@ -57,9 +57,18 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 10,
       "element": {
         "location": "betterstrongholds:hall_door_iron",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:stairs_straight",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
