@@ -183,6 +183,9 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
             // Sets the bounds of the structure once you are finished.
             this.recalculateStructureSize();
 
+            // Vanilla method of adjusting y-coordinate
+            this.func_214628_a(chunkGenerator.getSeaLevel(), this.rand, 10);
+
             // I use to debug and quickly find out if the structure is spawning or not and where it is.
             // This is returning the coordinates of the center starting piece.
             BetterStrongholds.LOGGER.debug("Better Stronghold at {} {} {}",
