@@ -1,11 +1,11 @@
 {
-  "name": "betterstrongholds:spiral_stairs",
+  "name": "betterstrongholds:hall_doorway_small",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:spiral_stairs_top",
+        "location": "betterstrongholds:hall_doorway_small",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

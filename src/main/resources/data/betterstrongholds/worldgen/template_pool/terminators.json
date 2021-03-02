@@ -1,101 +1,92 @@
 {
-  "name": "betterstrongholds:hall_doorway",
-  "fallback": "betterstrongholds:terminators",
+  "name": "betterstrongholds:terminators",
+  "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 100,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_doorway",
+        "location": "betterstrongholds:terminators/spiral_stairs_terminator",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:terminators/hall_doorway_terminator",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:terminators/hallway_end",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_doorway_2torch",
+        "location": "betterstrongholds:terminators/hallway_end_statue_0",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_doorway_2torch_soul",
+        "location": "betterstrongholds:terminators/hallway_end_statue_1",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 30,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_doorway_banner",
+        "location": "betterstrongholds:terminators/hallway_end_statue_2",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 20,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_doorway_small",
+        "location": "betterstrongholds:terminators/hallway_end_statue_3",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_door_wood",
+        "location": "betterstrongholds:terminators/hallway_end_statue_4",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_door_iron",
+        "location": "betterstrongholds:terminators/hall_wall_terminator",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:stairs_straight",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 10,
-      "element": {
-        "location": "betterstrongholds:spiral_stairs_bottom",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 10,
-      "element": {
-        "location": "betterstrongholds:spiral_stairs_top",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 5,
-      "element": {
-        "location": "betterstrongholds:grand_library",
+        "location": "betterstrongholds:terminators/hall_wall_cobble_terminator",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

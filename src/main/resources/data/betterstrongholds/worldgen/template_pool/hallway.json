@@ -1,6 +1,6 @@
 {
   "name": "betterstrongholds:hallway",
-  "fallback": "betterstrongholds:hallway_end",
+  "fallback": "betterstrongholds:terminators",
   "elements": [
     {
       "_comment5": "How likely out of all the element for this one to be chosen.",

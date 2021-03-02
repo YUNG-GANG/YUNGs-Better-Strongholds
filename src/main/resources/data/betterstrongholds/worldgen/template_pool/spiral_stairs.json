@@ -1,6 +1,6 @@
 {
   "name": "betterstrongholds:spiral_stairs",
-  "fallback": "betterstrongholds:spiral_stairs_terminators",
+  "fallback": "betterstrongholds:terminators",
   "elements": [
     {
       "weight": 1,
