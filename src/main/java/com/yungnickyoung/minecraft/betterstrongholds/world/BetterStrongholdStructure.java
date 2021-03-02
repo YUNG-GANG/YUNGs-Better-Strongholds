@@ -140,7 +140,7 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
                 dynamicRegistryManager,
                 new VillageConfig(() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
                     // The path to the starting Template Pool JSON file to read.
-                    .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "hallway")),
+                    .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
 
                     // How many pieces outward from center can a recursive jigsaw structure spawn.
                     // Our structure is only 1 piece outward and isn't recursive so any value of 1 or more doesn't change anything.
