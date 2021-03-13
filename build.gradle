@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url='https://dist.creeper.host/Sponge/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         jcenter()
         mavenCentral()
     }
@@ -11,7 +11,6 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 // Maven info
 version = "${modMinecraftVersion}-${modVersion}"
