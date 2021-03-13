@@ -65,6 +65,19 @@
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           }
+        },
+        {
+          "output_state": {
+            "Name": "minecraft:tnt"
+          },
+          "input_predicate": {
+            "block": "minecraft:red_stained_glass",
+            "probability": 1,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
         }
       ],
       "processor_type": "minecraft:rule"

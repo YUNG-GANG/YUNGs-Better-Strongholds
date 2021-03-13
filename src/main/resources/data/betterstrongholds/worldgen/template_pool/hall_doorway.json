@@ -84,15 +84,6 @@
       }
     },
     {
-      "weight": 10,
-      "element": {
-        "location": "betterstrongholds:spiral_stairs_top",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
       "weight": 5,
       "element": {
         "location": "betterstrongholds:grand_library",
@@ -174,9 +165,63 @@
       }
     },
     {
-      "weight": 10,
+      "weight": 20,
       "element": {
         "location": "betterstrongholds:junction_md",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:chest_trap_tnt",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:cmd_acarii",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:cmd_yung",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:crypt_sm",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:sealed_cell",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "betterstrongholds:sealed_collapse",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
