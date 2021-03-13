@@ -134,20 +134,16 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
              * force the structure to spawn at blockpos's Y value instead. You got options here!
              */
             BlockPos blockpos = new BlockPos(x, 40, z);
+            VillageConfig villageConfig = new VillageConfig(
+                () -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
+                    .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
+                19
+            );
 
             // All a structure has to do is call this method to turn it into a jigsaw based structure!
             assembleJigsawStructure(
                 dynamicRegistryManager,
-                new VillageConfig(() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
-                    // The path to the starting Template Pool JSON file to read.
-                    .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
-
-                    // How many pieces outward from center can a recursive jigsaw structure spawn.
-                    // Our structure is only 1 piece outward and isn't recursive so any value of 1 or more doesn't change anything.
-                    // However, I recommend you keep this a decent value like 10 so people can use datapacks to add additional pieces to your structure easily.
-                    // But don't make it too large for recursive structures like villages or you'll crash server due to hundreds of pieces attempting to generate!
-                    19
-                ),
+                villageConfig,
                 AbstractVillagePiece::new,
                 chunkGenerator,
                 templateManagerIn,

@@ -1,19 +1,10 @@
 {
   "processors": [
     {
+      "processor_type": "betterstrongholds:air_processors"
+    },
+    {
       "rules": [
-        {
-          "output_state": {
-            "Name": "minecraft:stone_bricks"
-          },
-          "input_predicate": {
-            "block": "minecraft:cyan_concrete",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
         {
           "output_state": {
             "Name": "minecraft:cobweb"

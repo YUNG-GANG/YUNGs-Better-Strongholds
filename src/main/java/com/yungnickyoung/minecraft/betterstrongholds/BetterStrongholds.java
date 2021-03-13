@@ -1,9 +1,10 @@
 package com.yungnickyoung.minecraft.betterstrongholds;
 
-    import com.yungnickyoung.minecraft.betterstrongholds.init.ModStructures;
-    import net.minecraftforge.fml.common.Mod;
-    import org.apache.logging.log4j.LogManager;
-    import org.apache.logging.log4j.Logger;
+import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.ModStructures;
+import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(BetterStrongholds.MOD_ID)
 public class BetterStrongholds {
@@ -15,6 +16,7 @@ public class BetterStrongholds {
     }
 
     private void init() {
+        ModProcessors.init();
         ModStructures.init();
     }
 }
