@@ -1,7 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
@@ -15,6 +14,9 @@ import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 
+/**
+ *
+ */
 @MethodsReturnNonnullByDefault
 public class AirProcessor extends StructureProcessor {
     public static final AirProcessor INSTANCE = new AirProcessor();
@@ -22,17 +24,15 @@ public class AirProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public Template.BlockInfo process(IWorldReader worldReader, BlockPos pos, BlockPos blockPos, Template.BlockInfo structureBlockInfoLocal, Template.BlockInfo structureBlockInfoWorld, PlacementSettings structurePlacementData, @Nullable Template template) {
-        if (structureBlockInfoWorld.state.isIn(Blocks.CYAN_CONCRETE)) {
-            if (worldReader.getBlockState(structureBlockInfoWorld.pos).getMaterial() == Material.AIR) {
-                worldReader.getChunk(structureBlockInfoWorld.pos).setBlockState(structureBlockInfoWorld.pos, Blocks.AIR.getDefaultState(), false);
-                BetterStrongholds.LOGGER.info("AIR~~!~!");
+    public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
+        if (blockInfoGlobal.state.isIn(Blocks.CYAN_CONCRETE)) {
+            if (worldReader.getBlockState(blockInfoGlobal.pos).getMaterial() == Material.AIR) {
+                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.REDSTONE_BLOCK.getDefaultState(), blockInfoGlobal.nbt);
             } else {
-                worldReader.getChunk(structureBlockInfoWorld.pos).setBlockState(structureBlockInfoWorld.pos, Blocks.STONE_BRICKS.getDefaultState(), false);
-                BetterStrongholds.LOGGER.info("BRICKS~~!~!");
+                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.GOLD_BLOCK.getDefaultState(), blockInfoGlobal.nbt);
             }
         }
-        return structureBlockInfoWorld;
+        return blockInfoGlobal;
     }
 
     protected IStructureProcessorType<?> getType() {

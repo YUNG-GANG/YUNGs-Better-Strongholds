@@ -59,7 +59,10 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:tnt"
+            "Name": "minecraft:tnt",
+            "Properties": {
+              "unstable": "false"
+            }
           },
           "input_predicate": {
             "block": "minecraft:red_stained_glass",

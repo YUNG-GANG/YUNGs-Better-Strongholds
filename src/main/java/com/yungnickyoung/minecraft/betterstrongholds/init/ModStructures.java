@@ -89,7 +89,7 @@ public class ModStructures {
     /**
      * Adds the appropriate structure feature to each biome as it loads in.
      */
-    public static void onBiomeLoad(BiomeLoadingEvent event) {
+    private static void onBiomeLoad(BiomeLoadingEvent event) {
         // Only operate on biomes that have strongholds
         boolean found = false;
         for (Supplier<StructureFeature<?, ?>> supplier : event.getGeneration().getStructures()) {
@@ -113,7 +113,7 @@ public class ModStructures {
      * We must manually add the separation settings for our structure to spawn.
      */
     private static Method GETCODEC_METHOD;
-    public static void addDimensionalSpacing(final WorldEvent.Load event) {
+    private static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
 
