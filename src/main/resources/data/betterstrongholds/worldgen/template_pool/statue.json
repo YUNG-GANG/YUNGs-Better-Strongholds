@@ -6,7 +6,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_0",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -15,7 +15,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_1",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -24,7 +24,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_2",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -33,7 +33,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_3",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -42,7 +42,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_4",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -51,7 +51,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_5",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -60,7 +60,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_6",
-        "processors": "betterstrongholds:main",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

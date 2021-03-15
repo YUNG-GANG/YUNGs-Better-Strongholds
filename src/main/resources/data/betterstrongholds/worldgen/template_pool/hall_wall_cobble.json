@@ -5,7 +5,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:hall_wall_cobble",
+        "location": "betterstrongholds:walls/hall_wall_cobble",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

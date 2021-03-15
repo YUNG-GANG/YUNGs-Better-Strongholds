@@ -3,10 +3,9 @@
   "fallback": "betterstrongholds:terminators",
   "elements": [
     {
-      "_comment5": "How likely out of all the element for this one to be chosen.",
       "weight": 50,
       "element": {
-        "location": "betterstrongholds:hallway_2",
+        "location": "betterstrongholds:hallways/hallway_2",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -15,7 +14,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "betterstrongholds:hallway_3",
+        "location": "betterstrongholds:hallways/hallway_3",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -24,7 +23,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "betterstrongholds:hallway_4",
+        "location": "betterstrongholds:hallways/hallway_4",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -33,16 +32,7 @@
     {
       "weight": 25,
       "element": {
-        "location": "betterstrongholds:hallway_turn",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 2,
-      "element": {
-        "location": "betterstrongholds:hallway_trap_0",
+        "location": "betterstrongholds:hallways/hallway_turn",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

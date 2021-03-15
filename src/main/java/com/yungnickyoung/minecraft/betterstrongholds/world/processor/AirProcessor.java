@@ -14,9 +14,6 @@ import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 
-/**
- *
- */
 @MethodsReturnNonnullByDefault
 public class AirProcessor extends StructureProcessor {
     public static final AirProcessor INSTANCE = new AirProcessor();
@@ -27,15 +24,15 @@ public class AirProcessor extends StructureProcessor {
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         if (blockInfoGlobal.state.isIn(Blocks.CYAN_CONCRETE)) {
             if (worldReader.getBlockState(blockInfoGlobal.pos).getMaterial() == Material.AIR) {
-                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.REDSTONE_BLOCK.getDefaultState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
             } else {
-                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.GOLD_BLOCK.getDefaultState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), blockInfoGlobal.nbt);
             }
         }
         return blockInfoGlobal;
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.AIR_PROCESSORS;
+        return ModProcessors.AIR_PROCESSOR;
     }
 }

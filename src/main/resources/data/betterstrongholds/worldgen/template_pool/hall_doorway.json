@@ -3,225 +3,225 @@
   "fallback": "betterstrongholds:terminators",
   "elements": [
     {
+      "weight": 1000,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
       "weight": 100,
       "element": {
-        "location": "betterstrongholds:hall_doorway",
+        "location": "betterstrongholds:hall_doorways/hall_doorway_2torch",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 0,
       "element": {
-        "location": "betterstrongholds:hall_doorway_2torch",
+        "location": "betterstrongholds:hall_doorways/hall_doorway_2torch_soul",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:hall_doorway_2torch_soul",
+        "location": "betterstrongholds:hall_doorways/hall_doorway_banner",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 30,
+      "weight": 200,
       "element": {
-        "location": "betterstrongholds:hall_doorway_banner",
+        "location": "betterstrongholds:hall_doorways/hall_doorway_small",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 20,
+      "weight": 200,
       "element": {
-        "location": "betterstrongholds:hall_doorway_small",
+        "location": "betterstrongholds:hall_doorways/hall_door_wood",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 150,
       "element": {
-        "location": "betterstrongholds:hall_door_wood",
+        "location": "betterstrongholds:hall_doorways/hall_door_iron",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:hall_door_iron",
+        "location": "betterstrongholds:stairs/stairs_straight",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:stairs_straight",
+        "location": "betterstrongholds:stairs/spiral_stairs_bottom",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:spiral_stairs_bottom",
+        "location": "betterstrongholds:rooms/grand_library",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:grand_library",
+        "location": "betterstrongholds:rooms/armoury_sm",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:armoury_sm",
+        "location": "betterstrongholds:rooms/armoury_md",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:armoury_md",
+        "location": "betterstrongholds:rooms/bunks_md",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:bunks_md",
+        "location": "betterstrongholds:rooms/crypt_sm",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:crypt_sm",
+        "location": "betterstrongholds:rooms/library_md",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:library_md",
+        "location": "betterstrongholds:rooms/mess",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:mess",
+        "location": "betterstrongholds:rooms/prison_lg",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:prison_lg",
+        "location": "betterstrongholds:rooms/storeroom",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:storeroom",
+        "location": "betterstrongholds:rooms/junction_md",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 20,
+      "weight": 3,
       "element": {
-        "location": "betterstrongholds:junction_md",
+        "location": "betterstrongholds:rooms/cmd_acarii",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 1,
       "element": {
-        "location": "betterstrongholds:chest_trap_tnt",
+        "location": "betterstrongholds:rooms/cmd_yung",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 75,
       "element": {
-        "location": "betterstrongholds:cmd_acarii",
+        "location": "betterstrongholds:rooms/sealed_cell",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 75,
       "element": {
-        "location": "betterstrongholds:cmd_yung",
+        "location": "betterstrongholds:rooms/sealed_collapse",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 100,
       "element": {
-        "location": "betterstrongholds:crypt_sm",
+        "location": "betterstrongholds:rooms/treasure_room_lg",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 10,
+      "weight": 150,
       "element": {
-        "location": "betterstrongholds:sealed_cell",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 10,
-      "element": {
-        "location": "betterstrongholds:sealed_collapse",
+        "location": "betterstrongholds:rooms/hallway_trap_0",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

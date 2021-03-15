@@ -6,7 +6,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/spiral_stairs_terminator",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -15,16 +15,16 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/hall_doorway_terminator",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "location": "betterstrongholds:terminators/hallway_end",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -32,8 +32,26 @@
     {
       "weight": 1,
       "element": {
+        "location": "betterstrongholds:terminators/hallway_end_chest",
+        "processors": "betterstrongholds:terminators",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:terminators/hallway_end_chest_trap",
+        "processors": "betterstrongholds:terminators",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
         "location": "betterstrongholds:terminators/hallway_end_statue_0",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -42,16 +60,16 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/hallway_end_statue_1",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "location": "betterstrongholds:terminators/hallway_end_statue_2",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -60,16 +78,16 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/hallway_end_statue_3",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "location": "betterstrongholds:terminators/hallway_end_statue_4",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -78,7 +96,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/hall_wall_terminator",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -87,7 +105,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:terminators/hall_wall_cobble_terminator",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:terminators",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

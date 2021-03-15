@@ -127,17 +127,11 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
             int x = (chunkX << 4) + 7;
             int z = (chunkZ << 4) + 7;
 
-            /*
-             * We pass this into func_242837_a to tell it where to generate the structure.
-             * If func_242837_a's last parameter is true, blockpos's Y value is ignored and the
-             * structure will spawn at terrain height instead. Set that parameter to false to
-             * force the structure to spawn at blockpos's Y value instead. You got options here!
-             */
             BlockPos blockpos = new BlockPos(x, 40, z);
             VillageConfig villageConfig = new VillageConfig(
                 () -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
                     .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
-                19
+                16 // TODO - config option for max stronghold size
             );
 
             // All a structure has to do is call this method to turn it into a jigsaw based structure!
@@ -193,8 +187,6 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
 
         /**
          * This method is a reimplementation of {@link JigsawManager#func_242837_a(DynamicRegistries, VillageConfig, JigsawManager.IPieceFactory, ChunkGenerator, TemplateManager, BlockPos, List, Random, boolean, boolean) JigsawManager.func_242837_a()}.
-         *
-         *
          */
         public static void assembleJigsawStructure(
             DynamicRegistries dynamicRegistryManager,

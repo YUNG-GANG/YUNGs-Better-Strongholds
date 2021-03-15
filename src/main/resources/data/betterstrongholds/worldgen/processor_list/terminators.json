@@ -1,0 +1,28 @@
+{
+  "processors": [
+    {
+      "processor_type": "betterstrongholds:air_processor"
+    },
+    {
+      "rules": [
+        {
+          "output_state": {
+            "Name": "minecraft:tnt",
+            "Properties": {
+              "unstable": "false"
+            }
+          },
+          "input_predicate": {
+            "block": "minecraft:red_stained_glass",
+            "probability": 1,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
+        }
+      ],
+      "processor_type": "minecraft:rule"
+    }
+  ]
+}

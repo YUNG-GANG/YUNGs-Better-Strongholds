@@ -1,49 +1,19 @@
 {
   "processors": [
     {
-      "processor_type": "betterstrongholds:air_processors"
+      "processor_type": "betterstrongholds:air_processor"
+    },
+    {
+      "processor_type": "betterstrongholds:cobweb_processor"
+    },
+    {
+      "processor_type": "betterstrongholds:torch_processor"
+    },
+    {
+      "processor_type": "betterstrongholds:lantern_processor"
     },
     {
       "rules": [
-        {
-          "output_state": {
-            "Name": "minecraft:cobweb"
-          },
-          "input_predicate": {
-            "block": "minecraft:white_stained_glass",
-            "probability": 1,
-            "predicate_type": "minecraft:random_block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
-        {
-          "output_state": {
-            "Name": "minecraft:air"
-          },
-          "input_predicate": {
-            "block": "minecraft:cobweb",
-            "probability": 0.75,
-            "predicate_type": "minecraft:random_block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
-        {
-          "output_state": {
-            "Name": "minecraft:cobweb"
-          },
-          "input_predicate": {
-            "block": "minecraft:gray_stained_glass",
-            "probability": 0.50,
-            "predicate_type": "minecraft:random_block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
         {
           "output_state": {
             "Name": "minecraft:spawner"
