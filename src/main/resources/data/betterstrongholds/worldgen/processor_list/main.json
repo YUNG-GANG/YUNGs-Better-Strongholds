@@ -13,6 +13,9 @@
       "processor_type": "betterstrongholds:lantern_processor"
     },
     {
+      "processor_type": "betterstrongholds:banner_processor"
+    },
+    {
       "rules": [
         {
           "output_state": {

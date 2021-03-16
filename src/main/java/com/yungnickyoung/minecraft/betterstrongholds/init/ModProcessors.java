@@ -13,7 +13,7 @@ public class ModProcessors {
     public static IStructureProcessorType<CobwebProcessor> COBWEB_PROCESSOR = () -> CobwebProcessor.CODEC;
     public static IStructureProcessorType<TorchProcessor> TORCH_PROCESSOR = () -> TorchProcessor.CODEC;
     public static IStructureProcessorType<LanternProcessor> LANTERN_PROCESSOR = () -> LanternProcessor.CODEC;
-    public static IStructureProcessorType<BannerEntityProcessor> BANNER_PROCESSOR = () -> BannerEntityProcessor.CODEC;
+    public static IStructureProcessorType<BannerProcessor> BANNER_PROCESSOR = () -> BannerProcessor.CODEC;
 
     public static void init() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModProcessors::commonSetup);
