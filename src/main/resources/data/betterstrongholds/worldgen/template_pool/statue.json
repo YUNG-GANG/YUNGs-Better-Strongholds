@@ -3,9 +3,63 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 1,
+      "weight": 5,
       "element": {
-        "location": "betterstrongholds:statues/statue_0",
+        "location": "betterstrongholds:statues/statue_sword",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "betterstrongholds:statues/statue_lantern_l",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "betterstrongholds:statues/statue_lantern_r",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "betterstrongholds:statues/statue_book_l",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "betterstrongholds:statues/statue_book_r",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "betterstrongholds:statues/statue_chest_l",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "betterstrongholds:statues/statue_chest_r",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,52 +68,16 @@
     {
       "weight": 1,
       "element": {
-        "location": "betterstrongholds:statues/statue_1",
+        "location": "betterstrongholds:statues/statue_shield_l",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 5,
       "element": {
-        "location": "betterstrongholds:statues/statue_2",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterstrongholds:statues/statue_3",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterstrongholds:statues/statue_4",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterstrongholds:statues/statue_5",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "betterstrongholds:statues/statue_6",
+        "location": "betterstrongholds:statues/statue_shield_r",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
