@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
-import com.yungnickyoung.minecraft.betterstrongholds.util.BannerFactory;
+import com.yungnickyoung.minecraft.betterstrongholds.util.Banner;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.AbstractBannerBlock;
 import net.minecraft.block.BlockState;
@@ -28,7 +28,7 @@ public class BannerProcessor extends StructureProcessor {
     public static final Codec<BannerProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     // All banners
-    public static final BannerFactory.Banner ENDERMAN_BANNER = new BannerFactory.Banner.Builder()
+    public static final Banner ENDERMAN_WALL_BANNER = new Banner.Builder()
         .blockState(Blocks.MAGENTA_WALL_BANNER.getDefaultState())
         .pattern("ss", 0)
         .pattern("ts", 15)
@@ -38,7 +38,7 @@ public class BannerProcessor extends StructureProcessor {
         .pattern("cs", 15)
         .build();
 
-    public static final BannerFactory.Banner WITHER_BANNER = new BannerFactory.Banner.Builder()
+    public static final Banner WITHER_WALL_BANNER = new Banner.Builder()
         .blockState(Blocks.BLACK_WALL_BANNER.getDefaultState())
         .pattern("bs", 7)
         .pattern("cs", 15)
@@ -47,7 +47,7 @@ public class BannerProcessor extends StructureProcessor {
         .pattern("sku", 15)
         .build();
 
-    public static final BannerFactory.Banner PORTAL_BANNER = new BannerFactory.Banner.Builder()
+    public static final Banner PORTAL_WALL_BANNER = new Banner.Builder()
         .blockState(Blocks.PURPLE_WALL_BANNER.getDefaultState())
         .pattern("ss", 2)
         .pattern("bri", 10)
@@ -55,10 +55,10 @@ public class BannerProcessor extends StructureProcessor {
         .pattern("bo", 15)
         .build();
 
-    public static final List<BannerFactory.Banner> BANNERS = Lists.newArrayList(
-        ENDERMAN_BANNER,
-        WITHER_BANNER,
-        PORTAL_BANNER
+    public static final List<Banner> WALL_BANNERS = Lists.newArrayList(
+        ENDERMAN_WALL_BANNER,
+        WITHER_WALL_BANNER,
+        PORTAL_WALL_BANNER
     );
 
     @Override
@@ -66,7 +66,7 @@ public class BannerProcessor extends StructureProcessor {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
             // Make sure we only operate on the placeholder banners
             if (blockInfoGlobal.state.getBlock() == Blocks.GRAY_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
-                BannerFactory.Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
+                Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
                 Direction facing = blockInfoGlobal.state.get(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().with(BlockStateProperties.HORIZONTAL_FACING, facing);
                 CompoundNBT newNBT = copyNBT(banner.getNbt());
@@ -81,8 +81,8 @@ public class BannerProcessor extends StructureProcessor {
         return ModProcessors.BANNER_PROCESSOR;
     }
 
-    private BannerFactory.Banner getRandomBanner(Random random) {
-        return BANNERS.get(random.nextInt(BANNERS.size()));
+    private Banner getRandomBanner(Random random) {
+        return WALL_BANNERS.get(random.nextInt(WALL_BANNERS.size()));
     }
 
     private CompoundNBT copyNBT(CompoundNBT other) {

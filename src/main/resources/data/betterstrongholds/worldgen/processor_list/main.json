@@ -45,6 +45,54 @@
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           }
+        },
+        {
+          "output_state": {
+            "Name": "minecraft:mossy_stone_bricks",
+            "Properties": {
+              "unstable": "false"
+            }
+          },
+          "input_predicate": {
+            "block": "minecraft:stone_bricks",
+            "probability": 0.25,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
+        },
+        {
+          "output_state": {
+            "Name": "minecraft:cracked_stone_bricks",
+            "Properties": {
+              "unstable": "false"
+            }
+          },
+          "input_predicate": {
+            "block": "minecraft:stone_bricks",
+            "probability": 0.25,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
+        },
+        {
+          "output_state": {
+            "Name": "minecraft:chiseled_stone_bricks",
+            "Properties": {
+              "unstable": "false"
+            }
+          },
+          "input_predicate": {
+            "block": "minecraft:stone_bricks",
+            "probability": 0.05,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          }
         }
       ],
       "processor_type": "minecraft:rule"
