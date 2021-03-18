@@ -20,11 +20,18 @@ public class Banner {
     private CompoundNBT nbt;
     private boolean isWallBanner;
 
-    private Banner(List<BannerPattern> _patterns, BlockState _state, CompoundNBT _nbt) {
+    public Banner(List<BannerPattern> _patterns, BlockState _state, CompoundNBT _nbt) {
         this.patterns = _patterns;
         this.state = _state;
         this.nbt = _nbt;
         this.isWallBanner = state.getBlock() instanceof WallBannerBlock;
+    }
+
+    public Banner(List<BannerPattern> _patterns, BlockState _state, CompoundNBT _nbt, boolean _isWallBanner) {
+        this.patterns = _patterns;
+        this.state = _state;
+        this.nbt = _nbt;
+        this.isWallBanner = _isWallBanner;
     }
 
     public List<BannerPattern> getPatterns() {
