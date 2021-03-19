@@ -96,6 +96,9 @@
         }
       ],
       "processor_type": "minecraft:rule"
+    },
+    {
+      "processor_type": "betterstrongholds:waterlogged_processor"
     }
   ]
 }

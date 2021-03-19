@@ -6,7 +6,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_sword",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -15,7 +15,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_lantern_l",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -24,7 +24,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_lantern_r",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -33,7 +33,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_book_l",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -42,7 +42,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_book_r",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -51,7 +51,7 @@
       "weight": 2,
       "element": {
         "location": "betterstrongholds:statues/statue_chest_l",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -60,7 +60,7 @@
       "weight": 2,
       "element": {
         "location": "betterstrongholds:statues/statue_chest_r",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -69,7 +69,7 @@
       "weight": 1,
       "element": {
         "location": "betterstrongholds:statues/statue_shield_l",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -78,7 +78,7 @@
       "weight": 5,
       "element": {
         "location": "betterstrongholds:statues/statue_shield_r",
-        "processors": "minecraft:empty",
+        "processors": "betterstrongholds:statues",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
