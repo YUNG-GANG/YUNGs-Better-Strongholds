@@ -3,7 +3,7 @@
   "fallback": "betterstrongholds:terminators",
   "elements": [
     {
-      "weight": 50,
+      "weight": 2,
       "element": {
         "location": "betterstrongholds:hallways/hallway_2",
         "processors": "betterstrongholds:main",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "weight": 50,
+      "weight": 2,
       "element": {
         "location": "betterstrongholds:hallways/hallway_3",
         "processors": "betterstrongholds:main",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "weight": 50,
+      "weight": 2,
       "element": {
         "location": "betterstrongholds:hallways/hallway_4",
         "processors": "betterstrongholds:main",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "weight": 25,
+      "weight": 1,
       "element": {
         "location": "betterstrongholds:hallways/hallway_turn",
         "processors": "betterstrongholds:main",

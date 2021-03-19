@@ -37,7 +37,7 @@ public class WaterloggedProcessor extends StructureProcessor {
                 currentChunk.setBlockState(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), false);
             }
 
-            // Remove water in adjacent blocks across chunk boundaries and above/below as well
+            // Remove water in adjacent blocks
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             for (Direction direction : Direction.values()) {
                 mutable.setPos(blockInfoGlobal.pos).move(direction);
