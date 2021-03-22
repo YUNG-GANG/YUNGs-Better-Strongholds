@@ -96,7 +96,7 @@
       "weight": 10,
       "element": {
         "location": "betterstrongholds:rooms/armoury_sm",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:rooms/armoury",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -105,7 +105,7 @@
       "weight": 10,
       "element": {
         "location": "betterstrongholds:rooms/armoury_md",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:rooms/armoury",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -141,7 +141,7 @@
       "weight": 10,
       "element": {
         "location": "betterstrongholds:rooms/mess",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:rooms/mess",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
@@ -150,7 +150,7 @@
       "weight": 10,
       "element": {
         "location": "betterstrongholds:rooms/prison_lg",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:rooms/prison_lg",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

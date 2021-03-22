@@ -26,10 +26,10 @@ public class OreProcessor extends StructureProcessor {
         oreChances.put(Blocks.COAL_ORE, .2f);
         oreChances.put(Blocks.IRON_ORE, .2f);
         oreChances.put(Blocks.GOLD_ORE, .2f);
-        oreChances.put(Blocks.LAPIS_ORE, .1f);
-        oreChances.put(Blocks.REDSTONE_ORE, .1f);
-        oreChances.put(Blocks.EMERALD_ORE, .1f);
-        oreChances.put(Blocks.DIAMOND_ORE, .1f);
+        oreChances.put(Blocks.LAPIS_ORE, .15f);
+        oreChances.put(Blocks.REDSTONE_ORE, .15f);
+        oreChances.put(Blocks.EMERALD_ORE, .05f);
+        oreChances.put(Blocks.DIAMOND_ORE, .05f);
     }
 
     @Nullable

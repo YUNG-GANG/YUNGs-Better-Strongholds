@@ -4,9 +4,6 @@
       "processor_type": "betterstrongholds:air_processor"
     },
     {
-      "processor_type": "betterstrongholds:cobweb_processor"
-    },
-    {
       "processor_type": "betterstrongholds:torch_processor"
     },
     {
@@ -14,9 +11,6 @@
     },
     {
       "processor_type": "betterstrongholds:banner_processor"
-    },
-    {
-      "processor_type": "betterstrongholds:rare_block_processor"
     },
     {
       "processor_type": "betterstrongholds:waterlogged_processor"
@@ -68,20 +62,7 @@
           },
           "input_predicate": {
             "block": "minecraft:chest",
-            "probability": 0.4,
-            "predicate_type": "minecraft:random_block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
-        {
-          "output_state": {
-            "Name": "minecraft:air"
-          },
-          "input_predicate": {
-            "block": "minecraft:spawner",
-            "probability": 0.75,
+            "probability": 0.2,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {

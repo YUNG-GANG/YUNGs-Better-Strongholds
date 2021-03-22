@@ -28,18 +28,6 @@
       "rules": [
         {
           "output_state": {
-            "Name": "minecraft:spawner"
-          },
-          "input_predicate": {
-            "block": "minecraft:cyan_stained_glass",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
-        {
-          "output_state": {
             "Name": "minecraft:tnt",
             "Properties": {
               "unstable": "false"
