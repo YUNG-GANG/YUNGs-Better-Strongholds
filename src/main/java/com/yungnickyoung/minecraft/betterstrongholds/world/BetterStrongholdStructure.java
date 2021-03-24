@@ -3,41 +3,31 @@ package com.yungnickyoung.minecraft.betterstrongholds.world;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.JigsawConfig;
+import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.JigsawManager;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
-import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
@@ -128,17 +118,16 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
             int z = (chunkZ << 4) + 7;
 
             BlockPos blockpos = new BlockPos(x, 40, z);
-            VillageConfig villageConfig = new VillageConfig(
+            JigsawConfig villageConfig = new JigsawConfig(
                 () -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
                     .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
                 16 // TODO - config option for max stronghold size
             );
 
             // All a structure has to do is call this method to turn it into a jigsaw based structure!
-            assembleJigsawStructure(
+            JigsawManager.assembleJigsawStructure(
                 dynamicRegistryManager,
                 villageConfig,
-                AbstractVillagePiece::new,
                 chunkGenerator,
                 templateManagerIn,
                 blockpos, // Position of the structure. Y value is ignored if last parameter is set to true.
@@ -176,62 +165,12 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
             // Vanilla method of adjusting y-coordinate
             this.func_214628_a(chunkGenerator.getSeaLevel(), this.rand, 10);
 
-            // I use to debug and quickly find out if the structure is spawning or not and where it is.
-            // This is returning the coordinates of the center starting piece.
+            // Debug log the coordinates of the center starting piece.
             BetterStrongholds.LOGGER.debug("Better Stronghold at {} {} {}",
                 this.components.get(0).getBoundingBox().minX,
                 this.components.get(0).getBoundingBox().minY,
                 this.components.get(0).getBoundingBox().minZ
             );
-        }
-
-        /**
-         * This method is a reimplementation of {@link JigsawManager#func_242837_a(DynamicRegistries, VillageConfig, JigsawManager.IPieceFactory, ChunkGenerator, TemplateManager, BlockPos, List, Random, boolean, boolean) JigsawManager.func_242837_a()}.
-         */
-        public static void assembleJigsawStructure(
-            DynamicRegistries dynamicRegistryManager,
-            VillageConfig jigsawConfig,
-            JigsawManager.IPieceFactory pieceFactory,
-            ChunkGenerator chunkGenerator,
-            TemplateManager templateManager,
-            BlockPos startPos,
-            List<? super AbstractVillagePiece> components,
-            Random random,
-            boolean doBoundaryAdjustments,
-            boolean useHeightmap
-        ) {
-            Structure.init();
-            MutableRegistry<JigsawPattern> mutableregistry = dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY);
-            Rotation rotation = Rotation.randomRotation(random);
-            JigsawPattern jigsawpattern = jigsawConfig.func_242810_c().get();
-            JigsawPiece jigsawpiece = jigsawpattern.getRandomPiece(random);
-            AbstractVillagePiece abstractvillagepiece = pieceFactory.create(templateManager, jigsawpiece, startPos, jigsawpiece.getGroundLevelDelta(), rotation, jigsawpiece.getBoundingBox(templateManager, startPos, rotation));
-            MutableBoundingBox mutableboundingbox = abstractvillagepiece.getBoundingBox();
-            int i = (mutableboundingbox.maxX + mutableboundingbox.minX) / 2;
-            int j = (mutableboundingbox.maxZ + mutableboundingbox.minZ) / 2;
-            int k;
-            if (useHeightmap) {
-                k = startPos.getY() + chunkGenerator.getNoiseHeight(i, j, Heightmap.Type.WORLD_SURFACE_WG);
-            } else {
-                k = startPos.getY();
-            }
-
-            int l = mutableboundingbox.minY + abstractvillagepiece.getGroundLevelDelta();
-            abstractvillagepiece.offset(0, k - l, 0);
-            components.add(abstractvillagepiece);
-            if (jigsawConfig.func_236534_a_() > 0) {
-                AxisAlignedBB axisalignedbb = new AxisAlignedBB(i - 80, k - 80, j - 80, i + 80 + 1, k + 80 + 1, j + 80 + 1);
-                JigsawManager.Assembler jigsawmanager$assembler = new JigsawManager.Assembler(mutableregistry, jigsawConfig.func_236534_a_(), pieceFactory, chunkGenerator, templateManager, components, random);
-                jigsawmanager$assembler.availablePieces.addLast(new JigsawManager.Entry(abstractvillagepiece, new MutableObject<>(VoxelShapes.combineAndSimplify(VoxelShapes.create(axisalignedbb), VoxelShapes.create(AxisAlignedBB.toImmutable(mutableboundingbox)), IBooleanFunction.ONLY_FIRST)), k + 80, 0));
-
-                while (!jigsawmanager$assembler.availablePieces.isEmpty()) {
-                    JigsawManager.Entry jigsawmanager$entry = jigsawmanager$assembler.availablePieces.removeFirst();
-                    SingleJigsawPiece piece = (SingleJigsawPiece) jigsawmanager$entry.villagePiece.getJigsawPiece();
-                    String pieceName = piece.field_236839_c_.left().isPresent() ? piece.field_236839_c_.left().get().toString() : "INVALID!";
-//                    BetterStrongholds.LOGGER.info(pieceName);
-                    jigsawmanager$assembler.func_236831_a_(jigsawmanager$entry.villagePiece, jigsawmanager$entry.free, jigsawmanager$entry.boundsTop, jigsawmanager$entry.depth, doBoundaryAdjustments);
-                }
-            }
         }
     }
 }
