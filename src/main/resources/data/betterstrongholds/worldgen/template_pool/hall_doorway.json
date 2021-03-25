@@ -3,7 +3,7 @@
   "fallback": "betterstrongholds:terminators",
   "elements": [
     {
-      "weight": 100,
+      "weight": 105,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_doorway",
         "processors": "betterstrongholds:main",
@@ -48,7 +48,7 @@
       }
     },
     {
-      "weight": 20,
+      "weight": 25,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_door_wood",
         "processors": "betterstrongholds:main",
@@ -57,7 +57,7 @@
       }
     },
     {
-      "weight": 15,
+      "weight": 5,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_door_iron",
         "processors": "betterstrongholds:main",
@@ -75,9 +75,36 @@
       }
     },
     {
-      "weight": 10,
+      "weight": 3,
       "element": {
-        "location": "betterstrongholds:stairs/spiral_stairs_bottom",
+        "location": "betterstrongholds:stairs/spiral_stairs_2floor_0",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "betterstrongholds:stairs/spiral_stairs_2floor_1",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "betterstrongholds:stairs/spiral_stairs_3floor_0",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "betterstrongholds:stairs/spiral_stairs_3floor_1",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

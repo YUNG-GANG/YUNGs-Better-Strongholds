@@ -117,7 +117,12 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
             int x = (chunkX << 4) + 7;
             int z = (chunkZ << 4) + 7;
 
-            BlockPos blockpos = new BlockPos(x, 40, z);
+            // TODO - config options for min/maxY
+            int minY = 30;
+            int maxY = 31;
+            int y = rand.nextInt(maxY - minY) + minY;
+
+            BlockPos blockpos = new BlockPos(x, y, z);
             JigsawConfig villageConfig = new JigsawConfig(
                 () -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
                     .getOrDefault(new ResourceLocation(BetterStrongholds.MOD_ID, "starts")),
@@ -133,37 +138,15 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
                 blockpos, // Position of the structure. Y value is ignored if last parameter is set to true.
                 this.components, // The list that will be populated with the jigsaw pieces after this method.
                 this.rand,
-                false, // Special boundary adjustments for villages. It's... hard to explain. Keep this false and make your pieces not be partially intersecting.
-                       // Either not intersecting or fully contained will make children pieces spawn just fine. It's easier that way.
-                false // Place at heightmap (top land). Set this to false for structure to be place at the passed in blockpos's Y value instead.
-                      // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.
+                false,
+                false
             );
-
-            // **THE FOLLOWING TWO LINES ARE OPTIONAL**
-            //
-            // Right here, you can do interesting stuff with the pieces in this.components such as offset the
-            // center piece by 50 blocks up for no reason, remove repeats of a piece or add a new piece so
-            // only 1 of that piece exists, etc. But you do not have access to the piece's blocks as this list
-            // holds just the piece's size and positions. Blocks will be placed later in JigsawManager.
-            //
-            // In this case, we do `piece.offset` to raise pieces up by 1 block so that the house is not right on
-            // the surface of water or sunken into land a bit.
-            //
-            // Then we extend the bounding box down by 1 by doing `piece.getBoundingBox().minY` which will cause the
-            // land formed around the structure to be lowered and not cover the doorstep. You can raise the bounding
-            // box to force the structure to be buried as well. This bounding box stuff with land is only for structures
-            // that you added to Structure.field_236384_t_ field handles adding land around the base of structures.
-            //
-            // By lifting the house up by 1 and lowering the bounding box, the land at bottom of house will now be
-            // flush with the surrounding terrain without blocking off the doorstep.
-//            this.components.forEach(piece -> piece.offset(0, 1, 0));
-//            this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
 
             // Sets the bounds of the structure once you are finished.
             this.recalculateStructureSize();
 
             // Vanilla method of adjusting y-coordinate
-            this.func_214628_a(chunkGenerator.getSeaLevel(), this.rand, 10);
+//            this.func_214628_a(chunkGenerator.getSeaLevel(), this.rand, 10);
 
             // Debug log the coordinates of the center starting piece.
             BetterStrongholds.LOGGER.debug("Better Stronghold at {} {} {}",

@@ -21,7 +21,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "location": "betterstrongholds:stairs/spiral_stairs_top",
         "processors": "betterstrongholds:main",

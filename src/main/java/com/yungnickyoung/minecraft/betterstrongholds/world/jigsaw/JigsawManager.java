@@ -109,6 +109,7 @@ public class JigsawManager {
         private final Random rand;
         public final Deque<Entry> availablePieces = Queues.newArrayDeque();
         private final Map<ResourceLocation, Integer> pieceCounts;
+        private final int maxY;
 
         public Assembler(Registry<JigsawPattern> patternRegistry, int maxDepth, ChunkGenerator chunkGenerator, TemplateManager templateManager, List<? super AbstractVillagePiece> structurePieces, Random rand) {
             this.patternRegistry = patternRegistry;
@@ -119,13 +120,15 @@ public class JigsawManager {
             this.rand = rand;
             // Initialize piece counts
             // TODO - move max piece counts into config items
-            pieceCounts = new HashMap<>();
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), 1);
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), 2);
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), 2);
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), 1);
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), 1);
-            pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), 2);
+            this.pieceCounts = new HashMap<>();
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), 1);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), 2);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), 2);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), 1);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), 1);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), 2);
+            // TODO - move max Y into config
+            this.maxY = 60;
         }
 
         public void processPiece(AbstractVillagePiece piece, MutableObject<VoxelShape> voxelShape, int boundsTop, int depth, boolean doBoundaryAdjustments) {
@@ -279,6 +282,12 @@ public class JigsawManager {
                                 if (candidateHeightAdjustments > 0) {
                                     int k2 = Math.max(candidateHeightAdjustments + 1, adjustedCandidateBoundingBox.maxY - adjustedCandidateBoundingBox.minY);
                                     adjustedCandidateBoundingBox.maxY = adjustedCandidateBoundingBox.minY + k2;
+                                }
+
+                                // Prevent pieces from spawning above max Y
+                                if (adjustedCandidateBoundingBox.maxY > this.maxY) {
+                                    BetterStrongholds.LOGGER.info("Skipping piece {} with max Y {}...", candidatePiece, adjustedCandidateBoundingBox.maxY);
+                                    continue;
                                 }
 
                                 // Some sort of final boundary check before adding the new piece.
