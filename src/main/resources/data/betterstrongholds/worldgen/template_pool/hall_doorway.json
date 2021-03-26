@@ -3,6 +3,15 @@
   "fallback": "betterstrongholds:terminators",
   "elements": [
     {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:portal_rooms/portal_room",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
       "weight": 105,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_doorway",

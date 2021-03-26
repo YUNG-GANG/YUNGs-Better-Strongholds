@@ -127,6 +127,7 @@ public class JigsawManager {
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), 1);
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), 1);
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), 2);
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), 1);
             // TODO - move max Y into config
             this.maxY = 60;
         }
@@ -195,6 +196,26 @@ public class JigsawManager {
                 List<JigsawPiece> poolPieces = Lists.newArrayList();
                 if (depth != this.maxDepth) {
                     poolPieces.addAll(poolOptional.get().getShuffledPieces(this.rand));
+                }
+
+                // Prioritize portal room if the following conditions are met:
+                // 1. It's a potential candidate for this pool
+                // 2. It hasn't already been placed
+                // 3. We are at least (maxDepth/2) pieces away from the starting room.
+                if (this.pieceCounts.get(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room")) > 0) {
+                    for (int i = 0; i < poolPieces.size(); i++) {
+                        JigsawPiece poolPiece = poolPieces.get(i);
+                        if (((SingleJigsawPiece) poolPiece).field_236839_c_.left().get().equals(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"))) {
+                            if (depth >= maxDepth / 2) { // depth check
+                                // All conditions are met. Move portal room to front of list to give it priority
+                                poolPieces.add(0, poolPieces.remove(i));
+                            } else {
+                                // If not far enough from starting room, remove the portal room piece from the list
+                                poolPieces.remove(i);
+                            }
+                            break;
+                        }
+                    }
                 }
 
                 // Append fallback pool pieces to the piece list.
@@ -286,7 +307,6 @@ public class JigsawManager {
 
                                 // Prevent pieces from spawning above max Y
                                 if (adjustedCandidateBoundingBox.maxY > this.maxY) {
-                                    BetterStrongholds.LOGGER.info("Skipping piece {} with max Y {}...", candidatePiece, adjustedCandidateBoundingBox.maxY);
                                     continue;
                                 }
 
