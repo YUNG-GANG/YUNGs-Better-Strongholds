@@ -30,15 +30,6 @@
       }
     },
     {
-      "weight": 0,
-      "element": {
-        "location": "betterstrongholds:hall_doorways/hall_doorway_2torch_soul",
-        "processors": "betterstrongholds:main",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
       "weight": 10,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_doorway_banner",
