@@ -19,9 +19,13 @@ import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Replaces gray wall banners with a random banner from a pool of banners.
+ */
 @MethodsReturnNonnullByDefault
 public class BannerProcessor extends StructureProcessor {
     public static final BannerProcessor INSTANCE = new BannerProcessor();
@@ -61,6 +65,7 @@ public class BannerProcessor extends StructureProcessor {
         PORTAL_WALL_BANNER
     );
 
+    @ParametersAreNonnullByDefault
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {

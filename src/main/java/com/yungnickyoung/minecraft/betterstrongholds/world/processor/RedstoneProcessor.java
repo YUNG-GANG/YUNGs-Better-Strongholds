@@ -16,28 +16,25 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Processor for replacing cyan concrete with air or stone bricks.
- * Intended to give walls and other pieces a ruined appearance that blends in with caves.
+ * Ensures redstone doesn't spawn floating in the air.
  */
 @MethodsReturnNonnullByDefault
-public class AirProcessor extends StructureProcessor {
-    public static final AirProcessor INSTANCE = new AirProcessor();
-    public static final Codec<AirProcessor> CODEC = Codec.unit(() -> INSTANCE);
+public class RedstoneProcessor extends StructureProcessor {
+    public static final RedstoneProcessor INSTANCE = new RedstoneProcessor();
+    public static final Codec<RedstoneProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @ParametersAreNonnullByDefault
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
-        if (blockInfoGlobal.state.isIn(Blocks.CYAN_CONCRETE)) {
-            if (worldReader.getBlockState(blockInfoGlobal.pos).getMaterial() == Material.AIR) {
-                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
-            } else {
-                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state.isIn(Blocks.REDSTONE_WIRE)) {
+            if (worldReader.getBlockState(blockInfoGlobal.pos.down()).getMaterial() == Material.AIR) {
+                worldReader.getChunk(blockInfoGlobal.pos).setBlockState(blockInfoGlobal.pos.down(), Blocks.STONE_BRICKS.getDefaultState(), false);
             }
         }
         return blockInfoGlobal;
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.AIR_PROCESSOR;
+        return ModProcessors.REDSTONE_PROCESSOR;
     }
 }

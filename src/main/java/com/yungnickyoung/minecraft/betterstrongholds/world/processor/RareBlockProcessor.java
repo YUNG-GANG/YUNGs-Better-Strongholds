@@ -2,6 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +17,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Replaces purpur blocks with a random rare block
+ * The chance of a given block being chosen is determined by the config.
+ */
+@MethodsReturnNonnullByDefault
 public class RareBlockProcessor extends StructureProcessor {
     public static final RareBlockProcessor INSTANCE = new RareBlockProcessor();
     public static final Codec<RareBlockProcessor> CODEC = Codec.unit(() -> INSTANCE);

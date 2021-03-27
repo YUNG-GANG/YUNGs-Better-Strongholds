@@ -7,6 +7,9 @@
       "processor_type": "betterstrongholds:banner_processor"
     },
     {
+      "processor_type": "betterstrongholds:redstone_processor"
+    },
+    {
       "processor_type": "betterstrongholds:waterlogged_processor"
     },
     {

@@ -20,6 +20,9 @@ import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 
+/**
+ * A patchwork fix for https://bugs.mojang.com/browse/MC-130584.
+ */
 public class WaterloggedProcessor extends StructureProcessor {
     public static final WaterloggedProcessor INSTANCE = new WaterloggedProcessor();
     public static final Codec<WaterloggedProcessor> CODEC = Codec.unit(() -> INSTANCE);
