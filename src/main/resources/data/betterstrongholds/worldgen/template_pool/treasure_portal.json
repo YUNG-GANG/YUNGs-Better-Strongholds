@@ -1,6 +1,6 @@
 {
   "name": "betterstrongholds:treasure_portal",
-  "fallback": "minecraft:empty",
+  "fallback": "betterstrongholds:treasure_portal",
   "elements": [
     {
       "weight": 1,

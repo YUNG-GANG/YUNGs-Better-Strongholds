@@ -20,10 +20,8 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -56,8 +54,6 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
     }
 
     /**
-     * || ONLY WORKS IN FORGE 34.1.12+ ||
-     *
      * This method allows us to have mobs that spawn naturally over time in our structure.
      * No other mobs will spawn in the structure of the same entity classification.
      * The reason you want to match the classifications is so that your structure's mob
@@ -75,23 +71,23 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
      *         have to manually implement spawning for them. Stick with Forge's Default form
      *         as it is easier to use that.
      */
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
-        new MobSpawnInfo.Spawners(EntityType.ILLUSIONER, 100, 4, 9),
-        new MobSpawnInfo.Spawners(EntityType.VINDICATOR, 100, 4, 9)
-    );
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
-        return STRUCTURE_MONSTERS;
-    }
-
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_CREATURES = ImmutableList.of(
-        new MobSpawnInfo.Spawners(EntityType.SHEEP, 30, 10, 15),
-        new MobSpawnInfo.Spawners(EntityType.RABBIT, 100, 1, 2)
-    );
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList() {
-        return STRUCTURE_CREATURES;
-    }
+//    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
+//        new MobSpawnInfo.Spawners(EntityType.ILLUSIONER, 100, 4, 9),
+//        new MobSpawnInfo.Spawners(EntityType.VINDICATOR, 100, 4, 9)
+//    );
+//    @Override
+//    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
+//        return STRUCTURE_MONSTERS;
+//    }
+//
+//    private static final List<MobSpawnInfo.Spawners> STRUCTURE_CREATURES = ImmutableList.of(
+//        new MobSpawnInfo.Spawners(EntityType.SHEEP, 30, 10, 15),
+//        new MobSpawnInfo.Spawners(EntityType.RABBIT, 100, 1, 2)
+//    );
+//    @Override
+//    public List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList() {
+//        return STRUCTURE_CREATURES;
+//    }
 
     /**
      * shouldStartAt

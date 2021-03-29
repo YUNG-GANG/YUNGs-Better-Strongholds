@@ -1,6 +1,6 @@
 {
   "name": "betterstrongholds:statue",
-  "fallback": "minecraft:empty",
+  "fallback": "betterstrongholds:statue",
   "elements": [
     {
       "weight": 5,

@@ -1,6 +1,6 @@
 {
   "name": "betterstrongholds:treasure_wall",
-  "fallback": "minecraft:empty",
+  "fallback": "betterstrongholds:treasure_wall",
   "elements": [
     {
       "weight": 1,
