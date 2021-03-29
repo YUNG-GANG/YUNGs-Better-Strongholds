@@ -2,10 +2,9 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.*;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -19,22 +18,27 @@ import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * A patchwork fix for https://bugs.mojang.com/browse/MC-130584.
  */
+@MethodsReturnNonnullByDefault
 public class WaterloggedProcessor extends StructureProcessor {
     public static final WaterloggedProcessor INSTANCE = new WaterloggedProcessor();
     public static final Codec<WaterloggedProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
-    @Nullable
+    @ParametersAreNonnullByDefault
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         // Workaround for https://bugs.mojang.com/browse/MC-130584
         // Due to a hardcoded field in Templates, any waterloggable blocks in structures replacing water in the world will become waterlogged.
         // Idea of workaround is detect if we are placing a waterloggable block and if so, remove the water in the world instead.
         ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
-        if (blockInfoGlobal.state.getBlock() instanceof IWaterLoggable) {
+        Block block = blockInfoGlobal.state.getBlock();
+
+        // Check if block is waterloggable and not intended to be waterlogged
+        if (block instanceof IWaterLoggable && !blockInfoGlobal.state.get(BlockStateProperties.WATERLOGGED)) {
             IChunk currentChunk = worldReader.getChunk(currentChunkPos.x, currentChunkPos.z);
             if (worldReader.getFluidState(blockInfoGlobal.pos).isTagged(FluidTags.WATER)) {
                 currentChunk.setBlockState(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), false);
@@ -50,7 +54,9 @@ public class WaterloggedProcessor extends StructureProcessor {
                 }
 
                 if (currentChunk.getFluidState(mutable).isTagged(FluidTags.WATER)) {
-                    currentChunk.setBlockState(mutable, Blocks.STONE_BRICKS.getDefaultState(), false);
+                    if (!(currentChunk.getBlockState(mutable).getBlock() instanceof IWaterLoggable && currentChunk.getBlockState(mutable).get(BlockStateProperties.WATERLOGGED))) {
+                        currentChunk.setBlockState(mutable, Blocks.STONE_BRICKS.getDefaultState(), false);
+                    }
                 }
             }
         }

@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.gen.feature.template.IStructureProcessorType;
@@ -27,7 +27,7 @@ public class RedstoneProcessor extends StructureProcessor {
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         if (blockInfoGlobal.state.isIn(Blocks.REDSTONE_WIRE)) {
-            if (worldReader.getBlockState(blockInfoGlobal.pos.down()).getMaterial() == Material.AIR) {
+            if (!worldReader.getBlockState(blockInfoGlobal.pos.down()).isSolidSide(worldReader, blockInfoGlobal.pos.down(), Direction.UP)) {
                 worldReader.getChunk(blockInfoGlobal.pos).setBlockState(blockInfoGlobal.pos.down(), Blocks.STONE_BRICKS.getDefaultState(), false);
             }
         }

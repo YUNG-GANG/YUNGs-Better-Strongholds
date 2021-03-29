@@ -13,6 +13,7 @@ import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -35,7 +36,7 @@ public class RareBlockProcessor extends StructureProcessor {
         blockChances.put(Blocks.DIAMOND_BLOCK, .1f);
     }
 
-    @Nullable
+    @ParametersAreNonnullByDefault
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         if (blockInfoGlobal.state.getBlock() == Blocks.PURPUR_BLOCK) {

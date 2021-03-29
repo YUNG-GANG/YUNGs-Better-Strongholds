@@ -26,7 +26,7 @@
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
-            "probability": 0.25,
+            "probability": 0.30,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {
@@ -39,7 +39,7 @@
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
-            "probability": 0.25,
+            "probability": 0.20,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {
@@ -48,7 +48,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:chiseled_stone_bricks"
+            "Name": "minecraft:infested_stone_bricks"
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
