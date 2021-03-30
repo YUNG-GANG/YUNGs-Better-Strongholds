@@ -25,6 +25,9 @@
       "processor_type": "betterstrongholds:redstone_processor"
     },
     {
+      "processor_type": "betterstrongholds:leg_processor"
+    },
+    {
       "processor_type": "betterstrongholds:waterlogged_processor"
     },
     {
