@@ -2,13 +2,12 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.SlabType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -21,11 +20,11 @@ import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
 
 /**
  * Dynamically generates legs below the stronghold.
  */
+@MethodsReturnNonnullByDefault
 public class LegProcessor extends StructureProcessor {
     public static final LegProcessor INSTANCE = new LegProcessor();
     public static final Codec<LegProcessor> CODEC = Codec.unit(() -> INSTANCE);
@@ -57,20 +56,33 @@ public class LegProcessor extends StructureProcessor {
                         tempMutable = mutable.offset(direction).toMutable();
                         worldReader.getChunk(tempMutable).setBlockState(
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState().with(StairsBlock.HALF, Half.TOP).with(StairsBlock.FACING, direction.getOpposite()),
+                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
+                                .with(StairsBlock.HALF, Half.TOP)
+                                .with(StairsBlock.FACING, direction.getOpposite())
+                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isTagged(FluidTags.WATER)),
                             false);
 
                         tempMutable.move(direction);
                         worldReader.getChunk(tempMutable).setBlockState(
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState().with(StairsBlock.HALF, Half.TOP).with(StairsBlock.FACING, direction),
+                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
+                                .with(StairsBlock.HALF, Half.TOP)
+                                .with(StairsBlock.FACING, direction)
+                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isTagged(FluidTags.WATER)),
                             false);
 
-                        tempMutable.move(direction);
-                        worldReader.getChunk(tempMutable).setBlockState(
-                            tempMutable,
-                            Blocks.STONE_BRICKS.getDefaultState(),
-                            false);
+                        // Middle piece between two adjacent pieces.
+                        // Only place if there is another rafter adjacent
+                        tempMutable.move(direction).move(Direction.UP);
+                        Block aboveBlock = worldReader.getBlockState(tempMutable).getBlock();
+                        tempMutable.move(direction).move(Direction.DOWN);
+                        if (worldReader.getBlockState(tempMutable).getBlock() == Blocks.STONE_BRICK_STAIRS || aboveBlock == Blocks.STONE_BRICKS || aboveBlock == Blocks.CRACKED_STONE_BRICKS || aboveBlock == Blocks.MOSSY_STONE_BRICKS || aboveBlock == Blocks.INFESTED_STONE_BRICKS) {
+                            tempMutable.move(direction.getOpposite());
+                            worldReader.getChunk(tempMutable).setBlockState(
+                                tempMutable,
+                                Blocks.STONE_BRICKS.getDefaultState(),
+                                false);
+                        }
                     }
                 } else if (yBelow == 2) {
                     BlockPos.Mutable tempMutable;
@@ -78,13 +90,18 @@ public class LegProcessor extends StructureProcessor {
                         tempMutable = mutable.offset(direction).toMutable();
                         worldReader.getChunk(tempMutable).setBlockState(
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState().with(StairsBlock.HALF, Half.TOP).with(StairsBlock.FACING, direction.getOpposite()),
+                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
+                                .with(StairsBlock.HALF, Half.TOP)
+                                .with(StairsBlock.FACING, direction.getOpposite())
+                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isTagged(FluidTags.WATER)),
                             false);
 
                         tempMutable.move(direction);
                         worldReader.getChunk(tempMutable).setBlockState(
                             tempMutable,
-                            Blocks.STONE_BRICK_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP),
+                            Blocks.STONE_BRICK_SLAB.getDefaultState()
+                                .with(SlabBlock.TYPE, SlabType.TOP)
+                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isTagged(FluidTags.WATER)),
                             false);
                     }
                 }
@@ -100,5 +117,4 @@ public class LegProcessor extends StructureProcessor {
     protected IStructureProcessorType<?> getType() {
         return ModProcessors.LEG_PROCESSOR;
     }
-
 }
