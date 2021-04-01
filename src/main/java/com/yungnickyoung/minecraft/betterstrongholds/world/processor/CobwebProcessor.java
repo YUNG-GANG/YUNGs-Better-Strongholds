@@ -1,6 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
@@ -47,14 +48,12 @@ public class CobwebProcessor extends StructureProcessor {
 
     /**
      * Returns cobweb replacement chance for the given BlockState.
-     *
-     * TODO - Use config options instead of hard-coded values.
      */
     private float getReplacementChance(BlockState blockState) {
         if (blockState.isIn(Blocks.WHITE_STAINED_GLASS))
-            return 0.1f;
+            return BSConfig.general.cobwebReplacementChanceNormal.get();
         else if (blockState.isIn(Blocks.GRAY_STAINED_GLASS))
-            return 0.3f;
+            return BSConfig.general.cobwebReplacementChanceSpawner.get();
         else return 0; // Should never happen
     }
 }

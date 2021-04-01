@@ -3,6 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw;
 import com.google.common.collect.Queues;
 import com.mojang.datafixers.util.Pair;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import net.minecraft.block.JigsawBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -119,17 +120,15 @@ public class JigsawManager {
             this.structurePieces = structurePieces;
             this.rand = rand;
             // Initialize piece counts
-            // TODO - move max piece counts into config items
             this.pieceCounts = new HashMap<>();
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), 1);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), 2);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), 2);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), 1);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), 1);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), 2);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), 1);
-            // TODO - move max Y into config
-            this.maxY = 60;
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), BSConfig.pieceSettings.grandLibraryMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), BSConfig.pieceSettings.smallLibraryMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), BSConfig.pieceSettings.prisonMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), BSConfig.pieceSettings.cmdAcariiMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), BSConfig.pieceSettings.cmdYungMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), BSConfig.pieceSettings.treasureRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), BSConfig.pieceSettings.portalRoomMaxCount.get());
+            this.maxY = BSConfig.general.strongholdMaxY.get();
         }
 
         public void processPiece(AbstractVillagePiece piece, MutableObject<VoxelShape> voxelShape, int boundsTop, int depth, boolean doBoundaryAdjustments) {

@@ -1,5 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds;
 
+import com.yungnickyoung.minecraft.betterstrongholds.init.ModConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModStructures;
 import net.minecraftforge.fml.common.Mod;
@@ -18,5 +19,6 @@ public class BetterStrongholds {
     private void init() {
         ModProcessors.init();
         ModStructures.init();
+        ModConfig.init();
     }
 }

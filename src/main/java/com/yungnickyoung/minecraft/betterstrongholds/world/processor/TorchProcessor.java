@@ -1,6 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
@@ -41,10 +42,8 @@ public class TorchProcessor extends StructureProcessor {
 
     /**
      * Returns torch replacement chance for the given BlockState.
-     *
-     * TODO - Use config options instead of hard-coded values.
      */
     private float getReplacementChance() {
-        return .1f;
+        return BSConfig.general.torchSpawnRate.get();
     }
 }
