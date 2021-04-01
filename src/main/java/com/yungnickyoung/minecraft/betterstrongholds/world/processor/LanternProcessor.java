@@ -44,6 +44,6 @@ public class LanternProcessor extends StructureProcessor {
      * Returns lantern replacement chance for the given BlockState.
      */
     private float getReplacementChance() {
-        return BSConfig.general.lanternSpawnRate.get();
+        return BSConfig.general.lanternSpawnRate.get().floatValue();
     }
 }

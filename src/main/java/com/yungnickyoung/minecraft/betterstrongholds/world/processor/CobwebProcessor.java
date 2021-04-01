@@ -51,9 +51,9 @@ public class CobwebProcessor extends StructureProcessor {
      */
     private float getReplacementChance(BlockState blockState) {
         if (blockState.isIn(Blocks.WHITE_STAINED_GLASS))
-            return BSConfig.general.cobwebReplacementChanceNormal.get();
+            return BSConfig.general.cobwebReplacementChanceNormal.get().floatValue();
         else if (blockState.isIn(Blocks.GRAY_STAINED_GLASS))
-            return BSConfig.general.cobwebReplacementChanceSpawner.get();
+            return BSConfig.general.cobwebReplacementChanceSpawner.get().floatValue();
         else return 0; // Should never happen
     }
 }

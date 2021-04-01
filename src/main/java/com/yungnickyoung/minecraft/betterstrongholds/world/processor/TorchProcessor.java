@@ -44,6 +44,6 @@ public class TorchProcessor extends StructureProcessor {
      * Returns torch replacement chance for the given BlockState.
      */
     private float getReplacementChance() {
-        return BSConfig.general.torchSpawnRate.get();
+        return BSConfig.general.torchSpawnRate.get().floatValue();
     }
 }

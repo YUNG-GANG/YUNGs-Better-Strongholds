@@ -2,6 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,7 @@ import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 /**
  * Dynamically generates legs below the stronghold.
@@ -29,16 +31,24 @@ public class LegProcessor extends StructureProcessor {
     public static final LegProcessor INSTANCE = new LegProcessor();
     public static final Codec<LegProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
+    private BlockSetSelector stoneBrickSelector = new BlockSetSelector(Blocks.STONE_BRICKS.getDefaultState())
+        .addBlock(Blocks.MOSSY_STONE_BRICKS.getDefaultState(), 0.3f)
+        .addBlock(Blocks.CRACKED_STONE_BRICKS.getDefaultState(), 0.2f)
+        .addBlock(Blocks.INFESTED_STONE_BRICKS.getDefaultState(), 0.05f);
+
     @ParametersAreNonnullByDefault
     @Override
     public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
         if (blockInfoGlobal.state.isIn(Blocks.YELLOW_STAINED_GLASS)) {
             ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
             IChunk currentChunk = worldReader.getChunk(currentChunkPos.x, currentChunkPos.z);
+            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            BlockState randomBlock;
 
             // Always replace the glass itself with stone bricks
-            currentChunk.setBlockState(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), false);
-            blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), blockInfoGlobal.nbt);
+            randomBlock = stoneBrickSelector.get(random);
+            currentChunk.setBlockState(blockInfoGlobal.pos, randomBlock, false);
+            blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, randomBlock, blockInfoGlobal.nbt);
 
             // Straight line down
             BlockPos.Mutable mutable = blockInfoGlobal.pos.down().toMutable();
@@ -47,7 +57,8 @@ public class LegProcessor extends StructureProcessor {
 
             while (mutable.getY() > 0 && (currBlock.getMaterial() == Material.AIR || currBlock.getMaterial() == Material.WATER || currBlock.getMaterial() == Material.LAVA)) {
                 // Generate vertical pillar
-                currentChunk.setBlockState(mutable, Blocks.STONE_BRICKS.getDefaultState(), false);
+                randomBlock = stoneBrickSelector.get(random);
+                currentChunk.setBlockState(mutable, randomBlock, false);
 
                 // Generate rafters
                 if (yBelow == 1) {
