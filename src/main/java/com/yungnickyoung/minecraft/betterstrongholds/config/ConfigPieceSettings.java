@@ -9,6 +9,8 @@ public class ConfigPieceSettings {
     public final ForgeConfigSpec.ConfigValue<Integer> cmdAcariiMaxCount;
     public final ForgeConfigSpec.ConfigValue<Integer> cmdYungMaxCount;
     public final ForgeConfigSpec.ConfigValue<Integer> treasureRoomMaxCount;
+    public final ForgeConfigSpec.ConfigValue<Integer> armouryLargeRoomMaxCount;
+    public final ForgeConfigSpec.ConfigValue<Integer> armourySmallRoomMaxCount;
     public final ForgeConfigSpec.ConfigValue<Integer> portalRoomMaxCount;
 
     public ConfigPieceSettings(final ForgeConfigSpec.Builder BUILDER) {
@@ -62,6 +64,20 @@ public class ConfigPieceSettings {
                 " Default: 2")
             .worldRestart()
             .define("Treasure Room Max Count", 2);
+
+        armouryLargeRoomMaxCount = BUILDER
+            .comment(
+                " The max number of large armoury rooms that can spawn in a single stronghold.\n" +
+                " Default: 2")
+            .worldRestart()
+            .define("Armoury Room (Large) Max Count", 2);
+
+        armourySmallRoomMaxCount = BUILDER
+            .comment(
+                " The max number of small armoury rooms that can spawn in a single stronghold.\n" +
+                " Default: 2")
+            .worldRestart()
+            .define("Armoury Room (Small) Max Count", 2);
 
         portalRoomMaxCount = BUILDER
             .comment(

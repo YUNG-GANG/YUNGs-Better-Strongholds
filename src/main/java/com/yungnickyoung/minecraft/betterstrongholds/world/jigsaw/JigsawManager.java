@@ -128,6 +128,8 @@ public class JigsawManager {
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), BSConfig.pieceSettings.cmdYungMaxCount.get());
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), BSConfig.pieceSettings.treasureRoomMaxCount.get());
             this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), BSConfig.pieceSettings.portalRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_md"), BSConfig.pieceSettings.armouryLargeRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_sm"), BSConfig.pieceSettings.armourySmallRoomMaxCount.get());
             this.maxY = BSConfig.general.strongholdMaxY.get();
         }
 
