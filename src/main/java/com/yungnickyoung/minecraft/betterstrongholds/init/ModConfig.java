@@ -3,6 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.init;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSSettings;
+import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
@@ -29,6 +30,7 @@ public class ModConfig {
     private static void onWorldLoad(WorldEvent.Load event) {
         loadOresJSON();
         loadRareBlocksJSON();
+        loadArmorStandsJSON();
     }
 
     private static void initCustomFiles() {
@@ -37,6 +39,7 @@ public class ModConfig {
         createJsonReadMe();
         loadOresJSON();
         loadRareBlocksJSON();
+        loadArmorStandsJSON();
     }
 
     private static void createDirectory() {
@@ -139,7 +142,7 @@ public class ModConfig {
                 BetterStrongholds.LOGGER.error("Unable to create ores.json file: {}", e.toString());
             }
         } else {
-            // If file already exists, load data into BlockSetSelectors' singleton instance
+            // If file already exists, load data into OreChances singleton instance
             if (!jsonFile.canRead()) {
                 BetterStrongholds.LOGGER.error("Better Strongholds ores.json file not readable! Using default configuration...");
                 return;
@@ -170,7 +173,7 @@ public class ModConfig {
                 BetterStrongholds.LOGGER.error("Unable to create rareblocks.json file: {}", e.toString());
             }
         } else {
-            // If file already exists, load data into BlockSetSelectors' singleton instance
+            // If file already exists, load data into RareBlockChances singleton instance
             if (!jsonFile.canRead()) {
                 BetterStrongholds.LOGGER.error("Better Strongholds rareblocks.json file not readable! Using default configuration...");
                 return;
@@ -180,6 +183,37 @@ public class ModConfig {
                 RareBlockChances.instance = JSON.loadObjectFromJsonFile(jsonPath, RareBlockChances.class);
             } catch (IOException e) {
                 BetterStrongholds.LOGGER.error("Error loading Better Strongholds rareblocks.json file: {}", e.toString());
+                BetterStrongholds.LOGGER.error("Using default configuration...");
+            }
+        }
+    }
+
+    /**
+     * If a JSON file already exists, it loads its contents into ArmorStandChances.
+     * Otherwise, it creates a default JSON and from the default options in ArmorStandChances.
+     */
+    private static void loadArmorStandsJSON() {
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "armorstands.json");
+        File jsonFile = new File(jsonPath.toString());
+
+        if (!jsonFile.exists()) {
+            // Create default file if JSON file doesn't already exist
+            try {
+                JSON.createJsonFileFromObject(jsonPath, ArmorStandChances.get());
+            } catch (IOException e) {
+                BetterStrongholds.LOGGER.error("Unable to create armorstands.json file: {}", e.toString());
+            }
+        } else {
+            // If file already exists, load data into ArmorStandChances singleton instance
+            if (!jsonFile.canRead()) {
+                BetterStrongholds.LOGGER.error("Better Strongholds armorstands.json file not readable! Using default configuration...");
+                return;
+            }
+
+            try {
+                ArmorStandChances.instance = JSON.loadObjectFromJsonFile(jsonPath, ArmorStandChances.class);
+            } catch (IOException e) {
+                BetterStrongholds.LOGGER.error("Error loading Better Strongholds armorstands.json file: {}", e.toString());
                 BetterStrongholds.LOGGER.error("Using default configuration...");
             }
         }

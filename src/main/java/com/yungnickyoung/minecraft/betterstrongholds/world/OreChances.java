@@ -1,6 +1,5 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -40,12 +39,6 @@ public class OreChances {
     private BlockSetSelector oreChances;
 
     public BlockState getRandomOre(Random random) {
-        // Initial check to warn user for improper summation
-        float sum = oreChances.getEntries().values().stream().reduce(0f, Float::sum);
-        if (sum != 1f) {
-            BetterStrongholds.LOGGER.error("Your ore spawn chances don't add up to 1! Ores won't spawn as you intend!");
-        }
-
         return oreChances.get(random);
     }
 }

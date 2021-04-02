@@ -1,7 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -38,12 +37,6 @@ public class RareBlockChances {
     private BlockSetSelector blockChances;
 
     public BlockState getRandomRareBlock(Random random) {
-        // Initial check to warn user for improper summation
-        float sum = blockChances.getEntries().values().stream().reduce(0f, Float::sum);
-        if (sum != 1f) {
-            BetterStrongholds.LOGGER.error("Your rare block spawn chances don't add up to 1! Rare blocks won't spawn as you intend!");
-        }
-
         return blockChances.get(random);
     }
 }

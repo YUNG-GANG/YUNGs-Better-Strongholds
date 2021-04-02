@@ -19,6 +19,7 @@ public class ModProcessors {
     public static IStructureProcessorType<RareBlockProcessor> RARE_BLOCK_PROCESSOR = () -> RareBlockProcessor.CODEC;
     public static IStructureProcessorType<RedstoneProcessor> REDSTONE_PROCESSOR = () -> RedstoneProcessor.CODEC;
     public static IStructureProcessorType<LegProcessor> LEG_PROCESSOR = () -> LegProcessor.CODEC;
+    public static IStructureProcessorType<ArmorStandProcessor> ARMORSTAND_PROCESSOR = () -> ArmorStandProcessor.CODEC;
 
     public static void init() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModProcessors::commonSetup);
@@ -36,6 +37,7 @@ public class ModProcessors {
             Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterStrongholds.MOD_ID, "rare_block_processor"), RARE_BLOCK_PROCESSOR);
             Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterStrongholds.MOD_ID, "redstone_processor"), REDSTONE_PROCESSOR);
             Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterStrongholds.MOD_ID, "leg_processor"), LEG_PROCESSOR);
+            Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BetterStrongholds.MOD_ID, "armorstand_processor"), ARMORSTAND_PROCESSOR);
         });
     }
 }
