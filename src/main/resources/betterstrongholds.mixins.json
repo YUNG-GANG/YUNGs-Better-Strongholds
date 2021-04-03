@@ -3,7 +3,10 @@
   "package": "com.yungnickyoung.minecraft.betterstrongholds.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "betterstrongholds.refmap.json",
-  "mixins": ["EnderEyeStrongholdLocatingMixin"],
+  "mixins": [
+    "EnderEyeStrongholdLocatingMixin",
+    "VanillaStrongholdSpawnMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
