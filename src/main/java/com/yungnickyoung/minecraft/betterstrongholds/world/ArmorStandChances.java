@@ -27,10 +27,12 @@ public class ArmorStandChances {
         commonHelmets = new ItemSetSelector(Items.AIR)
             .addItem(Items.CHAINMAIL_HELMET, .3f)
             .addItem(Items.LEATHER_HELMET, .1f)
-            .addItem(Items.IRON_HELMET, .3f);
+            .addItem(Items.IRON_HELMET, .3f)
+            .addItem(Items.CARVED_PUMPKIN, .01f);
 
         rareHelmets = new ItemSetSelector(Items.AIR)
-            .addItem(Items.DIAMOND_HELMET, .3f);
+            .addItem(Items.DIAMOND_HELMET, .3f)
+            .addItem(Items.CARVED_PUMPKIN, .2f);
 
         commonChestplates = new ItemSetSelector(Items.AIR)
             .addItem(Items.CHAINMAIL_CHESTPLATE, .3f)

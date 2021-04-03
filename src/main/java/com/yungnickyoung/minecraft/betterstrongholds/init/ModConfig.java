@@ -4,6 +4,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSSettings;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
+import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
@@ -28,18 +29,21 @@ public class ModConfig {
     }
 
     private static void onWorldLoad(WorldEvent.Load event) {
-        loadOresJSON();
-        loadRareBlocksJSON();
-        loadArmorStandsJSON();
+        loadJSON();
     }
 
     private static void initCustomFiles() {
         createDirectory();
         createBaseReadMe();
         createJsonReadMe();
+        loadJSON();
+    }
+
+    private static void loadJSON() {
         loadOresJSON();
         loadRareBlocksJSON();
         loadArmorStandsJSON();
+        loadItemFramesJSON();
     }
 
     private static void createDirectory() {
@@ -214,6 +218,37 @@ public class ModConfig {
                 ArmorStandChances.instance = JSON.loadObjectFromJsonFile(jsonPath, ArmorStandChances.class);
             } catch (IOException e) {
                 BetterStrongholds.LOGGER.error("Error loading Better Strongholds armorstands.json file: {}", e.toString());
+                BetterStrongholds.LOGGER.error("Using default configuration...");
+            }
+        }
+    }
+
+    /**
+     * If a JSON file already exists, it loads its contents into ItemFrameChances.
+     * Otherwise, it creates a default JSON and from the default options in ItemFrameChances.
+     */
+    private static void loadItemFramesJSON() {
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "itemframes.json");
+        File jsonFile = new File(jsonPath.toString());
+
+        if (!jsonFile.exists()) {
+            // Create default file if JSON file doesn't already exist
+            try {
+                JSON.createJsonFileFromObject(jsonPath, ItemFrameChances.get());
+            } catch (IOException e) {
+                BetterStrongholds.LOGGER.error("Unable to create itemframes.json file: {}", e.toString());
+            }
+        } else {
+            // If file already exists, load data into ArmorStandChances singleton instance
+            if (!jsonFile.canRead()) {
+                BetterStrongholds.LOGGER.error("Better Strongholds itemframes.json file not readable! Using default configuration...");
+                return;
+            }
+
+            try {
+                ItemFrameChances.instance = JSON.loadObjectFromJsonFile(jsonPath, ItemFrameChances.class);
+            } catch (IOException e) {
+                BetterStrongholds.LOGGER.error("Error loading Better Strongholds itemframes.json file: {}", e.toString());
                 BetterStrongholds.LOGGER.error("Using default configuration...");
             }
         }

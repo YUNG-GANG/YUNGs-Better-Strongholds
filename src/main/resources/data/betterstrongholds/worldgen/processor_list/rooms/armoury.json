@@ -19,6 +19,9 @@
       "processor_type": "betterstrongholds:armorstand_processor"
     },
     {
+      "processor_type": "betterstrongholds:itemframe_processor"
+    },
+    {
       "processor_type": "betterstrongholds:redstone_processor"
     },
     {
