@@ -112,25 +112,25 @@ public class ModStructures {
     /**
      * We must manually add the separation settings for our structure to spawn.
      */
-    private static Method GETCODEC_METHOD;
+    private static Method GETCODEC_METHOD; // Cached instance since this will never change once initialized
+
+    @SuppressWarnings("unchecked")
     private static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
 
             // Skip Terraforged's chunk generator as they are a special case of a mod locking down their chunkgenerator.
-            // They will handle your structure spacing for you if you add to WorldGenRegistries.NOISE_SETTINGS in FMLCommonSetupEvent.
-            // We use reflection here, but this can also be accomplished via getCodec with an invoker mixin.
+            // Credits to TelepathicGrunt for this.
             try {
                 if (GETCODEC_METHOD == null) {
                     GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "func_230347_a_");
                 }
 
-                ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
-
-                if (cgRL != null && cgRL.getNamespace().equals("terraforged")) {
+                ResourceLocation chunkGenResourceLocation  = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
+                if (chunkGenResourceLocation  != null && chunkGenResourceLocation .getNamespace().equals("terraforged")) {
                     return;
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 BetterStrongholds.LOGGER.error("Was unable to check if " + serverWorld.getDimensionKey().getLocation() + " is using Terraforged's ChunkGenerator.");
             }
 
