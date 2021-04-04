@@ -54,13 +54,36 @@ public class BetterStrongholdStructure extends Structure<NoFeatureConfig> {
     /**
      * shouldStartAt
      *
-     * Vanilla has its own complex behavior for stronghold spawning.
-     * We don't worry about that here - instead, we just prevent spawning close to the initial world spawn.
-     * This is identical behavior to the stronghold in Repurposed Structures.
+     * A less constrained form of the ring-based placement of vanilla strongholds.
+     *
+     * Thickness of rings: 1,536  (96 chunks)
+     * Distance between rings: 1,536 (96 chunks)
+     * Distance to first ring: 1,280 (80 chunks)
+     *
+     * Vanilla has 8 rings.
+     *
+     * Credits to TelepathicGrunt for this.
      */
     @Override
-    protected boolean func_230363_a_(ChunkGenerator chunkGenerator, BiomeProvider biomeProvider, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
-        return (chunkX * chunkX) + (chunkZ * chunkZ) > 10000;
+    protected boolean func_230363_a_(ChunkGenerator chunkGenerator, BiomeProvider biomeProvider, long seed, SharedSeedRandom chunkRandom, int xChunk, int zChunk, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
+        int ringThickness = 96;
+        int distanceToFirstRing = 80;
+
+        int chunkDistance = (int) Math.sqrt((xChunk * xChunk) + (zChunk * zChunk));
+
+        // Offset the distance so that the first ring is closer to spawn
+        int shiftedChunkDistance = chunkDistance + (ringThickness - distanceToFirstRing);
+
+        // Determine which ring we are in.
+        // non-stronghold rings are even number ringSection
+        // stronghold rings are odd number ringSection.
+        int ringSection = shiftedChunkDistance / ringThickness;
+
+        // Would mimic vanilla's 8 ring result
+        // if(ringSection > 16) return false;
+
+        // Only spawn strongholds on odd number sections
+        return ringSection % 2 == 1;
     }
 
     public static class Start extends StructureStart<NoFeatureConfig> {
