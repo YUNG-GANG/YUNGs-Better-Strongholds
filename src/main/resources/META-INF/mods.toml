@@ -3,6 +3,7 @@ loaderVersion="[35,)"
 license="GPLv3"
 issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issues"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds"
+logoFile="logo.png"
 
 [[mods]]
 	modId="${modId}"
