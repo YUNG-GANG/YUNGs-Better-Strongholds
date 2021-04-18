@@ -18,23 +18,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(EnderEyeItem.class)
-public class EnderEyeStrongholdLocatingMixin {
+public class EnderEyeBetterStrongholdLocatingMixin {
     @ModifyVariable(
         method = "onItemRightClick",
         at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/gen/ChunkGenerator;func_235956_a_(Lnet/minecraft/world/server/ServerWorld;Lnet/minecraft/world/gen/feature/structure/Structure;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;")
     )
     private BlockPos locateBetterStronghold(BlockPos blockPos, World world, PlayerEntity player) {
-        return returnClosestStronghold(blockPos, (ServerWorld)world, player.getPosition());
+        return locateClosestBetterStronghold(blockPos, (ServerWorld)world, player.getPosition());
     }
 
-    private static BlockPos returnClosestStronghold(BlockPos blockPos, ServerWorld world, BlockPos playerPos) {
+    private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerWorld world, BlockPos playerPos) {
         ChunkGenerator chunkGenerator = world.getChunkProvider().getChunkGenerator();
-        BlockPos closestPos = returnCloserPos(blockPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
-        closestPos = returnCloserPos(closestPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        closestPos = returnClosestPosition(closestPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
         return closestPos;
     }
 
-    private static BlockPos returnCloserPos(BlockPos blockPos1, BlockPos blockPos2, BlockPos centerPos) {
+    private static BlockPos returnClosestPosition(BlockPos blockPos1, BlockPos blockPos2, BlockPos centerPos) {
         if (blockPos1 == null && blockPos2 == null) {
             return null;
         }
