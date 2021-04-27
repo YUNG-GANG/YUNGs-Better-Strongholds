@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -43,7 +43,7 @@ public class CobwebProcessor extends StructureProcessor {
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.COBWEB_PROCESSOR;
+        return BSModProcessors.COBWEB_PROCESSOR;
     }
 
     /**

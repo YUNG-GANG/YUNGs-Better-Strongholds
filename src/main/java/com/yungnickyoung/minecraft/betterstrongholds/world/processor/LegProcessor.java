@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
@@ -126,6 +126,6 @@ public class LegProcessor extends StructureProcessor {
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.LEG_PROCESSOR;
+        return BSModProcessors.LEG_PROCESSOR;
     }
 }

@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.util.Banner;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.AbstractBannerBlock;
@@ -83,7 +83,7 @@ public class BannerProcessor extends StructureProcessor {
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.BANNER_PROCESSOR;
+        return BSModProcessors.BANNER_PROCESSOR;
     }
 
     private Banner getRandomBanner(Random random) {

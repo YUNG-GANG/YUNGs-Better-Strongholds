@@ -5,6 +5,6 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 
-public class ModConfiguredStructures {
-    public static StructureFeature<NoFeatureConfig, ? extends Structure<NoFeatureConfig>> CONFIGURED_BETTER_STRONGHOLD = ModStructures.BETTER_STRONGHOLD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
+public class BSModConfiguredStructures {
+    public static StructureFeature<NoFeatureConfig, ? extends Structure<NoFeatureConfig>> CONFIGURED_BETTER_STRONGHOLD = BSModStructures.BETTER_STRONGHOLD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
 }

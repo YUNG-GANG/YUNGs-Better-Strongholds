@@ -6,7 +6,7 @@
 
 package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModStructures;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructures;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
 import net.minecraft.util.math.BlockPos;
@@ -29,8 +29,8 @@ public class EnderEyeBetterStrongholdLocatingMixin {
 
     private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerWorld world, BlockPos playerPos) {
         ChunkGenerator chunkGenerator = world.getChunkProvider().getChunkGenerator();
-        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
-        closestPos = returnClosestPosition(closestPos, chunkGenerator.func_235956_a_(world, ModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.func_235956_a_(world, BSModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        closestPos = returnClosestPosition(closestPos, chunkGenerator.func_235956_a_(world, BSModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
         return closestPos;
     }
 

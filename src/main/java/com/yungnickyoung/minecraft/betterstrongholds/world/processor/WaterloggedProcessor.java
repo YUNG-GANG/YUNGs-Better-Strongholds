@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -65,7 +65,7 @@ public class WaterloggedProcessor extends StructureProcessor {
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.WATERLOGGED_PROCESSOR;
+        return BSModProcessors.WATERLOGGED_PROCESSOR;
     }
 }
 

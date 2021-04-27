@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
-import com.yungnickyoung.minecraft.betterstrongholds.init.ModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
@@ -63,6 +63,6 @@ public class ItemFrameProcessor extends StructureProcessor {
     }
 
     protected IStructureProcessorType<?> getType() {
-        return ModProcessors.ITEMFRAME_PROCESSOR;
+        return BSModProcessors.ITEMFRAME_PROCESSOR;
     }
 }

@@ -1,5 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.init;
 
+import com.google.common.collect.Lists;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSSettings;
@@ -11,6 +12,8 @@ import com.yungnickyoung.minecraft.yungsapi.io.JSON;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
@@ -18,18 +21,43 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ModConfig {
+public class BSModConfig {
     public static void init() {
         initCustomFiles();
         // Register mod config with Forge
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, BSConfig.SPEC, "betterstrongholds-forge-1_16.toml");
         // Refresh JSON config on world load so that user doesn't have to restart MC
-        MinecraftForge.EVENT_BUS.addListener(ModConfig::onWorldLoad);
+        MinecraftForge.EVENT_BUS.addListener(BSModConfig::onWorldLoad);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModConfig::configChanged);
     }
 
     private static void onWorldLoad(WorldEvent.Load event) {
         loadJSON();
+    }
+
+    /**
+     * Parses the whitelisted dimensions string and updates the stored values.
+     */
+    public static void configChanged(ModConfig.ModConfigEvent event) {
+        ModConfig config = event.getConfig();
+
+        if (config.getSpec() == BSConfig.SPEC) {
+            String rawStringofList = BSConfig.whitelistedDimensions.get();
+            int strLen = rawStringofList.length();
+
+            // Validate the string's format
+            if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
+                BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Whitelisted Dimension IDs'. Using [minecraft:overworld] instead...");
+                BetterStrongholds.whitelistedDimensions = Lists.newArrayList("minecraft:overworld");
+                return;
+            }
+
+            // Parse string to list
+            BetterStrongholds.whitelistedDimensions = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
+        }
     }
 
     private static void initCustomFiles() {

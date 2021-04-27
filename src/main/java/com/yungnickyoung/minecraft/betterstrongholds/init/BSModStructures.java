@@ -12,7 +12,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
@@ -31,9 +30,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.Supplier;
 
-public class ModStructures {
+public class BSModStructures {
     public static final DeferredRegister<Structure<?>> DEFERRED_REGISTRY = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, BetterStrongholds.MOD_ID);
     public static final RegistryObject<Structure<NoFeatureConfig>> BETTER_STRONGHOLD = DEFERRED_REGISTRY.register("stronghold", () -> new BetterStrongholdStructure(NoFeatureConfig.field_236558_a_));
 
@@ -42,9 +40,9 @@ public class ModStructures {
         DEFERRED_REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register event listeners
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModStructures::commonSetup);
-        MinecraftForge.EVENT_BUS.addListener(ModStructures::addDimensionalSpacing);
-        MinecraftForge.EVENT_BUS.addListener(ModStructures::onBiomeLoad); // We use normal priority since we are both removing and adding stuff
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModStructures::commonSetup);
+        MinecraftForge.EVENT_BUS.addListener(BSModStructures::addDimensionalSpacing);
+        MinecraftForge.EVENT_BUS.addListener(BSModStructures::onBiomeLoad); // We use normal priority since we are both removing and adding stuff
     }
 
     /**
@@ -65,10 +63,10 @@ public class ModStructures {
                     .build();
 
             // Register the configured structure feature
-            Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterStrongholds.MOD_ID, "stronghold"), ModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
+            Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterStrongholds.MOD_ID, "stronghold"), BSModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
 
             // Add structure feature to this to prevent any issues if other mods' custom ChunkGenerators use FlatGenerationSettings.STRUCTURES
-            FlatGenerationSettings.STRUCTURES.put(BETTER_STRONGHOLD.get(), ModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
+            FlatGenerationSettings.STRUCTURES.put(BETTER_STRONGHOLD.get(), BSModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
 
             // Register separation settings for mods that might need it, like Terraforged
             WorldGenRegistries.NOISE_SETTINGS.getEntries().forEach(settings -> {
@@ -90,23 +88,13 @@ public class ModStructures {
      * Adds the appropriate structure feature to each biome as it loads in.
      */
     private static void onBiomeLoad(BiomeLoadingEvent event) {
-        // Only operate on biomes that have strongholds
-        boolean found = false;
-        for (Supplier<StructureFeature<?, ?>> supplier : event.getGeneration().getStructures()) {
-            if (supplier.get().field_236268_b_ == Structure.STRONGHOLD) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) return;
-
         // Remove vanilla stronghold from biome generation settings.
         // This will prevent them from spawning, although the /locate entry will still exist.
+        // See LocateStrongholdCommandMixin for how I handle this problem.
         event.getGeneration().getStructures().removeIf(supplier -> supplier.get().field_236268_b_ == Structure.STRONGHOLD);
 
         // Add stronghold to biome generation settings
-        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
+        event.getGeneration().getStructures().add(() -> BSModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
     }
 
     /**
@@ -127,21 +115,28 @@ public class ModStructures {
                 }
 
                 ResourceLocation chunkGenResourceLocation  = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
-                if (chunkGenResourceLocation  != null && chunkGenResourceLocation .getNamespace().equals("terraforged")) {
+                if (chunkGenResourceLocation  != null && chunkGenResourceLocation.getNamespace().equals("terraforged")) {
                     return;
                 }
             } catch (Exception e) {
                 BetterStrongholds.LOGGER.error("Was unable to check if " + serverWorld.getDimensionKey().getLocation() + " is using Terraforged's ChunkGenerator.");
             }
 
-            // Prevent spawning in superflat world
-            if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
-                return;
-            }
 
-            // We use a temp map because some mods handle immutable maps.
+
+            // We use a temp map to add our spacing because some mods handle immutable maps
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
-            tempMap.put(ModStructures.BETTER_STRONGHOLD.get(), DimensionStructuresSettings.field_236191_b_.get(ModStructures.BETTER_STRONGHOLD.get()));
+
+            // Don't spawn in non-whitelisted dimensions
+            if (!BetterStrongholds.whitelistedDimensions.contains(serverWorld.getDimensionKey().getLocation().toString())) {
+                tempMap.keySet().remove(BSModStructures.BETTER_STRONGHOLD.get());
+            }
+            // Prevent spawning in superflat world
+            else if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
+                tempMap.keySet().remove(BSModStructures.BETTER_STRONGHOLD.get());
+            } else {
+                tempMap.put(BSModStructures.BETTER_STRONGHOLD.get(), DimensionStructuresSettings.field_236191_b_.get(BSModStructures.BETTER_STRONGHOLD.get()));
+            }
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
         }
     }

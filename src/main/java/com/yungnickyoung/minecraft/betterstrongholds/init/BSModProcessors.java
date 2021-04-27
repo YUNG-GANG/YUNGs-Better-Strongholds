@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.template.IStructureProcessorType;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-public class ModProcessors {
+public class BSModProcessors {
     public static IStructureProcessorType<AirProcessor> AIR_PROCESSOR = () -> AirProcessor.CODEC;
     public static IStructureProcessorType<CobwebProcessor> COBWEB_PROCESSOR = () -> CobwebProcessor.CODEC;
     public static IStructureProcessorType<TorchProcessor> TORCH_PROCESSOR = () -> TorchProcessor.CODEC;
@@ -23,7 +23,7 @@ public class ModProcessors {
     public static IStructureProcessorType<ItemFrameProcessor> ITEMFRAME_PROCESSOR = () -> ItemFrameProcessor.CODEC;
 
     public static void init() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModProcessors::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModProcessors::commonSetup);
     }
 
     private static void commonSetup(FMLCommonSetupEvent event) {
