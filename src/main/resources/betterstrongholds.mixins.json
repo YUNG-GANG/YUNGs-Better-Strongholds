@@ -5,7 +5,8 @@
   "refmap": "betterstrongholds.refmap.json",
   "mixins": [
     "EnderEyeBetterStrongholdLocatingMixin",
-    "VanillaStrongholdSpawnMixin"
+    "VanillaStrongholdSpawnMixin",
+    "LocateStrongholdCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
