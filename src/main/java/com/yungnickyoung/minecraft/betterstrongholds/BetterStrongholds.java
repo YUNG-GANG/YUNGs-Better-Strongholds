@@ -18,9 +18,17 @@ public class BetterStrongholds {
     public static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * List of whitelisted dimensions. Will be reinitialized later w/ values from config.
+     * Lists of whitelisted dimensions and blacklisted biomes.
+     * Will be reinitialized later w/ values from config.
      */
     public static List<String> whitelistedDimensions = Lists.newArrayList("minecraft:overworld");
+    public static List<String> blacklistedBiomes = Lists.newArrayList(
+        "minecraft:ocean", "minecraft:frozen_ocean", "minecraft:deep_ocean",
+        "minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:cold_ocean",
+        "minecraft:deep_lukewarm_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
+        "minecraft:beach", "minecraft:snowy_beach",
+        "minecraft:river", "minecraft:frozen_river"
+    );
 
     public BetterStrongholds() {
         init();

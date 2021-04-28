@@ -93,7 +93,12 @@ public class BSModStructures {
         // See LocateStrongholdCommandMixin for how I handle this problem.
         event.getGeneration().getStructures().removeIf(supplier -> supplier.get().field_236268_b_ == Structure.STRONGHOLD);
 
-        // Add stronghold to biome generation settings
+        // Don't spawn Better Stronghold in blacklisted biomes
+        if (BetterStrongholds.blacklistedBiomes.contains(event.getName().toString())) {
+            return;
+        }
+
+        // Add Better Stronghold to biome generation settings
         event.getGeneration().getStructures().add(() -> BSModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD);
     }
 
