@@ -4,30 +4,19 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.gen.feature.template.IStructureProcessorType;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.structure.processor.StructureProcessor;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
  * Gives armor stands random armor depending on the type of armor
  * they are already wearing.
  */
-@MethodsReturnNonnullByDefault
 public class ArmorStandProcessor extends StructureProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
     public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    @ParametersAreNonnullByDefault
     public Template.EntityInfo processEntity(IWorldReader world, BlockPos seedPos, Template.EntityInfo localEntityInfo, Template.EntityInfo globalEntityInfo, PlacementSettings placementSettings, Template template) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
             ListNBT armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);

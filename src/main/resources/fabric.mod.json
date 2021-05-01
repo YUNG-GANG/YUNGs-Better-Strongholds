@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "betterstrongholds",
+  "version": "${version}",
+  "name": "YUNG's Better Strongholds",
+  "description": "A complete redesign of Minecraft's strongholds",
+  "authors": [
+    "YUNGNICKYOUNG",
+    "Acarii"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds-fabric",
+    "sources": "https://github.com/yungnickyoung/YUNGs-Better-Strongholds",
+    "issues": "https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issues",
+    "discord": "discord.gg/rns3beq"
+  },
+  "license": "GPLv3",
+  "icon": "assets/bettermineshafts/logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds"
+    ],
+    "modmenu": [
+      "com.yungnickyoung.minecraft.betterstrongholds.config.gui.BSModMenu"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.10.6",
+    "fabric": ">=0.25.0",
+    "minecraft": ">=1.16.2",
+    "yungsapi": ">=1.16.5-Fabric-2"
+  }
+}

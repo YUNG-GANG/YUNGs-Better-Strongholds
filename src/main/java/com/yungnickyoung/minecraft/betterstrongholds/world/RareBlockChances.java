@@ -1,6 +1,5 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
-
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

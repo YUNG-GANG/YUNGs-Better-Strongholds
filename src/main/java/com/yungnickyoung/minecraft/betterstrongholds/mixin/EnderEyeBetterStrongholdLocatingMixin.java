@@ -9,10 +9,10 @@ package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructures;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -20,17 +20,17 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(EnderEyeItem.class)
 public class EnderEyeBetterStrongholdLocatingMixin {
     @ModifyVariable(
-        method = "onItemRightClick",
-        at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/gen/ChunkGenerator;func_235956_a_(Lnet/minecraft/world/server/ServerWorld;Lnet/minecraft/world/gen/feature/structure/Structure;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;")
+        method = "use",
+        at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/gen/ChunkGenerator;locateStructure(Lnet/minecraft/server/ServerWorld;Lnet/minecraft/world/gen/feature/StructureFeature;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;")
     )
     private BlockPos locateBetterStronghold(BlockPos blockPos, World world, PlayerEntity player) {
-        return locateClosestBetterStronghold(blockPos, (ServerWorld)world, player.getPosition());
+        return locateClosestBetterStronghold(blockPos, (ServerWorld)world, player.getBlockPos());
     }
 
     private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerWorld world, BlockPos playerPos) {
-        ChunkGenerator chunkGenerator = world.getChunkProvider().getChunkGenerator();
-        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.func_235956_a_(world, BSModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
-        closestPos = returnClosestPosition(closestPos, chunkGenerator.func_235956_a_(world, BSModStructures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
+        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.locateStructure(world, BSModStructures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
+        closestPos = returnClosestPosition(closestPos, chunkGenerator.locateStructure(world, BSModStructures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
         return closestPos;
     }
 

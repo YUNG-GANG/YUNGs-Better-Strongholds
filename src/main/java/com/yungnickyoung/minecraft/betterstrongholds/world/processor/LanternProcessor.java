@@ -1,49 +1,44 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
+import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
+import net.minecraft.structure.Structure;
+import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.processor.StructureProcessor;
+import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.gen.feature.template.IStructureProcessorType;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.WorldView;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
  * Replaces some lanterns with air, making the structure look more weathered and less complete.
  */
-@MethodsReturnNonnullByDefault
 public class LanternProcessor extends StructureProcessor {
     public static final LanternProcessor INSTANCE = new LanternProcessor();
     public static final Codec<LanternProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
-    @ParametersAreNonnullByDefault
     @Override
-    public Template.BlockInfo process(IWorldReader worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Template.BlockInfo blockInfoLocal, Template.BlockInfo blockInfoGlobal, PlacementSettings structurePlacementData, @Nullable Template template) {
-        if (blockInfoGlobal.state.isIn(Blocks.LANTERN)) {
+    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
+        if (blockInfoGlobal.state.isOf(Blocks.LANTERN)) {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            float replacementChance = getReplacementChance();
-            if (random.nextFloat() > replacementChance)
-                blockInfoGlobal = new Template.BlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
+            double replacementChance = getReplacementChance();
+            if (random.nextDouble() > replacementChance)
+                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.tag);
         }
         return blockInfoGlobal;
     }
 
-    protected IStructureProcessorType<?> getType() {
+    protected StructureProcessorType<?> getType() {
         return BSModProcessors.LANTERN_PROCESSOR;
     }
 
     /**
      * Returns lantern replacement chance for the given BlockState.
      */
-    private float getReplacementChance() {
-        return BSConfig.general.lanternSpawnRate.get().floatValue();
+    private double getReplacementChance() {
+        return BetterStrongholds.CONFIG.betterStrongholds.general.lanternSpawnRate;
     }
 }
