@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class BSModStructures {
-    public static StructureFeature<DefaultFeatureConfig> BETTER_STRONGHOLD = new BetterStrongholdStructure(DefaultFeatureConfig.CODEC));
+    public static StructureFeature<DefaultFeatureConfig> BETTER_STRONGHOLD = new BetterStrongholdStructure(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         registerStructures();

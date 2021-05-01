@@ -11,7 +11,7 @@ version = "${project.minecraft_version}-${project.mod_version}"
 group = project.maven_group
 
 minecraft {
-//    accessWidener = file("src/main/resources/betterstrongholds.aw")
+    accessWidener "src/main/resources/betterstrongholds.aw"
 }
 
 repositories {
@@ -46,7 +46,7 @@ dependencies {
 
     // YUNG's API - required dependency
     modImplementation ("com.yungnickyoung.minecraft.yungsapi:YungsApi:${project.yungs_api_version}") {
-        transitive = false
+//        transitive = false
     }
 }
 
