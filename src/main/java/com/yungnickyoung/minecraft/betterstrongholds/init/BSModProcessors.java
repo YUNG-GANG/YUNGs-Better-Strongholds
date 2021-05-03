@@ -17,8 +17,8 @@ public class BSModProcessors {
     public static StructureProcessorType<RareBlockProcessor> RARE_BLOCK_PROCESSOR = () -> RareBlockProcessor.CODEC;
     public static StructureProcessorType<RedstoneProcessor> REDSTONE_PROCESSOR = () -> RedstoneProcessor.CODEC;
     public static StructureProcessorType<LegProcessor> LEG_PROCESSOR = () -> LegProcessor.CODEC;
-//    public static StructureProcessorType<ArmorStandProcessor> ARMORSTAND_PROCESSOR = () -> ArmorStandProcessor.CODEC;
-//    public static StructureProcessorType<ItemFrameProcessor> ITEMFRAME_PROCESSOR = () -> ItemFrameProcessor.CODEC;
+    public static StructureProcessorType<ArmorStandProcessor> ARMORSTAND_PROCESSOR = () -> ArmorStandProcessor.CODEC;
+    public static StructureProcessorType<ItemFrameProcessor> ITEMFRAME_PROCESSOR = () -> ItemFrameProcessor.CODEC;
 
     public static void init() {
         registerProcessors();
@@ -35,7 +35,7 @@ public class BSModProcessors {
         Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "rare_block_processor"), RARE_BLOCK_PROCESSOR);
         Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "redstone_processor"), REDSTONE_PROCESSOR);
         Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "leg_processor"), LEG_PROCESSOR);
-//        Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "armorstand_processor"), ARMORSTAND_PROCESSOR);
-//        Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "itemframe_processor"), ITEMFRAME_PROCESSOR);
+        Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "armorstand_processor"), ARMORSTAND_PROCESSOR);
+        Registry.register(Registry.STRUCTURE_PROCESSOR, new Identifier(BetterStrongholds.MOD_ID, "itemframe_processor"), ITEMFRAME_PROCESSOR);
     }
 }

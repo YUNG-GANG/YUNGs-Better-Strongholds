@@ -27,6 +27,6 @@ public class ConfigPieceSettings {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public int armourySmallRoomMaxCount = 2;
 
-    @ConfigEntry.Gui.Tooltip(count = 1)
+    @ConfigEntry.Gui.Tooltip(count = 2)
     public int portalRoomMaxCount = 1;
 }

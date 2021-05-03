@@ -6,7 +6,8 @@
   "mixins": [
     "EnderEyeBetterStrongholdLocatingMixin",
     "VanillaStrongholdSpawnMixin",
-    "LocateStrongholdCommandMixin"
+    "LocateStrongholdCommandMixin",
+    "EntityProcessorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

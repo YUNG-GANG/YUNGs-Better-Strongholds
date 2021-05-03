@@ -1,86 +1,102 @@
-//package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
-//
-//import com.mojang.serialization.Codec;
-//import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
-//import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-//import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
-//import net.minecraft.structure.processor.StructureProcessor;
-//
-//import java.util.Random;
-//
-///**
-// * Gives armor stands random armor depending on the type of armor
-// * they are already wearing.
-// */
-//public class ArmorStandProcessor extends StructureProcessor {
-//    public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-//    public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
-//
-//    @Override
-//    public Template.EntityInfo processEntity(IWorldReader world, BlockPos seedPos, Template.EntityInfo localEntityInfo, Template.EntityInfo globalEntityInfo, PlacementSettings placementSettings, Template template) {
-//        if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
-//            ListNBT armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
-//            Random random = placementSettings.getRandom(globalEntityInfo.blockPos);
-//
-//            // Type depends on the helmet
-//            String helmet;
-//            try {
-//                helmet = ((CompoundNBT) armorItems.get(3)).get("id").toString();
-//            } catch(Exception e) {
-//                BetterStrongholds.LOGGER.info("Unable to randmize armor stand at {}. Missing helmet?", globalEntityInfo.blockPos);
-//                return globalEntityInfo;
-//            }
-//
-//            boolean isRare = false;
-//            if (helmet.equals("\"minecraft:diamond_helmet\""))
-//                isRare = true;
-//
-//            CompoundNBT newNBT = globalEntityInfo.nbt.copy();
-//            // Boots
-//            String bootsString = isRare
-//                ? ArmorStandChances.get().getRareBoots(random).getRegistryName().toString()
-//                : ArmorStandChances.get().getCommonBoots(random).getRegistryName().toString();
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
-//            CompoundNBT bootsTagNBT = new CompoundNBT();
-//            bootsTagNBT.putInt("Damage", 0);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
-//
-//            // Leggings
-//            String leggingsString = isRare
-//                ? ArmorStandChances.get().getRareLeggings(random).getRegistryName().toString()
-//                : ArmorStandChances.get().getCommonLeggings(random).getRegistryName().toString();
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
-//            CompoundNBT leggingsTagNBT = new CompoundNBT();
-//            leggingsTagNBT.putInt("Damage", 0);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
-//
-//            // Chestplate
-//            String chesplateString = isRare
-//                ? ArmorStandChances.get().getRareChestplate(random).getRegistryName().toString()
-//                : ArmorStandChances.get().getCommonChestplate(random).getRegistryName().toString();
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
-//            CompoundNBT chestplateTagNBT = new CompoundNBT();
-//            chestplateTagNBT.putInt("Damage", 0);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
-//
-//            // Helmet
-//            String helmetString = isRare
-//                ? ArmorStandChances.get().getRareHelmet(random).getRegistryName().toString()
-//                : ArmorStandChances.get().getCommonHelmet(random).getRegistryName().toString();
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
-//            CompoundNBT helmetTagNBT = new CompoundNBT();
-//            helmetTagNBT.putInt("Damage", 0);
-//            ((CompoundNBT)newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
-//            globalEntityInfo = new Template.EntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
-//        }
-//        return globalEntityInfo;
-//    }
-//
-//    protected IStructureProcessorType<?> getType() {
-//        return BSModProcessors.ARMORSTAND_PROCESSOR;
-//    }
-//}
+package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
+
+import com.mojang.serialization.Codec;
+import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
+import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
+import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.StructureEntityProcessor;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.structure.Structure;
+import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.processor.StructureProcessorType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
+
+/**
+ * Gives armor stands random armor depending on the type of armor
+ * they are already wearing.
+ */
+public class ArmorStandProcessor extends StructureEntityProcessor {
+    public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
+    public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
+
+    @Override
+    public Structure.StructureEntityInfo processEntity(WorldView worldView, BlockPos structurePiecePos, BlockPos structurePieceBottomCenterPos, Structure.StructureEntityInfo localEntityInfo, Structure.StructureEntityInfo globalEntityInfo, StructurePlacementData structurePlacementData) {
+        if (globalEntityInfo.tag.getString("id").equals("minecraft:armor_stand")) {
+            ListTag armorItems = globalEntityInfo.tag.getList("ArmorItems", 10);
+            Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
+
+            if (globalEntityInfo.blockPos.getX() == 8628 && globalEntityInfo.blockPos.getY() == 30 && globalEntityInfo.blockPos.getZ() == -2161) {
+                BetterStrongholds.LOGGER.info("halp");
+            }
+
+            // Type depends on the helmet
+            String helmet;
+            try {
+                helmet = ((CompoundTag) armorItems.get(3)).get("id").toString();
+            } catch(Exception e) {
+                BetterStrongholds.LOGGER.info("Unable to randomize armor stand at {}. Missing helmet?", globalEntityInfo.blockPos);
+                return globalEntityInfo;
+            }
+
+            boolean isRare = helmet.equals("\"minecraft:diamond_helmet\"");
+            CompoundTag newNBT = globalEntityInfo.tag.copy();
+            // Boots
+            String bootsString = isRare
+                ? Registry.ITEM.getId(ArmorStandChances.get().getRareBoots(random)).toString()
+                : Registry.ITEM.getId(ArmorStandChances.get().getCommonBoots(random)).toString();
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
+            CompoundTag bootsTagNBT = new CompoundTag();
+            bootsTagNBT.putInt("Damage", 0);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
+
+            // Leggings
+            String leggingsString = isRare
+                ? Registry.ITEM.getId(ArmorStandChances.get().getRareLeggings(random)).toString()
+                : Registry.ITEM.getId(ArmorStandChances.get().getCommonLeggings(random)).toString();
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
+            CompoundTag leggingsTagNBT = new CompoundTag();
+            leggingsTagNBT.putInt("Damage", 0);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
+
+            // Chestplate
+            String chesplateString = isRare
+                ? Registry.ITEM.getId(ArmorStandChances.get().getRareChestplate(random)).toString()
+                : Registry.ITEM.getId(ArmorStandChances.get().getCommonChestplate(random)).toString();
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
+            CompoundTag chestplateTagNBT = new CompoundTag();
+            chestplateTagNBT.putInt("Damage", 0);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
+
+            // Helmet
+            String helmetString = isRare
+                ? Registry.ITEM.getId(ArmorStandChances.get().getRareHelmet(random)).toString()
+                : Registry.ITEM.getId(ArmorStandChances.get().getCommonHelmet(random)).toString();
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
+            CompoundTag helmetTagNBT = new CompoundTag();
+            helmetTagNBT.putInt("Damage", 0);
+            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
+            globalEntityInfo = new Structure.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
+        }
+        return globalEntityInfo;
+    }
+
+    @Nullable
+    @Override
+    public Structure.StructureBlockInfo process(WorldView worldView, BlockPos pos, BlockPos blockPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
+        return blockInfoGlobal;
+    }
+
+    protected StructureProcessorType<?> getType() {
+        return BSModProcessors.ARMORSTAND_PROCESSOR;
+    }
+}

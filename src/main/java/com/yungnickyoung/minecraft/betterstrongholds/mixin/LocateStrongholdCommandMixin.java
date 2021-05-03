@@ -2,8 +2,8 @@ package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.command.CommandSource;
 import net.minecraft.server.command.LocateCommand;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.gen.feature.StructureFeature;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +24,7 @@ public class LocateStrongholdCommandMixin {
         );
 
     @Inject(method = "execute", at = @At(value = "HEAD"), cancellable = true)
-    private static void overrideLocateVanillaStronghold(CommandSource cmdSource,
+    private static void overrideLocateVanillaStronghold(ServerCommandSource cmdSource,
                                                         StructureFeature<?> structure,
                                                         CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         if (structure == StructureFeature.STRONGHOLD) {
