@@ -15,7 +15,7 @@ import java.util.List;
 @Mod(BetterStrongholds.MOD_ID)
 public class BetterStrongholds {
     public static final String MOD_ID = "betterstrongholds";
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     /**
      * Lists of whitelisted dimensions and blacklisted biomes.
