@@ -15,7 +15,7 @@
     "discord": "discord.gg/rns3beq"
   },
   "license": "GPLv3",
-  "icon": "assets/betterstrongholds/logo.png",
+  "icon": "assets/betterstrongholds/logo_sm.png",
   "environment": "*",
   "entrypoints": {
     "main": [
