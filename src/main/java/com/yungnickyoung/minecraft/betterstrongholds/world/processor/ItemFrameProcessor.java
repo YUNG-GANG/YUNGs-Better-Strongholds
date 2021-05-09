@@ -25,7 +25,13 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
     public static final Codec<ItemFrameProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureEntityInfo processEntity(WorldView worldView, BlockPos structurePiecePos, BlockPos structurePieceBottomCenterPos, Structure.StructureEntityInfo localEntityInfo, Structure.StructureEntityInfo globalEntityInfo, StructurePlacementData structurePlacementData) {
+    public Structure.StructureEntityInfo processEntity(WorldView worldView,
+                                                       BlockPos structurePiecePos,
+                                                       BlockPos structurePieceBottomCenterPos,
+                                                       Structure.StructureEntityInfo localEntityInfo,
+                                                       Structure.StructureEntityInfo globalEntityInfo,
+                                                       StructurePlacementData structurePlacementData
+    ) {
         if (globalEntityInfo.tag.getString("id").equals("minecraft:item_frame")) {
             Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
 

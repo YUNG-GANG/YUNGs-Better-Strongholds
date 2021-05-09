@@ -26,7 +26,13 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
     public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureEntityInfo processEntity(WorldView worldView, BlockPos structurePiecePos, BlockPos structurePieceBottomCenterPos, Structure.StructureEntityInfo localEntityInfo, Structure.StructureEntityInfo globalEntityInfo, StructurePlacementData structurePlacementData) {
+    public Structure.StructureEntityInfo processEntity(WorldView worldView,
+                                                       BlockPos structurePiecePos,
+                                                       BlockPos structurePieceBottomCenterPos,
+                                                       Structure.StructureEntityInfo localEntityInfo,
+                                                       Structure.StructureEntityInfo globalEntityInfo,
+                                                       StructurePlacementData structurePlacementData
+    ) {
         if (globalEntityInfo.tag.getString("id").equals("minecraft:armor_stand")) {
             ListTag armorItems = globalEntityInfo.tag.getList("ArmorItems", 10);
             Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
@@ -35,7 +41,7 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
                 BetterStrongholds.LOGGER.info("halp");
             }
 
-            // Type depends on the helmet
+            // Type depends on the helmet and nothing else
             String helmet;
             try {
                 helmet = ((CompoundTag) armorItems.get(3)).get("id").toString();
@@ -45,6 +51,7 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             }
 
             boolean isRare = helmet.equals("\"minecraft:diamond_helmet\"");
+
             CompoundTag newNBT = globalEntityInfo.tag.copy();
             // Boots
             String bootsString = isRare
