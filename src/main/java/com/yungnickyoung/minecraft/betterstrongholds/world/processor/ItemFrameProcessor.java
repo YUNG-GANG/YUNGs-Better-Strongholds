@@ -5,7 +5,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.StructureEntityProcessor;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.processor.StructureProcessorType;
@@ -32,20 +32,20 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
                                                        Structure.StructureEntityInfo globalEntityInfo,
                                                        StructurePlacementData structurePlacementData
     ) {
-        if (globalEntityInfo.tag.getString("id").equals("minecraft:item_frame")) {
+        if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
             Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
 
             // Determine which pool we are grabbing from
             String item;
             try {
-                item = globalEntityInfo.tag.getCompound("Item").get("id").toString();
+                item = globalEntityInfo.nbt.getCompound("Item").get("id").toString();
             } catch (Exception e) {
                 BetterStrongholds.LOGGER.info("Unable to randomize item frame at {}", globalEntityInfo.blockPos);
                 return globalEntityInfo;
             }
 
             // Set the item in the item frame's NBT
-            CompoundTag newNBT = globalEntityInfo.tag.copy();
+            NbtCompound newNBT = globalEntityInfo.nbt.copy();
             if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
                 String randomItemString = Registry.ITEM.getId(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {

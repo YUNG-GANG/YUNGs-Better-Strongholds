@@ -2,12 +2,14 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.yungnickyoung.minecraft.betterstrongholds.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
     "EnderEyeBetterStrongholdLocatingMixin",
     "VanillaStrongholdSpawnMixin",
     "LocateStrongholdCommandMixin",
-    "EntityProcessorMixin"
+    "EntityProcessorMixin",
+    "BlockBoxAccessor",
+    "SinglePoolElementAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

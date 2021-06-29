@@ -5,8 +5,8 @@ import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.StructureEntityProcessor;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.processor.StructureProcessorType;
@@ -33,8 +33,8 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
                                                        Structure.StructureEntityInfo globalEntityInfo,
                                                        StructurePlacementData structurePlacementData
     ) {
-        if (globalEntityInfo.tag.getString("id").equals("minecraft:armor_stand")) {
-            ListTag armorItems = globalEntityInfo.tag.getList("ArmorItems", 10);
+        if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
+            NbtList armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
             Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
 
             if (globalEntityInfo.blockPos.getX() == 8628 && globalEntityInfo.blockPos.getY() == 30 && globalEntityInfo.blockPos.getZ() == -2161) {
@@ -44,7 +44,7 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             // Type depends on the helmet and nothing else
             String helmet;
             try {
-                helmet = ((CompoundTag) armorItems.get(3)).get("id").toString();
+                helmet = ((NbtCompound) armorItems.get(3)).get("id").toString();
             } catch(Exception e) {
                 BetterStrongholds.LOGGER.info("Unable to randomize armor stand at {}. Missing helmet?", globalEntityInfo.blockPos);
                 return globalEntityInfo;
@@ -52,46 +52,46 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
 
             boolean isRare = helmet.equals("\"minecraft:diamond_helmet\"");
 
-            CompoundTag newNBT = globalEntityInfo.tag.copy();
+            NbtCompound newNBT = globalEntityInfo.nbt.copy();
             // Boots
             String bootsString = isRare
                 ? Registry.ITEM.getId(ArmorStandChances.get().getRareBoots(random)).toString()
                 : Registry.ITEM.getId(ArmorStandChances.get().getCommonBoots(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
-            CompoundTag bootsTagNBT = new CompoundTag();
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
+            NbtCompound bootsTagNBT = new NbtCompound();
             bootsTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
 
             // Leggings
             String leggingsString = isRare
                 ? Registry.ITEM.getId(ArmorStandChances.get().getRareLeggings(random)).toString()
                 : Registry.ITEM.getId(ArmorStandChances.get().getCommonLeggings(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
-            CompoundTag leggingsTagNBT = new CompoundTag();
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
+            NbtCompound leggingsTagNBT = new NbtCompound();
             leggingsTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
 
             // Chestplate
             String chesplateString = isRare
                 ? Registry.ITEM.getId(ArmorStandChances.get().getRareChestplate(random)).toString()
                 : Registry.ITEM.getId(ArmorStandChances.get().getCommonChestplate(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
-            CompoundTag chestplateTagNBT = new CompoundTag();
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
+            NbtCompound chestplateTagNBT = new NbtCompound();
             chestplateTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
 
             // Helmet
             String helmetString = isRare
                 ? Registry.ITEM.getId(ArmorStandChances.get().getRareHelmet(random)).toString()
                 : Registry.ITEM.getId(ArmorStandChances.get().getCommonHelmet(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
-            CompoundTag helmetTagNBT = new CompoundTag();
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
+            NbtCompound helmetTagNBT = new NbtCompound();
             helmetTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
+            ((NbtCompound)newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
             globalEntityInfo = new Structure.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
         }
         return globalEntityInfo;

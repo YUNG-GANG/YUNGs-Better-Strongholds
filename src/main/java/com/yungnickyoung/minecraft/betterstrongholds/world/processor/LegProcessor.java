@@ -42,7 +42,7 @@ public class LegProcessor extends StructureProcessor {
             // Always replace the glass itself with stone bricks
             randomBlock = stoneBrickSelector.get(random);
             currentChunk.setBlockState(blockInfoGlobal.pos, randomBlock, false);
-            blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, randomBlock, blockInfoGlobal.tag);
+            blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, randomBlock, blockInfoGlobal.nbt);
 
             // Straight line down
             BlockPos.Mutable mutable = blockInfoGlobal.pos.down().mutableCopy();

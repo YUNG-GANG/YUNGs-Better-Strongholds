@@ -26,7 +26,7 @@ public class TorchProcessor extends StructureProcessor {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
             double replacementChance = getReplacementChance();
             if (random.nextDouble() > replacementChance)
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.tag);
+                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
         }
         return blockInfoGlobal;
     }
