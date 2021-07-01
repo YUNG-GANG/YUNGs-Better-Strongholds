@@ -3,9 +3,8 @@ package com.yungnickyoung.minecraft.betterstrongholds.util;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallBannerBlock;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +16,17 @@ import java.util.List;
 public class Banner {
     private List<BannerPattern> patterns;
     private BlockState state;
-    private CompoundTag nbt;
+    private NbtCompound nbt;
     private boolean isWallBanner;
 
-    public Banner(List<BannerPattern> _patterns, BlockState _state, CompoundTag _nbt) {
+    public Banner(List<BannerPattern> _patterns, BlockState _state, NbtCompound _nbt) {
         this.patterns = _patterns;
         this.state = _state;
         this.nbt = _nbt;
         this.isWallBanner = state.getBlock() instanceof WallBannerBlock;
     }
 
-    public Banner(List<BannerPattern> _patterns, BlockState _state, CompoundTag _nbt, boolean _isWallBanner) {
+    public Banner(List<BannerPattern> _patterns, BlockState _state, NbtCompound _nbt, boolean _isWallBanner) {
         this.patterns = _patterns;
         this.state = _state;
         this.nbt = _nbt;
@@ -50,11 +49,11 @@ public class Banner {
         this.state = state;
     }
 
-    public CompoundTag getNbt() {
+    public NbtCompound getNbt() {
         return nbt;
     }
 
-    public void setNbt(CompoundTag nbt) {
+    public void setNbt(NbtCompound nbt) {
         this.nbt = nbt;
     }
 
@@ -89,7 +88,7 @@ public class Banner {
         }
 
         public Banner build() {
-            CompoundTag nbt = createBannerNBT(patterns);
+            NbtCompound nbt = createBannerNBT(patterns);
             return new Banner(patterns, state, nbt);
         }
 
@@ -97,13 +96,13 @@ public class Banner {
          * Helper function that creates a complete CompoundNBT for a banner BlockState
          * with the provided patterns.
          */
-        private static CompoundTag createBannerNBT(List<BannerPattern> patterns) {
-            CompoundTag nbt = new CompoundTag();
-            ListTag patternList = new ListTag();
+        private static NbtCompound createBannerNBT(List<BannerPattern> patterns) {
+            NbtCompound nbt = new NbtCompound();
+            NbtList patternList = new NbtList();
 
             // Construct list of patterns from args
             for (BannerPattern pattern : patterns) {
-                CompoundTag patternNBT = new CompoundTag();
+                NbtCompound patternNBT = new NbtCompound();
                 patternNBT.putString("Pattern", pattern.getPattern());
                 patternNBT.putInt("Color", pattern.getColor());
                 patternList.add(patternNBT);

@@ -5,9 +5,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.DoubleTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtDouble;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.processor.StructureProcessor;
@@ -43,18 +43,18 @@ public class EntityProcessorMixin {
         for (Structure.StructureEntityInfo entityInfo : processEntityInfos(serverWorldAccess, structurePiecePos, structurePieceBottomCenterPos, placementData, this.entities)) {
             BlockPos blockPos = entityInfo.blockPos;
             if (placementData.getBoundingBox() == null || placementData.getBoundingBox().contains(blockPos)) {
-                CompoundTag compoundTag = entityInfo.tag.copy();
+                NbtCompound compoundTag = entityInfo.nbt.copy();
                 Vec3d vec3d = entityInfo.pos;
-                ListTag listTag = new ListTag();
-                listTag.add(DoubleTag.of(vec3d.x));
-                listTag.add(DoubleTag.of(vec3d.y));
-                listTag.add(DoubleTag.of(vec3d.z));
+                NbtList listTag = new NbtList();
+                listTag.add(NbtDouble.of(vec3d.x));
+                listTag.add(NbtDouble.of(vec3d.y));
+                listTag.add(NbtDouble.of(vec3d.z));
                 compoundTag.put("Pos", listTag);
                 compoundTag.remove("UUID");
                 getEntity(serverWorldAccess, compoundTag).ifPresent((entity) -> {
                     float f = entity.applyMirror(placementData.getMirror());
-                    f += entity.yaw - entity.applyRotation(placementData.getRotation());
-                    entity.refreshPositionAndAngles(vec3d.x, vec3d.y, vec3d.z, f, entity.pitch);
+                    f += entity.getYaw() - entity.applyRotation(placementData.getRotation());
+                    entity.refreshPositionAndAngles(vec3d.x, vec3d.y, vec3d.z, f, entity.getPitch());
                     if (placementData.method_27265() && entity instanceof MobEntity) {
                         ((MobEntity)entity).initialize(serverWorldAccess, serverWorldAccess.getLocalDifficulty(new BlockPos(vec3d)), SpawnReason.STRUCTURE, null, compoundTag);
                     }
@@ -88,7 +88,7 @@ public class EntityProcessorMixin {
             BlockPos globalBlockPos = Structure
                 .transformAround(rawEntityInfo.blockPos, structurePlacementData.getMirror(), structurePlacementData.getRotation(), structurePlacementData.getPosition())
                 .add((structurePiecePos));
-            Structure.StructureEntityInfo globalEntityInfo = new Structure.StructureEntityInfo(globalPos, globalBlockPos, rawEntityInfo.tag);
+            Structure.StructureEntityInfo globalEntityInfo = new Structure.StructureEntityInfo(globalPos, globalBlockPos, rawEntityInfo.nbt);
 
             // Apply processors
             for (StructureProcessor processor : structurePlacementData.getProcessors()) {
@@ -106,9 +106,9 @@ public class EntityProcessorMixin {
         return processedEntities;
     }
 
-    private static Optional<Entity> getEntity(ServerWorldAccess serverWorldAccess, CompoundTag compoundTag) {
+    private static Optional<Entity> getEntity(ServerWorldAccess serverWorldAccess, NbtCompound compoundTag) {
         try {
-            return EntityType.getEntityFromTag(compoundTag, serverWorldAccess.toServerWorld());
+            return EntityType.getEntityFromNbt(compoundTag, serverWorldAccess.toServerWorld());
         } catch (Exception var3) {
             return Optional.empty();
         }

@@ -7,7 +7,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.util.Banner;
 import net.minecraft.block.AbstractBannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
@@ -65,11 +65,11 @@ public class BannerProcessor extends StructureProcessor {
     public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state.getBlock() == Blocks.GRAY_WALL_BANNER && (blockInfoGlobal.tag.get("Patterns") == null || blockInfoGlobal.tag.getList("Patterns", 10).size() == 0)) {
+            if (blockInfoGlobal.state.getBlock() == Blocks.GRAY_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
                 Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
                 Direction facing = blockInfoGlobal.state.get(Properties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().with(Properties.HORIZONTAL_FACING, facing);
-                CompoundTag newNBT = copyNBT(banner.getNbt());
+                NbtCompound newNBT = copyNBT(banner.getNbt());
 
                 blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, newState, newNBT);
             }
@@ -85,8 +85,8 @@ public class BannerProcessor extends StructureProcessor {
         return WALL_BANNERS.get(random.nextInt(WALL_BANNERS.size()));
     }
 
-    private CompoundTag copyNBT(CompoundTag other) {
-        CompoundTag nbt = new CompoundTag();
+    private NbtCompound copyNBT(NbtCompound other) {
+        NbtCompound nbt = new NbtCompound();
         nbt.copyFrom(other);
         return nbt;
     }

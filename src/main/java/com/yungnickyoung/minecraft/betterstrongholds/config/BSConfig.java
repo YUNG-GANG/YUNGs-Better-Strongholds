@@ -6,7 +6,7 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name="betterstrongholds-fabric-1_16")
+@Config(name="betterstrongholds-fabric-1_17")
 public class BSConfig implements ConfigData {
     @ConfigEntry.Category("Better Strongholds")
     @ConfigEntry.Gui.TransitiveObject
@@ -51,6 +51,4 @@ public class BSConfig implements ConfigData {
         // Parse string to list
         BetterStrongholds.blacklistedBiomes = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
     }
-
-
 }

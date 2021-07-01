@@ -28,7 +28,7 @@ public class RareBlockProcessor extends StructureProcessor {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
             // Randomly select ore from list
             BlockState rareBlock = RareBlockChances.get().getRandomRareBlock(random);
-            blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, rareBlock, blockInfoGlobal.tag);
+            blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, rareBlock, blockInfoGlobal.nbt);
 
         }
         return blockInfoGlobal;
