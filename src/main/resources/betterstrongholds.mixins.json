@@ -9,7 +9,8 @@
     "LocateStrongholdCommandMixin",
     "EntityProcessorMixin",
     "BlockBoxAccessor",
-    "SinglePoolElementAccessor"
+    "SinglePoolElementAccessor",
+    "StructurePoolMixin"
   ],
   "injectors": {
     "defaultRequire": 1
