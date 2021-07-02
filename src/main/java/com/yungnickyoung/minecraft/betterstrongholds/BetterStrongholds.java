@@ -3,6 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds;
 import com.google.common.collect.Lists;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfig;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModCriterions;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructures;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +37,7 @@ public class BetterStrongholds {
 
     private void init() {
         BSModProcessors.init();
+        BSModCriterions.init();
         BSModStructures.init();
         BSModConfig.init();
     }
