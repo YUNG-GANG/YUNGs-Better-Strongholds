@@ -32,7 +32,7 @@ public class WaterloggedProcessor extends StructureProcessor {
         Block block = blockInfoGlobal.state.getBlock();
 
         // Check if block is waterloggable and not intended to be waterlogged
-        if (block instanceof Waterloggable && !blockInfoGlobal.state.get(Properties.WATERLOGGED)) {
+        if (blockInfoGlobal.state.contains(Properties.WATERLOGGED) && !blockInfoGlobal.state.get(Properties.WATERLOGGED)) {
             Chunk currentChunk = worldReader.getChunk(currentChunkPos.x, currentChunkPos.z);
             if (worldReader.getFluidState(blockInfoGlobal.pos).isIn(FluidTags.WATER)) {
                 currentChunk.setBlockState(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), false);
