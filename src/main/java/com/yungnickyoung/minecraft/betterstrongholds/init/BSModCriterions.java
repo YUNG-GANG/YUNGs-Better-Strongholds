@@ -13,7 +13,6 @@ public class BSModCriterions {
 
     public static void init() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModCriterions::commonSetup);
-
         MinecraftForge.EVENT_BUS.addListener(SafeStructurePositionTrigger::playerTick);
     }
 

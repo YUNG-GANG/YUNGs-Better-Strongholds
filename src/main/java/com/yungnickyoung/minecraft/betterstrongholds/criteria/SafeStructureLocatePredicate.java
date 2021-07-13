@@ -12,7 +12,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class SafeStructureLocatePredicate {
-
     @Nullable
     private final Structure<?> feature;
 

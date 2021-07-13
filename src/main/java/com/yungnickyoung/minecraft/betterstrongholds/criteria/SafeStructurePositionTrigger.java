@@ -2,6 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.criteria;
 
 import com.google.gson.JsonObject;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModCriterions;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
 import net.minecraft.advancements.criterion.CriterionInstance;
@@ -14,6 +15,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.TickEvent;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@MethodsReturnNonnullByDefault
 public class SafeStructurePositionTrigger extends AbstractCriterionTrigger<SafeStructurePositionTrigger.Instance> {
     private final ResourceLocation id;
 
@@ -33,6 +37,7 @@ public class SafeStructurePositionTrigger extends AbstractCriterionTrigger<SafeS
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public SafeStructurePositionTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser) {
         JsonObject jsonobject = JSONUtils.getJsonObject(json, "location", json);
         SafeStructureLocatePredicate safeStructureLocatePredicate = SafeStructureLocatePredicate.deserialize(jsonobject);
@@ -60,6 +65,7 @@ public class SafeStructurePositionTrigger extends AbstractCriterionTrigger<SafeS
         }
 
         @Override
+        @ParametersAreNonnullByDefault
         public JsonObject serialize(ConditionArraySerializer conditions) {
             JsonObject jsonobject = super.serialize(conditions);
             jsonobject.add("location", this.location.serialize());
