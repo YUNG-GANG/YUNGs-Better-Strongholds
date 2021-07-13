@@ -25,13 +25,13 @@
       }
     },
     "in_stronghold_betterstrongholds": {
-      "trigger": "betterstrongholds:structure_location",
+      "trigger": "yungsapi:structure_location",
       "conditions": {
         "feature": "betterstrongholds:stronghold"
       }
     },
     "in_gate_endrem": {
-      "trigger": "betterstrongholds:structure_location",
+      "trigger": "yungsapi:structure_location",
       "conditions": {
         "feature": "endrem:end_gate"
       }
