@@ -30,10 +30,10 @@
         "feature": "betterstrongholds:stronghold"
       }
     },
-    "in_castle_endrem": {
+    "in_gate_endrem": {
       "trigger": "betterstrongholds:structure_location",
       "conditions": {
-        "feature": "endrem:end_castle"
+        "feature": "endrem:end_gate"
       }
     }
   },
@@ -41,7 +41,7 @@
     [
       "in_stronghold",
       "in_stronghold_betterstrongholds",
-      "in_castle_endrem"
+      "in_gate_endrem"
     ]
   ]
 }
