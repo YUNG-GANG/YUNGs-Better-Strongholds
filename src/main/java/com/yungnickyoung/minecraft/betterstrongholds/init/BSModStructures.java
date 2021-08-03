@@ -1,8 +1,8 @@
 package com.yungnickyoung.minecraft.betterstrongholds.init;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.mixin.ChunkGeneratorAccessor;
 import com.yungnickyoung.minecraft.betterstrongholds.world.BetterStrongholdStructure;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -15,21 +15,21 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.gen.settings.StructureSpreadSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 public class BSModStructures {
     public static final DeferredRegister<Structure<?>> DEFERRED_REGISTRY = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, BetterStrongholds.MOD_ID);
@@ -42,6 +42,7 @@ public class BSModStructures {
         // Register event listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModStructures::commonSetup);
         MinecraftForge.EVENT_BUS.addListener(BSModStructures::addDimensionalSpacing);
+        MinecraftForge.EVENT_BUS.addListener(BSModStructures::deepCopyDimensionalSpacing);
         MinecraftForge.EVENT_BUS.addListener(BSModStructures::onBiomeLoad); // We use normal priority since we are both removing and adding stuff
     }
 
@@ -104,30 +105,21 @@ public class BSModStructures {
 
     /**
      * We must manually add the separation settings for our structure to spawn.
+     * Credits to TelepathicGrunt.
      */
-    private static Method GETCODEC_METHOD; // Cached instance since this will never change once initialized
-
-    @SuppressWarnings("unchecked")
     private static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
 
             // Skip Terraforged's chunk generator as they are a special case of a mod locking down their chunkgenerator.
-            // Credits to TelepathicGrunt for this.
             try {
-                if (GETCODEC_METHOD == null) {
-                    GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "func_230347_a_");
-                }
-
-                ResourceLocation chunkGenResourceLocation  = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
+                ResourceLocation chunkGenResourceLocation = Registry.CHUNK_GENERATOR_CODEC.getKey(((ChunkGeneratorAccessor) serverWorld.getChunkProvider().generator).betterstrongholds_getCodec());
                 if (chunkGenResourceLocation  != null && chunkGenResourceLocation.getNamespace().equals("terraforged")) {
                     return;
                 }
             } catch (Exception e) {
                 BetterStrongholds.LOGGER.error("Was unable to check if " + serverWorld.getDimensionKey().getLocation() + " is using Terraforged's ChunkGenerator.");
             }
-
-
 
             // We use a temp map to add our spacing because some mods handle immutable maps
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
@@ -136,13 +128,52 @@ public class BSModStructures {
             if (!BetterStrongholds.whitelistedDimensions.contains(serverWorld.getDimensionKey().getLocation().toString())) {
                 tempMap.keySet().remove(BSModStructures.BETTER_STRONGHOLD.get());
             }
+
             // Prevent spawning in superflat world
             else if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
                 tempMap.keySet().remove(BSModStructures.BETTER_STRONGHOLD.get());
             } else {
                 tempMap.put(BSModStructures.BETTER_STRONGHOLD.get(), DimensionStructuresSettings.field_236191_b_.get(BSModStructures.BETTER_STRONGHOLD.get()));
             }
+
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
+        }
+    }
+
+    /**
+     * Deep copying the noise settings prevents bugs related to modded dimensions that use
+     * the same noise settings as existing dimensions.
+     * Credits to TelepathicGrunt.
+     */
+    public static void deepCopyDimensionalSpacing(final WorldEvent.Load event) {
+        if (event.getWorld() instanceof ServerWorld) {
+            ServerWorld serverWorld = (ServerWorld) event.getWorld();
+
+            // Workaround for Terraforged
+            ResourceLocation chunkGenResourceLocation = Registry.CHUNK_GENERATOR_CODEC.getKey(((ChunkGeneratorAccessor) serverWorld.getChunkProvider().generator).betterstrongholds_getCodec());
+            if (chunkGenResourceLocation != null && chunkGenResourceLocation.getNamespace().equals("terraforged")) {
+                return;
+            }
+
+            ChunkGenerator chunkGenerator = serverWorld.getChunkProvider().generator;
+
+            // Grab old copy of stronghold spacing settings
+            StructureSpreadSettings oldStrongholdSettings = chunkGenerator.func_235957_b_().func_236199_b_();
+
+            // Make a deep copy and wrap it in an optional as DimensionStructuresSettings requires an optional
+            Optional<StructureSpreadSettings> newStrongholdSettings = oldStrongholdSettings == null ?
+                Optional.empty() :
+                Optional.of(new StructureSpreadSettings(
+                    oldStrongholdSettings.func_236660_a_(),
+                    oldStrongholdSettings.func_236662_b_(),
+                    oldStrongholdSettings.func_236663_c_()));
+
+            // Create new deep copied DimensionStructuresSettings
+            // We do not need to create a new structure spacing map instance here as our patch into
+            // DimensionStructuresSettings will already create the new map instance for us.
+            DimensionStructuresSettings newSettings = new DimensionStructuresSettings(newStrongholdSettings, chunkGenerator.func_235957_b_().func_236195_a_());
+
+            ((ChunkGeneratorAccessor) chunkGenerator).betterstrongholds_setSettings(newSettings);
         }
     }
 }

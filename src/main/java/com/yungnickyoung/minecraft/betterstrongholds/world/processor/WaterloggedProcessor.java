@@ -1,6 +1,5 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import mcp.MethodsReturnNonnullByDefault;
@@ -35,7 +34,6 @@ public class WaterloggedProcessor extends StructureProcessor {
         // Due to a hardcoded field in Templates, any waterloggable blocks in structures replacing water in the world will become waterlogged.
         // Idea of workaround is detect if we are placing a waterloggable block and if so, remove the water in the world instead.
         ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
-        Block block = blockInfoGlobal.state.getBlock();
 
         // Check if block is waterloggable and not intended to be waterlogged
         if (blockInfoGlobal.state.hasProperty(BlockStateProperties.WATERLOGGED) && !blockInfoGlobal.state.get(BlockStateProperties.WATERLOGGED)) {
