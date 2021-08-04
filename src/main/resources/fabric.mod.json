@@ -39,6 +39,6 @@
     "fabricloader": ">=0.10.6",
     "fabric": ">=0.33.0+1.16",
     "minecraft": ">=1.16.4",
-    "yungsapi": ">=1.16.5-Fabric-6"
+    "yungsapi": ">=1.16.5-Fabric-7"
   }
 }
