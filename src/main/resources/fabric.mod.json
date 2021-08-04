@@ -21,6 +21,12 @@
     "main": [
       "com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds"
     ],
+    "client": [
+      "com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds"
+    ],
+    "server": [
+      "com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds"
+    ],
     "modmenu": [
       "com.yungnickyoung.minecraft.betterstrongholds.config.gui.BSModMenu"
     ]

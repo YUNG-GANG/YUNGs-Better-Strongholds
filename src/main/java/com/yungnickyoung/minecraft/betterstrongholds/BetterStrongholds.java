@@ -6,13 +6,22 @@ import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfiguredStructures;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructures;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.gen.chunk.StructureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class BetterStrongholds implements ModInitializer {
+public class BetterStrongholds implements ModInitializer, DedicatedServerModInitializer, ClientModInitializer {
     public static final String MOD_ID = "betterstrongholds";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
@@ -38,5 +47,36 @@ public class BetterStrongholds implements ModInitializer {
         BSModProcessors.init();
         BSModStructures.init();
         BSModConfiguredStructures.init();
+    }
+
+    /**
+     * We must perform the following to ensure our ServerWorldEvents.LOAD event always fires
+     * after Fabric API's usage of the same event. This is done so that our changes don't get overwritten
+     * by the Fabric API adding structure spacings to all dimensions.
+     * Credit to TelepathicGrunt.
+     */
+    @Override
+    public void onInitializeServer() {
+        enforceDimensionWhitelist();
+    }
+
+    @Override
+    public void onInitializeClient() {
+        enforceDimensionWhitelist();
+    }
+
+    public static void enforceDimensionWhitelist() {
+        // Controls the dimension blacklisting
+        ServerWorldEvents.LOAD.register((MinecraftServer minecraftServer, ServerWorld serverWorld) -> {
+            // Don't spawn in non-whitelisted dimensions
+            if (!BetterStrongholds.whitelistedDimensions.contains(serverWorld.getRegistryKey().getValue().toString())) {
+                // We use a temp map to add our spacing because some mods handle immutable maps
+                Map<StructureFeature<?>, StructureConfig> tempMap = new HashMap<>(serverWorld.getChunkManager().getChunkGenerator().getStructuresConfig().getStructures());
+
+                // Remove Better Stronghold
+                tempMap.keySet().remove(BSModStructures.BETTER_STRONGHOLD);
+                serverWorld.getChunkManager().getChunkGenerator().getStructuresConfig().structures = tempMap;
+            }
+        });
     }
 }
