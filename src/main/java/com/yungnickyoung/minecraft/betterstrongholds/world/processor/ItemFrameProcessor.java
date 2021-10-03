@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
-import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.StructureEntityProcessor;
+import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;

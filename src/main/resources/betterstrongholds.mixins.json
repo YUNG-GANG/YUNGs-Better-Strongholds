@@ -7,10 +7,8 @@
     "EnderEyeBetterStrongholdLocatingMixin",
     "VanillaStrongholdSpawnMixin",
     "LocateStrongholdCommandMixin",
-    "EntityProcessorMixin",
     "BlockBoxAccessor",
-    "SinglePoolElementAccessor",
-    "StructurePoolMixin"
+    "SinglePoolElementAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

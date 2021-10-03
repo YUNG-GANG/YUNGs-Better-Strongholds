@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-import com.yungnickyoung.minecraft.betterstrongholds.util.Banner;
+import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
 import net.minecraft.block.AbstractBannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
