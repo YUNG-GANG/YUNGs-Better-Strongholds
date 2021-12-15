@@ -4,10 +4,10 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 public class ConfigGeneral {
     @ConfigEntry.Gui.Tooltip(count = 3)
-    public int strongholdStartMinY = 30;
+    public int strongholdStartMinY = -30;
 
     @ConfigEntry.Gui.Tooltip(count = 3)
-    public int strongholdStartMaxY = 31;
+    public int strongholdStartMaxY = 11;
 
     @ConfigEntry.Gui.Tooltip(count = 5)
     public int strongholdMaxY = 60;

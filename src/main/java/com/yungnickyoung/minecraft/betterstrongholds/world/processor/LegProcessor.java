@@ -3,21 +3,26 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkSection;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.material.Material;
 
 import java.util.Optional;
 import java.util.Random;
@@ -29,23 +34,28 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
     public static final LegProcessor INSTANCE = new LegProcessor();
     public static final Codec<LegProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
-    private final BlockSetSelector stoneBrickSelector = new BlockSetSelector(Blocks.STONE_BRICKS.getDefaultState())
-        .addBlock(Blocks.MOSSY_STONE_BRICKS.getDefaultState(), 0.3f)
-        .addBlock(Blocks.CRACKED_STONE_BRICKS.getDefaultState(), 0.2f)
-        .addBlock(Blocks.INFESTED_STONE_BRICKS.getDefaultState(), 0.05f);
+    private final BlockSetSelector stoneBrickSelector = new BlockSetSelector(Blocks.STONE_BRICKS.defaultBlockState())
+        .addBlock(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 0.3f)
+        .addBlock(Blocks.CRACKED_STONE_BRICKS.defaultBlockState(), 0.2f)
+        .addBlock(Blocks.INFESTED_STONE_BRICKS.defaultBlockState(), 0.05f);
 
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
-        if (blockInfoGlobal.state.isOf(Blocks.YELLOW_STAINED_GLASS)) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             StructurePlaceSettings structurePlacementData) {
+        if (blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS)) {
             ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
-            Chunk currentChunk = worldReader.getChunk(currentChunkPos.x, currentChunkPos.z);
+            ChunkAccess currentChunk = levelReader.getChunk(currentChunkPos.x, currentChunkPos.z);
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
 
             // Always replace the glass itself with stone bricks
-            blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(random), blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(random), blockInfoGlobal.nbt);
 
             // Reusable mutable
-            BlockPos.Mutable mutable = blockInfoGlobal.pos.down().mutableCopy(); // Move down since we already processed the first block
+            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos.below().mutable(); // Move down since we already processed the first block
 
             // Chunk section information
             int sectionYIndex = currentChunk.getSectionIndex(mutable.getY());
@@ -56,7 +66,7 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                 return blockInfoGlobal;
             }
 
-            ChunkSection currChunkSection = currentChunk.getSection(sectionYIndex);
+            LevelChunkSection currChunkSection = currentChunk.getSection(sectionYIndex);
 
             // Initialize currBlock
             Optional<BlockState> currBlock = getBlockStateSafe(currChunkSection, mutable);
@@ -64,69 +74,69 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
 
             int yBelow = 1;
 
-            while (mutable.getY() > worldReader.getBottomY() && (currBlock.get().getMaterial() == Material.AIR || currBlock.get().getMaterial() == Material.WATER || currBlock.get().getMaterial() == Material.LAVA)) {
+            while (mutable.getY() > levelReader.getMinBuildHeight() && (currBlock.get().getMaterial() == Material.AIR || currBlock.get().getMaterial() == Material.WATER || currBlock.get().getMaterial() == Material.LAVA)) {
                 // Place block in vertical pillar
                 setBlockStateSafe(currChunkSection, mutable, stoneBrickSelector.get(random));
 
                 // Generate rafters
                 if (yBelow == 1) {
-                    BlockPos.Mutable tempMutable;
-                    for (Direction direction : Direction.Type.HORIZONTAL) {
-                        tempMutable = mutable.offset(direction).mutableCopy();
+                    BlockPos.MutableBlockPos tempMutable;
+                    for (Direction direction : Direction.Plane.HORIZONTAL) {
+                        tempMutable = mutable.relative(direction).mutable();
                         setBlockStateSafe(
-                            worldReader,
+                            levelReader,
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
-                                .with(StairsBlock.HALF, BlockHalf.TOP)
-                                .with(StairsBlock.FACING, direction.getOpposite())
-                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isIn(FluidTags.WATER)));
+                            Blocks.STONE_BRICK_STAIRS.defaultBlockState()
+                                .setValue(StairBlock.HALF, Half.TOP)
+                                .setValue(StairBlock.FACING, direction.getOpposite())
+                                .setValue(StairBlock.WATERLOGGED, levelReader.getFluidState(tempMutable).is(FluidTags.WATER)));
 
                         tempMutable.move(direction);
                         setBlockStateSafe(
-                            worldReader,
+                            levelReader,
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
-                                .with(StairsBlock.HALF, BlockHalf.TOP)
-                                .with(StairsBlock.FACING, direction)
-                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isIn(FluidTags.WATER)));
+                            Blocks.STONE_BRICK_STAIRS.defaultBlockState()
+                                .setValue(StairBlock.HALF, Half.TOP)
+                                .setValue(StairBlock.FACING, direction)
+                                .setValue(StairBlock.WATERLOGGED, levelReader.getFluidState(tempMutable).is(FluidTags.WATER)));
 
                         // Middle piece between two adjacent pieces.
                         // Only place if there is another rafter adjacent
                         tempMutable.move(direction).move(Direction.UP);
-                        Optional<BlockState> aboveBlockState = getBlockStateSafe(worldReader, tempMutable);
-                        Block aboveBlock = aboveBlockState.isPresent() ? aboveBlockState.get().getBlock() : null;
+                        Optional<BlockState> aboveBlockState = getBlockStateSafe(levelReader, tempMutable);
+                        Block aboveBlock = aboveBlockState.map(BlockBehaviour.BlockStateBase::getBlock).orElse(null);
 
                         tempMutable.move(direction).move(Direction.DOWN);
-                        Optional<BlockState> belowBlockState = getBlockStateSafe(worldReader, tempMutable);
-                        Block belowBlock = belowBlockState.isPresent() ? belowBlockState.get().getBlock() : null;
+                        Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, tempMutable);
+                        Block belowBlock = belowBlockState.map(BlockBehaviour.BlockStateBase::getBlock).orElse(null);
 
                         if (belowBlock == Blocks.STONE_BRICK_STAIRS || aboveBlock == Blocks.STONE_BRICKS || aboveBlock == Blocks.CRACKED_STONE_BRICKS || aboveBlock == Blocks.MOSSY_STONE_BRICKS || aboveBlock == Blocks.INFESTED_STONE_BRICKS) {
                             tempMutable.move(direction.getOpposite());
                             setBlockStateSafe(
-                                worldReader,
+                                levelReader,
                                 tempMutable,
-                                Blocks.STONE_BRICKS.getDefaultState());
+                                Blocks.STONE_BRICKS.defaultBlockState());
                         }
                     }
                 } else if (yBelow == 2) {
-                    BlockPos.Mutable tempMutable;
-                    for (Direction direction : Direction.Type.HORIZONTAL) {
-                        tempMutable = mutable.offset(direction).mutableCopy();
+                    BlockPos.MutableBlockPos tempMutable;
+                    for (Direction direction : Direction.Plane.HORIZONTAL) {
+                        tempMutable = mutable.relative(direction).mutable();
                         setBlockStateSafe(
-                            worldReader,
+                            levelReader,
                             tempMutable,
-                            Blocks.STONE_BRICK_STAIRS.getDefaultState()
-                                .with(StairsBlock.HALF, BlockHalf.TOP)
-                                .with(StairsBlock.FACING, direction.getOpposite())
-                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isIn(FluidTags.WATER)));
+                            Blocks.STONE_BRICK_STAIRS.defaultBlockState()
+                                .setValue(StairBlock.HALF, Half.TOP)
+                                .setValue(StairBlock.FACING, direction.getOpposite())
+                                .setValue(StairBlock.WATERLOGGED, levelReader.getFluidState(tempMutable).is(FluidTags.WATER)));
 
                         tempMutable.move(direction);
                         setBlockStateSafe(
-                            worldReader,
+                            levelReader,
                             tempMutable,
-                            Blocks.STONE_BRICK_SLAB.getDefaultState()
-                                .with(SlabBlock.TYPE, SlabType.TOP)
-                                .with(StairsBlock.WATERLOGGED, worldReader.getFluidState(tempMutable).isIn(FluidTags.WATER)));
+                            Blocks.STONE_BRICK_SLAB.defaultBlockState()
+                                .setValue(SlabBlock.TYPE, SlabType.TOP)
+                                .setValue(SlabBlock.WATERLOGGED, levelReader.getFluidState(tempMutable).is(FluidTags.WATER)));
                     }
                 }
 

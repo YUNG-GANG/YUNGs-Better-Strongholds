@@ -2,14 +2,13 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
-import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 /**
  * Processor for replacing cyan concrete with air or stone bricks.
@@ -20,12 +19,17 @@ public class AirProcessor extends StructureProcessor implements ISafeWorldModifi
     public static final Codec<AirProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.CYAN_CONCRETE) {
-            if (isBlockStateAirSafe(worldReader, blockInfoGlobal.pos)) {
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                BlockPos jigsawPiecePos,
+                                                BlockPos jigsawPieceBottomCenterPos,
+                                                StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                StructurePlaceSettings structurePlacementData) {
+        if (blockInfoGlobal.state.is(Blocks.CYAN_CONCRETE)) {
+            if (isBlockStateAirSafe(levelReader, blockInfoGlobal.pos)) {
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
             } else {
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.getDefaultState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.defaultBlockState(), blockInfoGlobal.nbt);
             }
         }
         return blockInfoGlobal;

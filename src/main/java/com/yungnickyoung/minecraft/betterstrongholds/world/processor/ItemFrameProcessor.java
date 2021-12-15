@@ -5,13 +5,14 @@ import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -25,15 +26,14 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
     public static final Codec<ItemFrameProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureEntityInfo processEntity(WorldView worldView,
-                                                       BlockPos structurePiecePos,
-                                                       BlockPos structurePieceBottomCenterPos,
-                                                       Structure.StructureEntityInfo localEntityInfo,
-                                                       Structure.StructureEntityInfo globalEntityInfo,
-                                                       StructurePlacementData structurePlacementData
-    ) {
+    public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
+                                                               BlockPos structurePiecePos,
+                                                               BlockPos structurePieceBottomCenterPos,
+                                                               StructureTemplate.StructureEntityInfo localEntityInfo,
+                                                               StructureTemplate.StructureEntityInfo globalEntityInfo,
+                                                               StructurePlaceSettings structurePlaceSettings) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
-            Random random = structurePlacementData.getRandom(globalEntityInfo.blockPos);
+            Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Determine which pool we are grabbing from
             String item;
@@ -45,14 +45,14 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
             }
 
             // Set the item in the item frame's NBT
-            NbtCompound newNBT = globalEntityInfo.nbt.copy();
+            CompoundTag newNBT = globalEntityInfo.nbt.copy();
             if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
-                String randomItemString = Registry.ITEM.getId(ItemFrameChances.get().getArmouryItem(random)).toString();
+                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
-                String randomItemString = Registry.ITEM.getId(ItemFrameChances.get().getStorageItem(random)).toString();
+                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }
@@ -62,14 +62,19 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
             int randomRotation = random.nextInt(8);
             newNBT.putByte("ItemRotation", (byte) randomRotation);
 
-            globalEntityInfo = new Structure.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
+            globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
         }
         return globalEntityInfo;
     }
 
     @Nullable
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldView, BlockPos pos, BlockPos blockPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             StructurePlaceSettings structurePlacementData) {
         return blockInfoGlobal;
     }
 

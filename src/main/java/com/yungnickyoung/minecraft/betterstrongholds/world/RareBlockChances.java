@@ -1,8 +1,8 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
@@ -24,11 +24,11 @@ public class RareBlockChances {
     }
 
     private RareBlockChances() {
-        blockChances = new BlockSetSelector(Blocks.IRON_BLOCK.getDefaultState())
-            .addBlock(Blocks.IRON_BLOCK.getDefaultState(), .3f)
-            .addBlock(Blocks.QUARTZ_BLOCK.getDefaultState(), .3f)
-            .addBlock(Blocks.GOLD_BLOCK.getDefaultState(), .3f)
-            .addBlock(Blocks.DIAMOND_BLOCK.getDefaultState(), .1f);
+        blockChances = new BlockSetSelector(Blocks.IRON_BLOCK.defaultBlockState())
+            .addBlock(Blocks.IRON_BLOCK.defaultBlockState(), .3f)
+            .addBlock(Blocks.QUARTZ_BLOCK.defaultBlockState(), .3f)
+            .addBlock(Blocks.GOLD_BLOCK.defaultBlockState(), .3f)
+            .addBlock(Blocks.DIAMOND_BLOCK.defaultBlockState(), .1f);
     }
 
     /** Instance variables and methods **/

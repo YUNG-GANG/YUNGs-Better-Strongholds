@@ -4,18 +4,18 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
-import net.minecraft.block.AbstractBannerBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.state.property.Properties;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.AbstractBannerBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.List;
 import java.util.Random;
@@ -29,7 +29,7 @@ public class BannerProcessor extends StructureProcessor {
 
     // All banners
     public static final Banner ENDERMAN_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.MAGENTA_WALL_BANNER.getDefaultState())
+        .blockState(Blocks.MAGENTA_WALL_BANNER.defaultBlockState())
         .pattern("ss", 0)
         .pattern("ts", 15)
         .pattern("hhb", 15)
@@ -39,7 +39,7 @@ public class BannerProcessor extends StructureProcessor {
         .build();
 
     public static final Banner WITHER_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.BLACK_WALL_BANNER.getDefaultState())
+        .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
         .pattern("bs", 7)
         .pattern("cs", 15)
         .pattern("hh", 7)
@@ -48,7 +48,7 @@ public class BannerProcessor extends StructureProcessor {
         .build();
 
     public static final Banner PORTAL_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.PURPLE_WALL_BANNER.getDefaultState())
+        .blockState(Blocks.PURPLE_WALL_BANNER.defaultBlockState())
         .pattern("ss", 2)
         .pattern("bri", 10)
         .pattern("cbo", 2)
@@ -62,16 +62,21 @@ public class BannerProcessor extends StructureProcessor {
     );
 
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.getBlock() instanceof AbstractBannerBlock) {
             // Make sure we only operate on the placeholder banners
             if (blockInfoGlobal.state.getBlock() == Blocks.GRAY_WALL_BANNER && (blockInfoGlobal.nbt.get("Patterns") == null || blockInfoGlobal.nbt.getList("Patterns", 10).size() == 0)) {
                 Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos));
-                Direction facing = blockInfoGlobal.state.get(Properties.HORIZONTAL_FACING);
-                BlockState newState = banner.getState().with(Properties.HORIZONTAL_FACING, facing);
-                NbtCompound newNBT = copyNBT(banner.getNbt());
+                Direction facing = blockInfoGlobal.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
+                CompoundTag newNBT = copyNBT(banner.getNbt());
 
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, newState, newNBT);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, newState, newNBT);
             }
         }
         return blockInfoGlobal;
@@ -85,9 +90,9 @@ public class BannerProcessor extends StructureProcessor {
         return WALL_BANNERS.get(random.nextInt(WALL_BANNERS.size()));
     }
 
-    private NbtCompound copyNBT(NbtCompound other) {
-        NbtCompound nbt = new NbtCompound();
-        nbt.copyFrom(other);
+    private CompoundTag copyNBT(CompoundTag other) {
+        CompoundTag nbt = new CompoundTag();
+        nbt.merge(other);
         return nbt;
     }
 }

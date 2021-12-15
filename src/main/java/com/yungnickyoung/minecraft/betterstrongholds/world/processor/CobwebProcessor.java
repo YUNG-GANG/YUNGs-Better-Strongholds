@@ -3,14 +3,14 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.Random;
 
@@ -25,14 +25,19 @@ public class CobwebProcessor extends StructureProcessor {
     public static final Codec<CobwebProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
-        if (blockInfoGlobal.state.isOf(Blocks.WHITE_STAINED_GLASS) || blockInfoGlobal.state.isOf(Blocks.GRAY_STAINED_GLASS)) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             StructurePlaceSettings structurePlacementData) {
+        if (blockInfoGlobal.state.is(Blocks.WHITE_STAINED_GLASS) || blockInfoGlobal.state.is(Blocks.GRAY_STAINED_GLASS)) {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
             double replacementChance = getReplacementChance(blockInfoGlobal.state);
             if (random.nextDouble() < replacementChance)
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.COBWEB.getDefaultState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.COBWEB.defaultBlockState(), blockInfoGlobal.nbt);
             else
-                blockInfoGlobal = new Structure.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.getDefaultState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
         }
         return blockInfoGlobal;
     }
@@ -45,9 +50,9 @@ public class CobwebProcessor extends StructureProcessor {
      * Returns cobweb replacement chance for the given BlockState.
      */
     private double getReplacementChance(BlockState blockState) {
-        if (blockState.isOf(Blocks.WHITE_STAINED_GLASS))
+        if (blockState.is(Blocks.WHITE_STAINED_GLASS))
             return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceNormal;
-        if (blockState.isOf(Blocks.GRAY_STAINED_GLASS))
+        if (blockState.is(Blocks.GRAY_STAINED_GLASS))
             return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceSpawner;
         else return 0; // Should never happen
     }

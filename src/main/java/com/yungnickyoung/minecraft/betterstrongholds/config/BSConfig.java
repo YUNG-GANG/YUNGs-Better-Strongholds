@@ -6,7 +6,7 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name="betterstrongholds-fabric-1_17")
+@Config(name=BSSettings.CUSTOM_CONFIG_PATH + "-" + BSSettings.VERSION_PATH)
 public class BSConfig implements ConfigData {
     @ConfigEntry.Category("Better Strongholds")
     @ConfigEntry.Gui.TransitiveObject

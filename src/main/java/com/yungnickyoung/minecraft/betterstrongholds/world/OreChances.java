@@ -1,8 +1,8 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.BlockSetSelector;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
@@ -24,14 +24,14 @@ public class OreChances {
     }
 
     private OreChances() {
-        oreChances = new BlockSetSelector(Blocks.COAL_ORE.getDefaultState())
-            .addBlock(Blocks.COAL_ORE.getDefaultState(), .2f)
-            .addBlock(Blocks.IRON_ORE.getDefaultState(), .2f)
-            .addBlock(Blocks.GOLD_ORE.getDefaultState(), .2f)
-            .addBlock(Blocks.LAPIS_ORE.getDefaultState(), .15f)
-            .addBlock(Blocks.REDSTONE_ORE.getDefaultState(), .15f)
-            .addBlock(Blocks.EMERALD_ORE.getDefaultState(), .05f)
-            .addBlock(Blocks.DIAMOND_ORE.getDefaultState(), .05f);
+        oreChances = new BlockSetSelector(Blocks.COAL_ORE.defaultBlockState())
+            .addBlock(Blocks.COAL_ORE.defaultBlockState(), .2f)
+            .addBlock(Blocks.IRON_ORE.defaultBlockState(), .2f)
+            .addBlock(Blocks.GOLD_ORE.defaultBlockState(), .2f)
+            .addBlock(Blocks.LAPIS_ORE.defaultBlockState(), .15f)
+            .addBlock(Blocks.REDSTONE_ORE.defaultBlockState(), .15f)
+            .addBlock(Blocks.EMERALD_ORE.defaultBlockState(), .05f)
+            .addBlock(Blocks.DIAMOND_ORE.defaultBlockState(), .05f);
     }
 
     /** Instance variables and methods **/

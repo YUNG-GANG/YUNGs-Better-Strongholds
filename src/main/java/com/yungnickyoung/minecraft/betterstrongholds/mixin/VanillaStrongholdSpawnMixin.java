@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(ChunkGenerator.class)
 public class VanillaStrongholdSpawnMixin {
-    @Inject(method = "generateStrongholdPositions()V", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "generateStrongholds", at = @At(value = "HEAD"), cancellable = true)
     private void removeVanillaStronghold(CallbackInfo ci) {
         ci.cancel();
     }

@@ -53,13 +53,15 @@ public class BSModConfig {
         File readme = new File(path.toString());
         if (!readme.exists()) {
             String readmeText =
-                "This directory is for a few additional options for YUNG's Better Strongholds.\n" +
-                "Options provided may vary by version.\n" +
-                "This directory contains subdirectories for supported versions. The first time you run Better Strongholds, a version subdirectory will be created if that version supports advanced options.\n" +
-                "For example, the first time you use Better Strongholds for MC 1.16 on Forge, the 'forge-1_16' subdirectory will be created in this folder.\n" +
-                "If no subdirectory for your version is created, then that version probably does not support the additional options.\n\n" +
-                "NOTE -- MOST OPTIONS CAN BE FOUND IN A CONFIG FILE OUTSIDE THIS FOLDER!\n" +
-                "For example, on Forge 1.16 the file is 'betterstrongholds-forge-1_16.toml'.";
+                    """
+                            This directory is for a few additional options for YUNG's Better Strongholds.
+                            Options provided may vary by version.
+                            This directory contains subdirectories for supported versions. The first time you run Better Strongholds, a version subdirectory will be created if that version supports advanced options.
+                            For example, the first time you use Better Strongholds for MC 1.16 on Forge, the 'forge-1_16' subdirectory will be created in this folder.
+                            If no subdirectory for your version is created, then that version probably does not support the additional options.
+
+                            NOTE -- MOST OPTIONS CAN BE FOUND IN A CONFIG FILE OUTSIDE THIS FOLDER!
+                            For example, on Forge 1.16 the file is 'betterstrongholds-forge-1_16.toml'.""";
             try {
                 Files.write(path, readmeText.getBytes());
             } catch (IOException e) {
@@ -73,57 +75,70 @@ public class BSModConfig {
         File readme = new File(path.toString());
         if (!readme.exists()) {
             String readmeText =
-                "######################################\n" +
-                "#             ores.json              #\n" +
-                "######################################\n\n" +
-                "  This file contains a BlockSetSelector (see below) describing the probability of a given ore being chosen.\n" +
-                "These probabilities are used in treasure rooms in the stronghold, in which\n" +
-                "piles of ore have a chance of spawning.\n" +
-                "For information on BlockSetSelectors, see the bottom of this README.\n\n" +
-                "######################################\n" +
-                "#          rareblocks.json           #\n" +
-                "######################################\n\n" +
-                "  This file contains a BlockSetSelector describing the probability of a given block being chosen.\n" +
-                "These probabilities are used in grand libraries, in which\n" +
-                "two rare blocks will spawn.\n" +
-                "For information on BlockSetSelectors, see the bottom of this README.\n\n" +
-                "######################################\n" +
-                "#          armorstands.json          #\n" +
-                "######################################\n\n" +
-                "  This file contains ItemSetSelectors describing the probability distribution of armor on armor stands.\n" +
-                "Common armor stands spawn in Armoury rooms, while Rare ones are only available in the rare Commander rooms.\n" +
-                "For information on ItemSetSelectors, see the bottom of this README.\n\n" +
-                "######################################\n" +
-                "#          itemframes.json          #\n" +
-                "######################################\n\n" +
-                "  This file contains ItemSetSelectors describing the probability distribution of items in item frames.\n" +
-                "Item frames only spawn in storage rooms and armoury rooms.\n" +
-                "For information on ItemSetSelectors, see the bottom of this README.\n\n" +
-                "######################################\n" +
-                "#         BlockSetSelectors          #\n" +
-                "######################################\n\n" +
-                "Describes a set of blockstates and the probability of each blockstate being chosen.\n" +
-                " - entries: An object where each entry's key is a blockstate, and each value is that blockstate's probability of being chosen.\n" +
-                "      The total sum of all probabilities SHOULD NOT exceed 1.0!\n" +
-                " - defaultBlock: The blockstate used for any leftover probability ranges.\n" +
-                "      For example, if the total sum of all the probabilities of the entries is 0.6, then\n" +
-                "      there is a 0.4 chance of the defaultBlock being selected.\n" +
-                "\n" +
-                "Here's an example block selector:\n" +
-                "\"entries\": {\n" +
-                "  \"minecraft:cobblestone\": 0.25,\n" +
-                "  \"minecraft:air\": 0.2,\n" +
-                "  \"minecraft:stone_bricks\": 0.1\n" +
-                "},\n" +
-                "\"defaultBlock\": \"minecraft:oak_planks\"\n" +
-                "\n" +
-                "For each block, this selector has a 25% chance of returning cobblestone, 20% chance of choosing air,\n" +
-                "10% chance of choosing stone bricks, and a 100 - (25 + 20 + 10) = 45% chance of choosing oak planks (since it's the default block).\n\n" +
-                "######################################\n" +
-                "#         ItemSetSelectors           #\n" +
-                "######################################\n\n" +
-                "Describes a set of items and the probability of each item being chosen.\n" +
-                "Works the same as BlockSetSelectors, but with items instead of blockstates.\n";
+                    """
+                            ######################################
+                            #             ores.json              #
+                            ######################################
+
+                              This file contains a BlockSetSelector (see below) describing the probability of a given ore being chosen.
+                            These probabilities are used in treasure rooms in the stronghold, in which
+                            piles of ore have a chance of spawning.
+                            For information on BlockSetSelectors, see the bottom of this README.
+
+                            ######################################
+                            #          rareblocks.json           #
+                            ######################################
+
+                              This file contains a BlockSetSelector describing the probability of a given block being chosen.
+                            These probabilities are used in grand libraries, in which
+                            two rare blocks will spawn.
+                            For information on BlockSetSelectors, see the bottom of this README.
+
+                            ######################################
+                            #          armorstands.json          #
+                            ######################################
+
+                              This file contains ItemSetSelectors describing the probability distribution of armor on armor stands.
+                            Common armor stands spawn in Armoury rooms, while Rare ones are only available in the rare Commander rooms.
+                            For information on ItemSetSelectors, see the bottom of this README.
+
+                            ######################################
+                            #          itemframes.json          #
+                            ######################################
+
+                              This file contains ItemSetSelectors describing the probability distribution of items in item frames.
+                            Item frames only spawn in storage rooms and armoury rooms.
+                            For information on ItemSetSelectors, see the bottom of this README.
+
+                            ######################################
+                            #         BlockSetSelectors          #
+                            ######################################
+
+                            Describes a set of blockstates and the probability of each blockstate being chosen.
+                             - entries: An object where each entry's key is a blockstate, and each value is that blockstate's probability of being chosen.
+                                  The total sum of all probabilities SHOULD NOT exceed 1.0!
+                             - defaultBlock: The blockstate used for any leftover probability ranges.
+                                  For example, if the total sum of all the probabilities of the entries is 0.6, then
+                                  there is a 0.4 chance of the defaultBlock being selected.
+
+                            Here's an example block selector:
+                            "entries": {
+                              "minecraft:cobblestone": 0.25,
+                              "minecraft:air": 0.2,
+                              "minecraft:stone_bricks": 0.1
+                            },
+                            "defaultBlock": "minecraft:oak_planks"
+
+                            For each block, this selector has a 25% chance of returning cobblestone, 20% chance of choosing air,
+                            10% chance of choosing stone bricks, and a 100 - (25 + 20 + 10) = 45% chance of choosing oak planks (since it's the default block).
+
+                            ######################################
+                            #         ItemSetSelectors           #
+                            ######################################
+
+                            Describes a set of items and the probability of each item being chosen.
+                            Works the same as BlockSetSelectors, but with items instead of blockstates.
+                            """;
 
             try {
                 Files.write(path, readmeText.getBytes());

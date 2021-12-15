@@ -2,16 +2,15 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.Optional;
 
@@ -23,11 +22,16 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
     public static final Codec<RedstoneProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public Structure.StructureBlockInfo process(WorldView worldReader, BlockPos jigsawPiecePos, BlockPos jigsawPieceBottomCenterPos, Structure.StructureBlockInfo blockInfoLocal, Structure.StructureBlockInfo blockInfoGlobal, StructurePlacementData structurePlacementData) {
-        if (blockInfoGlobal.state.isOf(Blocks.REDSTONE_WIRE)) {
-            Optional<BlockState> belowBlockState = getBlockStateSafe(worldReader, blockInfoGlobal.pos.down());
-            if (belowBlockState.isEmpty() || belowBlockState.get().isSideSolidFullSquare(worldReader, blockInfoGlobal.pos.down(), Direction.UP)) {
-                setBlockStateSafe(worldReader, blockInfoGlobal.pos.down(), Blocks.STONE_BRICKS.getDefaultState());
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             StructurePlaceSettings structurePlacementData) {
+        if (blockInfoGlobal.state.is(Blocks.REDSTONE_WIRE)) {
+            Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, blockInfoGlobal.pos.below());
+            if (belowBlockState.isEmpty() || belowBlockState.get().isFaceSturdy(levelReader, blockInfoGlobal.pos.below(), Direction.UP)) {
+                setBlockStateSafe(levelReader, blockInfoGlobal.pos.below(), Blocks.STONE_BRICKS.defaultBlockState());
             }
         }
         return blockInfoGlobal;

@@ -6,13 +6,13 @@
 
 package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
-import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructures;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnderEyeItem;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructureFeatures;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.EnderEyeItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -21,16 +21,16 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class EnderEyeBetterStrongholdLocatingMixin {
     @ModifyVariable(
         method = "use",
-        at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/gen/chunk/ChunkGenerator;locateStructure(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/world/gen/feature/StructureFeature;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;")
-    )
-    private BlockPos locateBetterStronghold(BlockPos blockPos, World world, PlayerEntity player) {
-        return locateClosestBetterStronghold(blockPos, (ServerWorld)world, player.getBlockPos());
+        at = @At(value = "INVOKE_ASSIGN",
+                target = "Lnet/minecraft/world/level/chunk/ChunkGenerator;findNearestMapFeature(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/levelgen/feature/StructureFeature;Lnet/minecraft/core/BlockPos;IZ)Lnet/minecraft/core/BlockPos;"))
+    private BlockPos locateBetterStronghold(BlockPos blockPos, Level level, Player player) {
+        return locateClosestBetterStronghold(blockPos, (ServerLevel)level, player.blockPosition());
     }
 
-    private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerWorld world, BlockPos playerPos) {
-        ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
-        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.locateStructure(world, BSModStructures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
-        closestPos = returnClosestPosition(closestPos, chunkGenerator.locateStructure(world, BSModStructures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
+    private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerLevel level, BlockPos playerPos) {
+        ChunkGenerator chunkGenerator = level.getChunkSource().getGenerator();
+        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
+        closestPos = returnClosestPosition(closestPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
         return closestPos;
     }
 
