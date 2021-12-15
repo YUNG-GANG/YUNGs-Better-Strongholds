@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world;
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.BetterStrongholdsFeatureConfiguration;
-import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.JigsawManager;
+import com.yungnickyoung.minecraft.betterstrongholds.world.jigsaw.BetterStrongholdsJigsawManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
@@ -33,7 +33,7 @@ public class BetterStrongholdStructureFeature extends NoiseAffectingStructureFea
             BlockPos blockPos = new BlockPos(x, y, z);
 
             // Generate
-            return JigsawManager.assembleJigsawStructure(
+            return BetterStrongholdsJigsawManager.assembleJigsawStructure(
                     context,
                     PoolElementStructurePiece::new,
                     blockPos,

@@ -2,6 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
+import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;

@@ -36,7 +36,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class JigsawManager {
+public class BetterStrongholdsJigsawManager {
     public static Optional<PieceGenerator<BetterStrongholdsFeatureConfiguration>> assembleJigsawStructure(
             PieceGeneratorSupplier.Context<BetterStrongholdsFeatureConfiguration> jigsawContext,
             JigsawPlacement.PieceFactory pieceFactory,
