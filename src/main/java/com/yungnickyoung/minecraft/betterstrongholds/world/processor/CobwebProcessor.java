@@ -31,7 +31,7 @@ public class CobwebProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.WHITE_STAINED_GLASS) || blockInfoGlobal.state.is(Blocks.GRAY_STAINED_GLASS)) {
+        if (blockInfoGlobal.state.is(Blocks.TRIPWIRE) || blockInfoGlobal.state.is(Blocks.COBWEB)) {
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
             double replacementChance = getReplacementChance(blockInfoGlobal.state);
             if (random.nextDouble() < replacementChance)
@@ -50,9 +50,9 @@ public class CobwebProcessor extends StructureProcessor {
      * Returns cobweb replacement chance for the given BlockState.
      */
     private double getReplacementChance(BlockState blockState) {
-        if (blockState.is(Blocks.WHITE_STAINED_GLASS))
+        if (blockState.is(Blocks.TRIPWIRE))
             return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceNormal;
-        if (blockState.is(Blocks.GRAY_STAINED_GLASS))
+        if (blockState.is(Blocks.COBWEB))
             return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceSpawner;
         else return 0; // Should never happen
     }

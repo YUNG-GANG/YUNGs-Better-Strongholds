@@ -47,13 +47,15 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS)) {
+        if (blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state.is(Blocks.ORANGE_STAINED_GLASS)) {
             ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
             ChunkAccess currentChunk = levelReader.getChunk(currentChunkPos.x, currentChunkPos.z);
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
 
-            // Always replace the glass itself with stone bricks
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(random), blockInfoGlobal.nbt);
+            // Replace the glass itself
+            blockInfoGlobal = blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS)
+                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(random), blockInfoGlobal.nbt)
+                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.CYAN_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt);
 
             // Reusable mutable
             BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos.below().mutable(); // Move down since we already processed the first block
