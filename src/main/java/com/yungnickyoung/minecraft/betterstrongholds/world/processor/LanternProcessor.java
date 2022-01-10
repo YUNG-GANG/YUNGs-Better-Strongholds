@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -44,6 +44,6 @@ public class LanternProcessor extends StructureProcessor {
      * Returns lantern replacement chance for the given BlockState.
      */
     private double getReplacementChance() {
-        return BetterStrongholds.CONFIG.betterStrongholds.general.lanternSpawnRate;
+        return BSConfig.general.lanternSpawnRate.get();
     }
 }

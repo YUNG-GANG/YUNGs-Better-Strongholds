@@ -8,10 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Strongholds are unique structures in that removing them from biomes
- * is not sufficient to prevent them from spawning. /locate will not work
- * if they are removed from biomes, but removing them from the noise settings
- * for the Overworld is also necessary. This mixin is an alternative approach to this
- * which should be compatible with both regular dimension and JSON dimensions.
+ * is not sufficient to prevent them from spawning.This mixin is an alternative approach to this
+ * which should be compatible with both regular and JSON dimensions.
  */
 @Mixin(ChunkGenerator.class)
 public class VanillaStrongholdSpawnMixin {

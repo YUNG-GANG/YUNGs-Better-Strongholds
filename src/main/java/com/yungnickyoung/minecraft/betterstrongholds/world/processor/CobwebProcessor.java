@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -51,9 +51,9 @@ public class CobwebProcessor extends StructureProcessor {
      */
     private double getReplacementChance(BlockState blockState) {
         if (blockState.is(Blocks.TRIPWIRE))
-            return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceNormal;
+            return BSConfig.general.cobwebReplacementChanceNormal.get();
         if (blockState.is(Blocks.COBWEB))
-            return BetterStrongholds.CONFIG.betterStrongholds.general.cobwebReplacementChanceSpawner;
+            return BSConfig.general.cobwebReplacementChanceSpawner.get();
         else return 0; // Should never happen
     }
 }

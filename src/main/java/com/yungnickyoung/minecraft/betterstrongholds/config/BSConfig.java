@@ -1,54 +1,46 @@
 package com.yungnickyoung.minecraft.betterstrongholds.config;
 
-import com.google.common.collect.Lists;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import net.minecraftforge.common.ForgeConfigSpec;
 
-@Config(name=BSSettings.CUSTOM_CONFIG_PATH + "-" + BSSettings.VERSION_PATH)
-public class BSConfig implements ConfigData {
-    @ConfigEntry.Category("Better Strongholds")
-    @ConfigEntry.Gui.TransitiveObject
-    public ConfigBetterStrongholds betterStrongholds = new ConfigBetterStrongholds();
+public class BSConfig {
+    public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec SPEC;
 
-    /**
-     * Validate whitelisted dimensions on config load.
-     */
-    @Override
-    public void validatePostLoad() throws ValidationException {
-        // Dimension whitelisting
-        String rawStringofList = betterStrongholds.whitelistedDimensions;
-        int strLen = rawStringofList.length();
+    public static final ForgeConfigSpec.ConfigValue<String> whitelistedDimensions;
+    public static final ForgeConfigSpec.ConfigValue<String> blacklistedBiomes;
 
-        // Validate the string's format
-        if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
-            BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Whitelisted Dimensions'. Using [minecraft:overworld] instead...");
-            BetterStrongholds.whitelistedDimensions = Lists.newArrayList("minecraft:overworld");
-            return;
-        }
+    public static final ConfigGeneral general;
+    public static final ConfigPieceSettings pieceSettings;
 
-        // Parse string to list
-        BetterStrongholds.whitelistedDimensions = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
+    static {
+        BUILDER.push("YUNG's Better Strongholds");
 
-        // Biome blacklisting
-        rawStringofList = betterStrongholds.blacklistedBiomes;
-        strLen = rawStringofList.length();
+        whitelistedDimensions = BUILDER
+                .comment(
+                        """
+                                List of dimensions that will have Better Strongholds.
+                                List must be comma-separated values enclosed in square brackets.
+                                Entries must have the mod namespace included.
+                                For example: "[minecraft:overworld, minecraft:the_nether, undergarden:undergarden]"
+                                Default: "[minecraft:overworld]\"""".indent(1))
+                .worldRestart()
+                .define("Whitelisted Dimensions", "[minecraft:overworld]");
 
-        // Validate the string's format
-        if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
-            BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Blacklisted Biomes'. Using default instead...");
-            BetterStrongholds.blacklistedBiomes = Lists.newArrayList(
-                "minecraft:ocean", "minecraft:frozen_ocean", "minecraft:deep_ocean",
-                "minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:cold_ocean",
-                "minecraft:deep_lukewarm_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
-                "minecraft:beach", "minecraft:snowy_beach",
-                "minecraft:river", "minecraft:frozen_river"
-            );
-            return;
-        }
+        blacklistedBiomes = BUILDER
+                .comment(
+                        """
+                                List of biomes that will NOT have Better Strongholds.
+                                List must be comma-separated values enclosed in square brackets.
+                                Entries must have the mod namespace included.
+                                For example: "[minecraft:plains, byg:alps]"
+                                Default: "[minecraft:ocean, minecraft:frozen_ocean, minecraft:deep_ocean, minecraft:warm_ocean, minecraft:lukewarm_ocean, minecraft:cold_ocean, minecraft:deep_lukewarm_ocean, minecraft:deep_cold_ocean, minecraft:deep_frozen_ocean, minecraft:beach, minecraft:snowy_beach, minecraft:river, minecraft:frozen_river]\"""".indent(1))
+                .worldRestart()
+                .define("Blacklisted Biomes", "[minecraft:ocean, minecraft:frozen_ocean, minecraft:deep_ocean, minecraft:warm_ocean, minecraft:lukewarm_ocean, minecraft:cold_ocean, minecraft:deep_lukewarm_ocean, minecraft:deep_cold_ocean, minecraft:deep_frozen_ocean, minecraft:beach, minecraft:snowy_beach, minecraft:river, minecraft:frozen_river]");
 
-        // Parse string to list
-        BetterStrongholds.blacklistedBiomes = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
+        general = new ConfigGeneral(BUILDER);
+        pieceSettings = new ConfigPieceSettings(BUILDER);
+
+        BUILDER.pop();
+        SPEC = BUILDER.build();
     }
 }

@@ -4,11 +4,12 @@
   "package": "com.yungnickyoung.minecraft.betterstrongholds.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "accessor.ChunkGeneratorAccessor",
+    "accessor.StructureSettingsAccessor",
+    "accessor.SinglePoolElementAccessor",
     "EnderEyeBetterStrongholdLocatingMixin",
     "LocateStrongholdCommandMixin",
-    "accessor.StructureSettingsAccessor",
-    "VanillaStrongholdSpawnMixin",
-    "accessor.SinglePoolElementAccessor"
+    "VanillaStrongholdSpawnMixin"
   ],
   "injectors": {
     "defaultRequire": 1

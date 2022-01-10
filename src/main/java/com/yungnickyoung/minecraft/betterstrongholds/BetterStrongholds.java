@@ -1,23 +1,19 @@
 package com.yungnickyoung.minecraft.betterstrongholds;
 
 import com.google.common.collect.Lists;
-import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfig;
-import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfiguredStructures;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructureFeatures;
-import net.fabricmc.api.ModInitializer;
+import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class BetterStrongholds implements ModInitializer {
+@Mod(BetterStrongholds.MOD_ID)
+public class BetterStrongholds {
     public static final String MOD_ID = "betterstrongholds";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
-    /** Better Strongholds config. Uses AutoConfig. **/
-    public static BSConfig CONFIG;
 
     /**
      * Lists of whitelisted dimensions and blacklisted biomes.
@@ -32,11 +28,13 @@ public class BetterStrongholds implements ModInitializer {
         "minecraft:river", "minecraft:frozen_river"
     );
 
-    @Override
-    public void onInitialize() {
+    public BetterStrongholds() {
+        init();
+    }
+
+    private void init() {
         BSModConfig.init();
         BSModProcessors.init();
         BSModStructureFeatures.init();
-        BSModConfiguredStructures.init();
     }
 }

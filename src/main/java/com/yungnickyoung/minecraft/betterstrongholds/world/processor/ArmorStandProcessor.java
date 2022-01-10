@@ -4,35 +4,36 @@ import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
  * Gives armor stands random armor depending on the type of armor
  * they are already wearing.
  */
-public class ArmorStandProcessor extends StructureEntityProcessor {
+@ParametersAreNonnullByDefault
+public class ArmorStandProcessor extends StructureProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
     public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
-                                                              BlockPos structurePiecePos,
-                                                              BlockPos structurePieceBottomCenterPos,
-                                                              StructureTemplate.StructureEntityInfo localEntityInfo,
-                                                              StructureTemplate.StructureEntityInfo globalEntityInfo,
-                                                              StructurePlaceSettings structurePlaceSettings) {
+    public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
+                                                               BlockPos structurePiecePos,
+                                                               StructureTemplate.StructureEntityInfo localEntityInfo,
+                                                               StructureTemplate.StructureEntityInfo globalEntityInfo,
+                                                               StructurePlaceSettings structurePlaceSettings,
+                                                               StructureTemplate template) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
             ListTag armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
             Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);

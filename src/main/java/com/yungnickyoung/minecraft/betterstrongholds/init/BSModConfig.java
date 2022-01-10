@@ -1,5 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.init;
 
+import com.google.common.collect.Lists;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSSettings;
@@ -8,9 +9,13 @@ import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,15 +25,69 @@ import java.nio.file.Paths;
 
 public class BSModConfig {
     public static void init() {
-        AutoConfig.register(BSConfig.class, Toml4jConfigSerializer::new);
-        BetterStrongholds.CONFIG = AutoConfig.getConfigHolder(BSConfig.class).getConfig();
         initCustomFiles();
+        // Register mod config with Forge
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, BSConfig.SPEC, "betterstrongholds-forge-1_18.toml");
+        // Refresh JSON config on world load so that user doesn't have to restart MC
+        MinecraftForge.EVENT_BUS.addListener(BSModConfig::onWorldLoad);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModConfig::configChanged);
+    }
+
+    private static void onWorldLoad(WorldEvent.Load event) {
+        loadJSON();
+    }
+
+    /**
+     * Parses the whitelisted dimensions & blacklisted biomes strings and updates the stored values.
+     */
+    public static void configChanged(ModConfigEvent event) {
+        ModConfig config = event.getConfig();
+
+        if (config.getSpec() == BSConfig.SPEC) {
+            // Dimension whitelisting
+            String rawStringofList = BSConfig.whitelistedDimensions.get();
+            int strLen = rawStringofList.length();
+
+            // Validate the string's format
+            if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
+                BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Whitelisted Dimensions'. Using [minecraft:overworld] instead...");
+                BetterStrongholds.whitelistedDimensions = Lists.newArrayList("minecraft:overworld");
+                return;
+            }
+
+            // Parse string to list
+            BetterStrongholds.whitelistedDimensions = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
+
+            // Biome blacklisting
+            rawStringofList = BSConfig.blacklistedBiomes.get();
+            strLen = rawStringofList.length();
+
+            // Validate the string's format
+            if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
+                BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Blacklisted Biomes'. Using default instead...");
+                BetterStrongholds.blacklistedBiomes = Lists.newArrayList(
+                        "minecraft:ocean", "minecraft:frozen_ocean", "minecraft:deep_ocean",
+                        "minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:cold_ocean",
+                        "minecraft:deep_lukewarm_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
+                        "minecraft:beach", "minecraft:snowy_beach",
+                        "minecraft:river", "minecraft:frozen_river"
+                );
+                return;
+            }
+
+            // Parse string to list
+            BetterStrongholds.blacklistedBiomes = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
+        }
     }
 
     private static void initCustomFiles() {
         createDirectory();
         createBaseReadMe();
         createJsonReadMe();
+        loadJSON();
+    }
+
+    private static void loadJSON() {
         loadOresJSON();
         loadRareBlocksJSON();
         loadArmorStandsJSON();
@@ -36,7 +95,7 @@ public class BSModConfig {
     }
 
     private static void createDirectory() {
-        File parentDir = new File(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH);
+        File parentDir = new File(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH);
         File customConfigDir = new File(parentDir, BSSettings.VERSION_PATH);
         try {
             String filePath = customConfigDir.getCanonicalPath();
@@ -49,7 +108,7 @@ public class BSModConfig {
     }
 
     private static void createBaseReadMe() {
-        Path path = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, "README.txt");
+        Path path = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, "README.txt");
         File readme = new File(path.toString());
         if (!readme.exists()) {
             String readmeText =
@@ -71,7 +130,7 @@ public class BSModConfig {
     }
 
     private static void createJsonReadMe() {
-        Path path = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "README.txt");
+        Path path = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "README.txt");
         File readme = new File(path.toString());
         if (!readme.exists()) {
             String readmeText =
@@ -153,7 +212,7 @@ public class BSModConfig {
      * Otherwise, it creates a default JSON and from the default options in OreChances.
      */
     private static void loadOresJSON() {
-        Path jsonPath = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "ores.json");
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "ores.json");
         File jsonFile = new File(jsonPath.toString());
 
         if (!jsonFile.exists()) {
@@ -184,7 +243,7 @@ public class BSModConfig {
      * Otherwise, it creates a default JSON and from the default options in RareBlockChances.
      */
     private static void loadRareBlocksJSON() {
-        Path jsonPath = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "rareblocks.json");
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "rareblocks.json");
         File jsonFile = new File(jsonPath.toString());
 
         if (!jsonFile.exists()) {
@@ -215,7 +274,7 @@ public class BSModConfig {
      * Otherwise, it creates a default JSON and from the default options in ArmorStandChances.
      */
     private static void loadArmorStandsJSON() {
-        Path jsonPath = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "armorstands.json");
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "armorstands.json");
         File jsonFile = new File(jsonPath.toString());
 
         if (!jsonFile.exists()) {
@@ -246,7 +305,7 @@ public class BSModConfig {
      * Otherwise, it creates a default JSON and from the default options in ItemFrameChances.
      */
     private static void loadItemFramesJSON() {
-        Path jsonPath = Paths.get(FabricLoader.getInstance().getConfigDir().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "itemframes.json");
+        Path jsonPath = Paths.get(FMLPaths.CONFIGDIR.get().toString(), BSSettings.CUSTOM_CONFIG_PATH, BSSettings.VERSION_PATH, "itemframes.json");
         File jsonFile = new File(jsonPath.toString());
 
         if (!jsonFile.exists()) {

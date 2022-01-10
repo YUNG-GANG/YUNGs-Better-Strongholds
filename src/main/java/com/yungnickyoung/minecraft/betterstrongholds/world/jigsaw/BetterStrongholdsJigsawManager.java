@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.mojang.datafixers.util.Pair;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
+import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.mixin.accessor.SinglePoolElementAccessor;
 import com.yungnickyoung.minecraft.yungsapi.YungsApi;
 import com.yungnickyoung.minecraft.yungsapi.mixin.accessor.BoundingBoxAccessor;
@@ -167,16 +168,16 @@ public class BetterStrongholdsJigsawManager {
 
             // Initialize piece counts
             this.pieceCounts = new HashMap<>();
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.grandLibraryMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.smallLibraryMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.prisonMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.cmdAcariiMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.cmdYungMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.treasureRoomMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.portalRoomMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_md"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount);
-            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_sm"), BetterStrongholds.CONFIG.betterStrongholds.pieceSettings.armourySmallRoomMaxCount);
-            this.maxY = BetterStrongholds.CONFIG.betterStrongholds.general.strongholdMaxY;
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/grand_library"), BSConfig.pieceSettings.grandLibraryMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/library_md"), BSConfig.pieceSettings.smallLibraryMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/prison_lg"), BSConfig.pieceSettings.prisonMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_acarii"), BSConfig.pieceSettings.cmdAcariiMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/cmd_yung"), BSConfig.pieceSettings.cmdYungMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/treasure_room_lg"), BSConfig.pieceSettings.treasureRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "portal_rooms/portal_room"), BSConfig.pieceSettings.portalRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_md"), BSConfig.pieceSettings.armouryLargeRoomMaxCount.get());
+            this.pieceCounts.put(new ResourceLocation(BetterStrongholds.MOD_ID, "rooms/armoury_sm"), BSConfig.pieceSettings.armourySmallRoomMaxCount.get());
+            this.maxY = BSConfig.general.strongholdMaxY.get();
         }
 
         public void processPiece(

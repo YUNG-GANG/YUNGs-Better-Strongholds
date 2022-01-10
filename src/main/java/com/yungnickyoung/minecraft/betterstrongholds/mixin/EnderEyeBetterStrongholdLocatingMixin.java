@@ -29,8 +29,8 @@ public class EnderEyeBetterStrongholdLocatingMixin {
 
     private static BlockPos locateClosestBetterStronghold(BlockPos blockPos, ServerLevel level, BlockPos playerPos) {
         ChunkGenerator chunkGenerator = level.getChunkSource().getGenerator();
-        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
-        closestPos = returnClosestPosition(closestPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD, playerPos, 100, false), playerPos);
+        BlockPos closestPos = returnClosestPosition(blockPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
+        closestPos = returnClosestPosition(closestPos, chunkGenerator.findNearestMapFeature(level, BSModStructureFeatures.BETTER_STRONGHOLD.get(), playerPos, 100, false), playerPos);
         return closestPos;
     }
 
