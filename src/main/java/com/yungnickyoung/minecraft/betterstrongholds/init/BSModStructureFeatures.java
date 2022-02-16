@@ -164,5 +164,4 @@ public class BSModStructureFeatures {
 
         ((StructureSettingsAccessor) structureSettings).setStructureConfig(tempMap);
     }
-
 }
