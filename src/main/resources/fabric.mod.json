@@ -27,11 +27,11 @@
   },
   "depends": {
     "fabricloader": ">=0.12.0",
-    "fabric": ">=0.43.1",
+    "fabric": ">=0.46.4",
     "minecraft": ">=1.18",
     "cloth-config2": ">=6.0.42",
     "java": ">=17",
-    "yungsapi": ">=1.18-Fabric-34"
+    "yungsapi": ">=1.18-Fabric-36"
   },
   "mixins": [
     "betterstrongholds.mixins.json"
