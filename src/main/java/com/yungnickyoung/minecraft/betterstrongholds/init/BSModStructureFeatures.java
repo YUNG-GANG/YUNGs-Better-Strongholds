@@ -122,7 +122,6 @@ public class BSModStructureFeatures {
             if (!BetterStrongholds.blacklistedBiomes.contains(biomeName)) {
                 strongholdBiomeMap.put(BSModConfiguredStructures.CONFIGURED_BETTER_STRONGHOLD, biomeEntry.getKey());
             }
-
         }
 
         // Add our structures and their associated configured structures + containing biomes to the settings
@@ -130,7 +129,6 @@ public class BSModStructureFeatures {
 
         // Save our updates
         ((StructureSettingsAccessor) worldStructureSettings).setConfiguredStructures(tempStructureToMultiMap.build());
-
     }
 
     /**
