@@ -3,6 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModProcessors;
 import com.yungnickyoung.minecraft.betterstrongholds.init.BSModStructureFeatures;
+import com.yungnickyoung.minecraft.betterstrongholds.init.BSModTags;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ public class BetterStrongholds {
 
     private void init() {
         BSModConfig.init();
+        BSModTags.init();
         BSModProcessors.init();
         BSModStructureFeatures.init();
     }
