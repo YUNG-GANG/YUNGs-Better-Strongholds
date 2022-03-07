@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterstrongholds.refmap.json",
   "mixins": [
+    "CancelSearchVanillaStrongholdMixin",
     "DisableVanillaStrongholdsMixin",
     "LocateStrongholdCommandMixin",
     "accessor.SinglePoolElementAccessor"
