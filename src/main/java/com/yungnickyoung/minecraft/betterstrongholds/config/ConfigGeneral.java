@@ -6,7 +6,6 @@ public class ConfigGeneral {
     public final ForgeConfigSpec.ConfigValue<Integer> strongholdStartMinY;
     public final ForgeConfigSpec.ConfigValue<Integer> strongholdStartMaxY;
     public final ForgeConfigSpec.ConfigValue<Integer> strongholdMaxY;
-    public final ForgeConfigSpec.ConfigValue<Integer> strongholdSize;
     public final ForgeConfigSpec.ConfigValue<Double> cobwebReplacementChanceNormal;
     public final ForgeConfigSpec.ConfigValue<Double> cobwebReplacementChanceSpawner;
     public final ForgeConfigSpec.ConfigValue<Double> torchSpawnRate;
@@ -49,16 +48,6 @@ public class ConfigGeneral {
                                 Default: 60""".indent(1))
                 .worldRestart()
                 .define("Max Y", 60);
-
-        strongholdSize = BUILDER
-                .comment(
-                        """
-                                The max number of "pieces" the stronghold will generate from the center.
-                                This number controls the general size of strongholds. Bigger number = bigger strongholds.
-                                It is HIGHLY recommended to keep this an even number!
-                                Default: 16""".indent(1))
-                .worldRestart()
-                .define("Stronghold Size", 16);
 
         cobwebReplacementChanceNormal = BUILDER
                 .comment(

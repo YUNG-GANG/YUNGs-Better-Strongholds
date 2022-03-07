@@ -1,6 +1,5 @@
 package com.yungnickyoung.minecraft.betterstrongholds.init;
 
-import com.google.common.collect.Lists;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholds;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSConfig;
 import com.yungnickyoung.minecraft.betterstrongholds.config.BSSettings;
@@ -12,9 +11,6 @@ import com.yungnickyoung.minecraft.yungsapi.io.JSON;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
@@ -30,54 +26,10 @@ public class BSModConfig {
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, BSConfig.SPEC, "betterstrongholds-forge-1_18.toml");
         // Refresh JSON config on world load so that user doesn't have to restart MC
         MinecraftForge.EVENT_BUS.addListener(BSModConfig::onWorldLoad);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(BSModConfig::configChanged);
     }
 
     private static void onWorldLoad(WorldEvent.Load event) {
         loadJSON();
-    }
-
-    /**
-     * Parses the whitelisted dimensions & blacklisted biomes strings and updates the stored values.
-     */
-    public static void configChanged(ModConfigEvent event) {
-        ModConfig config = event.getConfig();
-
-        if (config.getSpec() == BSConfig.SPEC) {
-            // Dimension whitelisting
-            String rawStringofList = BSConfig.whitelistedDimensions.get();
-            int strLen = rawStringofList.length();
-
-            // Validate the string's format
-            if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
-                BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Whitelisted Dimensions'. Using [minecraft:overworld] instead...");
-                BetterStrongholds.whitelistedDimensions = Lists.newArrayList("minecraft:overworld");
-                return;
-            }
-
-            // Parse string to list
-            BetterStrongholds.whitelistedDimensions = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
-
-            // Biome blacklisting
-            rawStringofList = BSConfig.blacklistedBiomes.get();
-            strLen = rawStringofList.length();
-
-            // Validate the string's format
-            if (strLen < 2 || rawStringofList.charAt(0) != '[' || rawStringofList.charAt(strLen - 1) != ']') {
-                BetterStrongholds.LOGGER.error("INVALID VALUE FOR SETTING 'Blacklisted Biomes'. Using default instead...");
-                BetterStrongholds.blacklistedBiomes = Lists.newArrayList(
-                        "minecraft:ocean", "minecraft:frozen_ocean", "minecraft:deep_ocean",
-                        "minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:cold_ocean",
-                        "minecraft:deep_lukewarm_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
-                        "minecraft:beach", "minecraft:snowy_beach",
-                        "minecraft:river", "minecraft:frozen_river"
-                );
-                return;
-            }
-
-            // Parse string to list
-            BetterStrongholds.blacklistedBiomes = Lists.newArrayList(rawStringofList.substring(1, strLen - 1).split(",\\s*"));
-        }
     }
 
     private static void initCustomFiles() {

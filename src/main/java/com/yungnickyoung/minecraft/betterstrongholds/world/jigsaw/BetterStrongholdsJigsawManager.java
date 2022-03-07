@@ -21,11 +21,11 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.structures.*;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
+import net.minecraft.world.level.levelgen.structure.pools.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.AABB;
@@ -54,7 +54,7 @@ public class BetterStrongholdsJigsawManager {
         ChunkGenerator chunkGenerator = jigsawContext.chunkGenerator();
         StructureManager structureManager = jigsawContext.structureManager();
         LevelHeightAccessor levelHeightAccessor = jigsawContext.heightAccessor();
-        Predicate<Biome> predicate = jigsawContext.validBiome();
+        Predicate<Holder<Biome>> predicate = jigsawContext.validBiome();
 
         StructureFeature.bootstrap(); // Ensures static members are all loaded
 

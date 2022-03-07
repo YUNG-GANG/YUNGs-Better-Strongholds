@@ -5,12 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterstrongholds.refmap.json",
   "mixins": [
-    "accessor.ChunkGeneratorAccessor",
-    "accessor.StructureSettingsAccessor",
-    "accessor.SinglePoolElementAccessor",
-    "EnderEyeBetterStrongholdLocatingMixin",
+    "DisableVanillaStrongholdsMixin",
     "LocateStrongholdCommandMixin",
-    "VanillaStrongholdSpawnMixin"
+    "accessor.SinglePoolElementAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
