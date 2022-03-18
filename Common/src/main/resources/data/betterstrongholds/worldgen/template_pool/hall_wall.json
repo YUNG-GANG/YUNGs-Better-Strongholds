@@ -1,0 +1,15 @@
+{
+  "name": "betterstrongholds:hall_wall",
+  "fallback": "betterstrongholds:terminators",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:walls/hall_wall",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

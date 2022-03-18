@@ -1,0 +1,104 @@
+{
+ "betterstrongholds.commands.locate.stronghold": "Use /locate betterstrongholds:stronghold instead!",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.title": "YUNG's Better Strongholds",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds": "YUNG's Better Strongholds",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general": "General Settings",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.@Tooltip": "General settings.",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings": "Piece Settings",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.@Tooltip": "Options for controlling individual pieces/rooms in the stronghold.",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions": "Whitelisted Dimensions",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[0]": "List of dimensions that will have Better Strongholds.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[1]": "List must be comma-separated values enclosed in brackets.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[2]": "Entries must have the mod namespace included.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[3]": "For example: \"[minecraft:overworld, minecraft:the_nether, undergarden:undergarden]\"",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[4]": "Default: \"[minecraft:overworld]\"",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes": "Blacklisted Biomes",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[0]": "List of biomes that will NOT have Better Strongholds.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[1]": "List must be comma-separated values enclosed in brackets.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[2]": "Entries must have the mod namespace included.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[3]": "For example: \"[minecraft:plains, byg:alps]\"",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[4]": "Default: \"[minecraft:ocean, minecraft:frozen_ocean, minecraft:deep_ocean, minecraft:warm_ocean, minecraft:lukewarm_ocean, minecraft:cold_ocean, minecraft:deep_lukewarm_ocean, minecraft:deep_cold_ocean, minecraft:deep_frozen_ocean, minecraft:beach, minecraft:snowy_beach, minecraft:river, minecraft:frozen_river]\"",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY": "Min Start Y",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[0]": "The minimum y-value at which the STARTING ROOM of the stronghold can spawn.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[1]": "Note that the various pieces of the stronghold can extend above or below this value.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[2]": "Default: -30",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY": "Max Start Y",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[0]": "The maximum y-value at which the STARTING ROOM of the stronghold can spawn.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[1]": "Note that the various pieces of the stronghold can extend above or below this value.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[2]": "Default: 31",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY": "Max Y",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[0]": "The maximum y-value at which ANY piece of the stronghold can spawn.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[1]": "If any piece attempts to spawn such that any part of it is above this y-value,",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[2]": "it will not spawn.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[3]": "In other words, this is a hard cap above which no part of the stronghold can generate.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[4]": "Default: 60",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize": "Stronghold Size",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[0]": "The max number of \"pieces\" the stronghold will generate from the center.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[1]": "This number controls the general size of strongholds. Bigger number = bigger strongholds.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[2]": "It is HIGHLY recommended to keep this an even number.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[3]": "Default: 16",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal": "Cobweb Spawn Rate (NORMAL)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[0]": "The rate at which cobwebs will spawn in various parts of the stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[1]": "Default: 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner": "Cobweb Spawn Rate (SPAWNER)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[0]": "The rate at which cobwebs will spawn around spider spawners in libraries.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[1]": "Default: 0.3",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate": "Torch Spawn Rate",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate.@Tooltip[0]": "The rate at which torches spawn throughout the stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate.@Tooltip[1]": "Default: 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate": "Lantern Spawn Rate",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[0]": "The rate at which lanterns spawn throughout the stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[1]": "Default: 0.2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount": "Grand Library Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount.@Tooltip[0]": "The max number of Grand Libraries that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount.@Tooltip[1]": "Default: 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount": "Small Library Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[0]": "The max number of small libraries that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[1]": "Note that these are distinct rooms from the Grand Library, being smaller",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[2]": "and more common (by default).",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[3]": "Default: 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount": "Prison Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount.@Tooltip[0]": "The max number of prisons that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount.@Tooltip[1]": "Default: 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount": "Commander Room (Acarii) Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount.@Tooltip[0]": "The max number of Commander (Acarii) rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount.@Tooltip[1]": "Default: 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount": "Commander Room (YUNG) Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount.@Tooltip[0]": "The max number of Commander (YUNG) rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount.@Tooltip[1]": "Default: 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount": "Treasure Room Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount.@Tooltip[0]": "The max number of treasure rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount.@Tooltip[1]": "Default: 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount": "Armoury Room (Large) Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount.@Tooltip[0]": "The max number of large armoury rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount.@Tooltip[1]": "Default: 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount": "Armoury Room (Small) Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount.@Tooltip[0]": "The max number of small armoury rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount.@Tooltip[1]": "Default: 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount": "Portal Room Max Count",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount.@Tooltip[0]": "The max number of portal rooms that can spawn in a single stronghold.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount.@Tooltip[1]": "Default: 1"
+}
