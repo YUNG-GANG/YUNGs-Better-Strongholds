@@ -37,10 +37,6 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             ListTag armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
             Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
-            if (globalEntityInfo.blockPos.getX() == 8628 && globalEntityInfo.blockPos.getY() == 30 && globalEntityInfo.blockPos.getZ() == -2161) {
-                BetterStrongholdsCommon.LOGGER.info("halp");
-            }
-
             // Type depends on the helmet and nothing else
             String helmet;
             try {
