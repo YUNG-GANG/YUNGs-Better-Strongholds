@@ -6,7 +6,9 @@ import com.yungnickyoung.minecraft.yungsapi.world.BlockStateRandomizer;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -44,6 +46,10 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state.is(Blocks.ORANGE_STAINED_GLASS)) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(blockInfoGlobal.pos))) {
+                return blockInfoGlobal;
+            }
+
             Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
 
             // Replace the glass itself
