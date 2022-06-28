@@ -18,6 +18,7 @@ public class StructureProcessorTypeModule {
     public static StructureProcessorType<RareBlockProcessor> RARE_BLOCK_PROCESSOR = () -> RareBlockProcessor.CODEC;
     public static StructureProcessorType<RedstoneProcessor> REDSTONE_PROCESSOR = () -> RedstoneProcessor.CODEC;
     public static StructureProcessorType<LegProcessor> LEG_PROCESSOR = () -> LegProcessor.CODEC;
+    public static StructureProcessorType<EndPortalFrameProcessor> END_PORTAL_FRAME_PROCESSOR = () -> EndPortalFrameProcessor.CODEC;
     public static StructureProcessorType<StructureProcessor> ARMORSTAND_PROCESSOR = () -> Services.PROCESSORS.armorStandProcessorCodec();
     public static StructureProcessorType<StructureProcessor> ITEMFRAME_PROCESSOR = () -> Services.PROCESSORS.itemFrameProcessorCodec();
 
@@ -32,6 +33,7 @@ public class StructureProcessorTypeModule {
         register("rare_block_processor", RARE_BLOCK_PROCESSOR);
         register("redstone_processor", REDSTONE_PROCESSOR);
         register("leg_processor", LEG_PROCESSOR);
+        register("end_portal_frame_processor", END_PORTAL_FRAME_PROCESSOR);
         register("armorstand_processor", ARMORSTAND_PROCESSOR);
         register("itemframe_processor", ITEMFRAME_PROCESSOR);
     }
