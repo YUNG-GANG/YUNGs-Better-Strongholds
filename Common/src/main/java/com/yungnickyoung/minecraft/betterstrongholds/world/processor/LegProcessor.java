@@ -1,13 +1,14 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.BlockStateRandomizer;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +25,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * Dynamically generates legs below the stronghold.
@@ -50,11 +50,11 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                 return blockInfoGlobal;
             }
 
-            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
 
             // Replace the glass itself
             blockInfoGlobal = blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS)
-                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(random), blockInfoGlobal.nbt)
+                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(randomSource), blockInfoGlobal.nbt)
                     : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.CYAN_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt);
 
             // Reusable mutable
@@ -67,7 +67,7 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                     && mutable.getY() < levelReader.getMaxBuildHeight()
                     && (currBlockState.isAir() || !levelReader.getFluidState(mutable).isEmpty())) {
                 // Place block in vertical pillar
-                levelReader.getChunk(mutable).setBlockState(mutable, stoneBrickSelector.get(random), false);
+                levelReader.getChunk(mutable).setBlockState(mutable, stoneBrickSelector.get(randomSource), false);
 
                 // Generate rafters
                 if (yBelow == 1) {
@@ -141,6 +141,6 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.LEG_PROCESSOR;
+        return StructureProcessorTypeModule.LEG_PROCESSOR;
     }
 }

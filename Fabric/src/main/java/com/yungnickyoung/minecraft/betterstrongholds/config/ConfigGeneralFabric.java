@@ -3,18 +3,6 @@ package com.yungnickyoung.minecraft.betterstrongholds.config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 public class ConfigGeneralFabric {
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public int strongholdStartMinY = -30;
-
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public int strongholdStartMaxY = 11;
-
-    @ConfigEntry.Gui.Tooltip(count = 5)
-    public int strongholdMaxY = 60;
-
-    @ConfigEntry.Gui.Tooltip(count = 4)
-    public int strongholdSize = 16;
-
     @ConfigEntry.Gui.Tooltip(count = 2)
     public double cobwebReplacementChanceNormal = .1;
 

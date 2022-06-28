@@ -1,10 +1,9 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.ItemRandomizer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-
-import java.util.Random;
 
 /**
  * Singleton class holding ItemRandomizers for armor pieces on armor stands.
@@ -77,35 +76,35 @@ public class ArmorStandChances {
     private ItemRandomizer commonBoots;
     private ItemRandomizer rareBoots;
 
-    public Item getCommonHelmet(Random random) {
-        return commonHelmets.get(random);
+    public Item getCommonHelmet(RandomSource randomSource) {
+        return commonHelmets.get(randomSource);
     }
 
-    public Item getRareHelmet(Random random) {
-         return rareHelmets.get(random);
+    public Item getRareHelmet(RandomSource randomSource) {
+         return rareHelmets.get(randomSource);
     }
 
-    public Item getCommonChestplate(Random random) {
-        return commonChestplates.get(random);
+    public Item getCommonChestplate(RandomSource randomSource) {
+        return commonChestplates.get(randomSource);
     }
 
-    public Item getRareChestplate(Random random) {
-        return rareChestplates.get(random);
+    public Item getRareChestplate(RandomSource randomSource) {
+        return rareChestplates.get(randomSource);
     }
 
-    public Item getCommonLeggings(Random random) {
-        return commonLeggings.get(random);
+    public Item getCommonLeggings(RandomSource randomSource) {
+        return commonLeggings.get(randomSource);
     }
 
-    public Item getRareLeggings(Random random) {
-        return rareLeggings.get(random);
+    public Item getRareLeggings(RandomSource randomSource) {
+        return rareLeggings.get(randomSource);
     }
 
-    public Item getCommonBoots(Random random) {
-        return commonBoots.get(random);
+    public Item getCommonBoots(RandomSource randomSource) {
+        return commonBoots.get(randomSource);
     }
 
-    public Item getRareBoots(Random random) {
-        return rareBoots.get(random);
+    public Item getRareBoots(RandomSource randomSource) {
+        return rareBoots.get(randomSource);
     }
 }

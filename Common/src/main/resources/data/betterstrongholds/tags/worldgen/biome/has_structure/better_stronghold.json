@@ -1,0 +1,93 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_mountain",
+    "#minecraft:is_badlands",
+    {
+      "id": "#forge:is_mesa",
+      "required": false
+    },
+    {
+      "id": "#c:in_mesa",
+      "required": false
+    },
+    {
+      "id": "#forge:is_badlands",
+      "required": false
+    },
+    "#minecraft:is_hill",
+    "#minecraft:is_taiga",
+    "#minecraft:is_jungle",
+    {
+      "id": "#forge:is_jungle",
+      "required": false
+    },
+    {
+      "id": "#c:in_jungle",
+      "required": false
+    },
+    "#minecraft:is_forest",
+    {
+      "id": "#forge:is_forest",
+      "required": false
+    },
+    {
+      "id": "#c:forest",
+      "required": false
+    },
+    "minecraft:stony_shore",
+    "minecraft:mushroom_fields",
+    {
+      "id": "#forge:is_mushroom",
+      "required": false
+    },
+    {
+      "id": "#c:mushroom",
+      "required": false
+    },
+    "minecraft:ice_spikes",
+    {
+      "id": "#byg:is_icy",
+      "required": false
+    },
+    {
+      "id": "#forge:is_icy",
+      "required": false
+    },
+    {
+      "id": "#c:icy",
+      "required": false
+    },
+    "minecraft:desert",
+    {
+      "id": "#forge:is_desert",
+      "required": false
+    },
+    {
+      "id": "#c:desert",
+      "required": false
+    },
+    "minecraft:savanna",
+    "minecraft:snowy_plains",
+    "minecraft:plains",
+    {
+      "id": "#c:plains",
+      "required": false
+    },
+    "minecraft:sunflower_plains",
+    "minecraft:swamp",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    {
+      "id": "#forge:is_savanna",
+      "required": false
+    },
+    {
+      "id": "#c:savanna",
+      "required": false
+    },
+    "minecraft:windswept_savanna",
+    "minecraft:dripstone_caves",
+    "minecraft:lush_caves"
+  ]
+}

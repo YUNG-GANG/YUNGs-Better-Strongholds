@@ -1,8 +1,23 @@
 {
-  "type": "betterstrongholds:stronghold",
+  "type": "yungsapi:yung_jigsaw",
+  "biomes": "#betterstrongholds:has_structure/better_stronghold",
+  "step": "strongholds",
+  "start_pool": "betterstrongholds:starts",
+  "start_jigsaw_name": "betterstrongholds:stronghold_anchor",
+  "size": 16,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": {
+      "absolute": -30
+    },
+    "max_inclusive": {
+      "absolute": 11
+    }
+  },
+  "max_distance_from_center": 128,
+  "max_y": 60,
+  "spawn_overrides": {},
   "config": {
-    "start_pool": "betterstrongholds:starts",
-    "size": 16,
     "oreBlockRandomizer": {
       "defaultBlockState": {
         "Name": "minecraft:coal_ore"
@@ -296,8 +311,5 @@
         ]
       }
     }
-  },
-  "biomes": "#betterstrongholds:has_structure/has_better_stronghold",
-  "adapt_noise": false,
-  "spawn_overrides": {}
+  }
 }

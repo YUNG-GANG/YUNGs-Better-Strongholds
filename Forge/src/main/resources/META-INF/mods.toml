@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[40,)"
+loaderVersion="[41,)"
 license="LGPLv3"
 issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issues"
 
@@ -16,16 +16,16 @@ issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issue
 [[dependencies.betterstrongholds]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19,1.20)"
 
 [[dependencies.betterstrongholds]]
     modId="forge"
     mandatory=true
-    versionRange="[40.0.8,)"
+    versionRange="[41.0.45,)"
 
 [[dependencies.betterstrongholds]]
     modId="yungsapi"
-    versionRange="[1.18.2-Forge-2.0.7,)"
+    versionRange="[1.19-Forge-3.3.0,)"
     mandatory=true
     ordering="NONE"
     side="BOTH"

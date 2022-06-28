@@ -2,11 +2,12 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.banner.Banner;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.AbstractBannerBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Replaces gray wall banners with a random banner from a pool of banners.
@@ -83,11 +83,11 @@ public class BannerProcessor extends StructureProcessor {
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.BANNER_PROCESSOR;
+        return StructureProcessorTypeModule.BANNER_PROCESSOR;
     }
 
-    private Banner getRandomBanner(Random random) {
-        return WALL_BANNERS.get(random.nextInt(WALL_BANNERS.size()));
+    private Banner getRandomBanner(RandomSource randomSource) {
+        return WALL_BANNERS.get(randomSource.nextInt(WALL_BANNERS.size()));
     }
 
     private CompoundTag copyNBT(CompoundTag other) {

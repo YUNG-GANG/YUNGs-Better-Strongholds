@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -84,7 +84,7 @@ public class WaterloggedProcessor extends StructureProcessor implements ISafeWor
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.WATERLOGGED_PROCESSOR;
+        return StructureProcessorTypeModule.WATERLOGGED_PROCESSOR;
     }
 }
 

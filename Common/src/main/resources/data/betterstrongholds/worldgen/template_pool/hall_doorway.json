@@ -5,10 +5,14 @@
     {
       "weight": 1,
       "element": {
+        "name": "portal_room",
         "location": "betterstrongholds:portal_rooms/portal_room",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 1,
+        "min_required_depth": 8,
+        "is_priority": true,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -113,28 +117,34 @@
     {
       "weight": 100,
       "element": {
+        "name": "grand_library",
         "location": "betterstrongholds:rooms/grand_library",
         "processors": "betterstrongholds:rooms/grand_library",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
       "weight": 100,
       "element": {
+        "name": "armoury_sm",
         "location": "betterstrongholds:rooms/armoury_sm",
         "processors": "betterstrongholds:rooms/armoury",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 2,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
       "weight": 100,
       "element": {
+        "name": "armoury_md",
         "location": "betterstrongholds:rooms/armoury_md",
         "processors": "betterstrongholds:rooms/armoury",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 2,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -158,10 +168,12 @@
     {
       "weight": 100,
       "element": {
+        "name": "library_md",
         "location": "betterstrongholds:rooms/library_md",
         "processors": "betterstrongholds:rooms/library_md",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 2,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -176,10 +188,12 @@
     {
       "weight": 100,
       "element": {
+        "name": "prison_lg",
         "location": "betterstrongholds:rooms/prison_lg",
         "processors": "betterstrongholds:rooms/prison_lg",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 2,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -203,19 +217,23 @@
     {
       "weight": 3,
       "element": {
+        "name": "cmd_acarii",
         "location": "betterstrongholds:rooms/cmd_acarii",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
       "weight": 1,
       "element": {
+        "name": "cmd_yung",
         "location": "betterstrongholds:rooms/cmd_yung",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -239,10 +257,12 @@
     {
       "weight": 100,
       "element": {
+        "name": "treasure_room_lg",
         "location": "betterstrongholds:rooms/treasure_room_lg",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "max_count": 2,
+        "element_type": "yungsapi:yung_single_element"
       }
     }
   ]

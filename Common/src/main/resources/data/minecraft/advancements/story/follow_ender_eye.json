@@ -17,10 +17,10 @@
   },
   "criteria": {
     "in_stronghold": {
-      "trigger": "minecraft:location",
+      "trigger": "yungsapi:structure_location",
       "conditions": {
         "location": {
-          "feature": "stronghold"
+          "feature": "minecraft:stronghold"
         }
       }
     },

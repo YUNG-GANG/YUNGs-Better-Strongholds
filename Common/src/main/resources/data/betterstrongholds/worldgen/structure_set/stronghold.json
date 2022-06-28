@@ -9,6 +9,8 @@
     "salt": 596441294,
     "spacing": 85,
     "separation": 50,
-    "type": "minecraft:random_spread"
+    "chunk_distance_to_first_ring": 80,
+    "ring_chunk_thickness": 96,
+    "type": "betterstrongholds:stronghold"
   }
 }

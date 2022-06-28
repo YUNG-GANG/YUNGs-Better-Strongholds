@@ -7,13 +7,11 @@ public class BSConfigForge {
     public static final ForgeConfigSpec SPEC;
 
     public static final ConfigGeneralForge general;
-    public static final ConfigPieceSettingsForge pieceSettings;
 
     static {
         BUILDER.push("YUNG's Better Strongholds");
 
         general = new ConfigGeneralForge(BUILDER);
-        pieceSettings = new ConfigPieceSettingsForge(BUILDER);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

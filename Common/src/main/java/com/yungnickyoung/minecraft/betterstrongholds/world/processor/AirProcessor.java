@@ -1,7 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -37,6 +37,6 @@ public class AirProcessor extends StructureProcessor implements ISafeWorldModifi
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.AIR_PROCESSOR;
+        return StructureProcessorTypeModule.AIR_PROCESSOR;
     }
 }

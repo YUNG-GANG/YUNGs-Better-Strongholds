@@ -7,9 +7,4 @@ public class ConfigBetterStrongholdsFabric {
     @ConfigEntry.Gui.CollapsibleObject
     @ConfigEntry.Gui.Tooltip
     public ConfigGeneralFabric general = new ConfigGeneralFabric();
-
-    @ConfigEntry.Category("Piece Settings")
-    @ConfigEntry.Gui.CollapsibleObject
-    @ConfigEntry.Gui.Tooltip
-    public ConfigPieceSettingsFabric pieceSettings = new ConfigPieceSettingsFabric();
 }

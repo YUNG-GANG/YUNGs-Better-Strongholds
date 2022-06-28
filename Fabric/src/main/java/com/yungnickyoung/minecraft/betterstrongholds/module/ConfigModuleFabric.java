@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
-    public static final String VERSION_PATH = "fabric-1_18_2";
+    public static final String VERSION_PATH = "fabric-1_19";
 
     public static void init() {
         initCustomFiles();
@@ -274,21 +274,9 @@ public class ConfigModuleFabric {
     }
 
     private static void bakeConfig(BSConfigFabric configFabric) {
-        BetterStrongholdsCommon.CONFIG.general.strongholdStartMinY = configFabric.betterStrongholds.general.strongholdStartMinY;
-        BetterStrongholdsCommon.CONFIG.general.strongholdStartMaxY = configFabric.betterStrongholds.general.strongholdStartMaxY;
-        BetterStrongholdsCommon.CONFIG.general.strongholdMaxY = configFabric.betterStrongholds.general.strongholdMaxY;
         BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceNormal = configFabric.betterStrongholds.general.cobwebReplacementChanceNormal;
         BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceSpawner = configFabric.betterStrongholds.general.cobwebReplacementChanceSpawner;
         BetterStrongholdsCommon.CONFIG.general.torchSpawnRate = configFabric.betterStrongholds.general.torchSpawnRate;
         BetterStrongholdsCommon.CONFIG.general.lanternSpawnRate = configFabric.betterStrongholds.general.lanternSpawnRate;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.grandLibraryMaxCount = configFabric.betterStrongholds.pieceSettings.grandLibraryMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.smallLibraryMaxCount = configFabric.betterStrongholds.pieceSettings.smallLibraryMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.prisonMaxCount = configFabric.betterStrongholds.pieceSettings.prisonMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.cmdAcariiMaxCount = configFabric.betterStrongholds.pieceSettings.cmdAcariiMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.cmdYungMaxCount = configFabric.betterStrongholds.pieceSettings.cmdYungMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.treasureRoomMaxCount = configFabric.betterStrongholds.pieceSettings.treasureRoomMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.armouryLargeRoomMaxCount = configFabric.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.armourySmallRoomMaxCount = configFabric.betterStrongholds.pieceSettings.armourySmallRoomMaxCount;
-        BetterStrongholdsCommon.CONFIG.pieceSettings.portalRoomMaxCount = configFabric.betterStrongholds.pieceSettings.portalRoomMaxCount;
     }
 }

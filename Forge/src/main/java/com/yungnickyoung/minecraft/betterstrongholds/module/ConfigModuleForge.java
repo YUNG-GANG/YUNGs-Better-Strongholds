@@ -23,11 +23,11 @@ import java.nio.file.Paths;
 
 public class ConfigModuleForge {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
-    public static final String VERSION_PATH = "forge-1_18_2";
+    public static final String VERSION_PATH = "forge-1_19";
 
     public static void init() {
         initCustomFiles();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BSConfigForge.SPEC, "betterstrongholds-forge-1_18.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BSConfigForge.SPEC, "betterstrongholds-forge-1_19.toml");
         MinecraftForge.EVENT_BUS.addListener(ConfigModuleForge::onWorldLoad);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ConfigModuleForge::onConfigChange);
     }
@@ -294,21 +294,9 @@ public class ConfigModuleForge {
     }
 
     private static void bakeConfig() {
-        BetterStrongholdsCommon.CONFIG.general.strongholdStartMinY = BSConfigForge.general.strongholdStartMinY.get();
-        BetterStrongholdsCommon.CONFIG.general.strongholdStartMaxY = BSConfigForge.general.strongholdStartMaxY.get();
-        BetterStrongholdsCommon.CONFIG.general.strongholdMaxY = BSConfigForge.general.strongholdMaxY.get();
         BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceNormal = BSConfigForge.general.cobwebReplacementChanceNormal.get();
         BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceSpawner = BSConfigForge.general.cobwebReplacementChanceSpawner.get();
         BetterStrongholdsCommon.CONFIG.general.torchSpawnRate = BSConfigForge.general.torchSpawnRate.get();
         BetterStrongholdsCommon.CONFIG.general.lanternSpawnRate = BSConfigForge.general.lanternSpawnRate.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.grandLibraryMaxCount = BSConfigForge.pieceSettings.grandLibraryMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.smallLibraryMaxCount = BSConfigForge.pieceSettings.smallLibraryMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.prisonMaxCount = BSConfigForge.pieceSettings.prisonMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.cmdAcariiMaxCount = BSConfigForge.pieceSettings.cmdAcariiMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.cmdYungMaxCount = BSConfigForge.pieceSettings.cmdYungMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.treasureRoomMaxCount = BSConfigForge.pieceSettings.treasureRoomMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.armouryLargeRoomMaxCount = BSConfigForge.pieceSettings.armouryLargeRoomMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.armourySmallRoomMaxCount = BSConfigForge.pieceSettings.armourySmallRoomMaxCount.get();
-        BetterStrongholdsCommon.CONFIG.pieceSettings.portalRoomMaxCount = BSConfigForge.pieceSettings.portalRoomMaxCount.get();
     }
 }

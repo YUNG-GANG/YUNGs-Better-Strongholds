@@ -2,8 +2,9 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,8 +12,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-
-import java.util.Random;
 
 /**
  * Replaces white stained glass and gray stained glass with cobwebs and air.
@@ -32,9 +31,9 @@ public class CobwebProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state.is(Blocks.TRIPWIRE) || blockInfoGlobal.state.is(Blocks.COBWEB)) {
-            Random random = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
             double replacementChance = getReplacementChance(blockInfoGlobal.state);
-            if (random.nextDouble() < replacementChance)
+            if (randomSource.nextDouble() < replacementChance)
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.COBWEB.defaultBlockState(), blockInfoGlobal.nbt);
             else
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
@@ -43,7 +42,7 @@ public class CobwebProcessor extends StructureProcessor {
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.COBWEB_PROCESSOR;
+        return StructureProcessorTypeModule.COBWEB_PROCESSOR;
     }
 
     /**

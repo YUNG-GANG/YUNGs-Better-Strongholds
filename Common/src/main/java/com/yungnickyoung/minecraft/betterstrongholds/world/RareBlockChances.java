@@ -1,10 +1,9 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.BlockStateRandomizer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Random;
 
 /**
  * Singleton class holding map of rare blocks to probabilities.
@@ -35,7 +34,7 @@ public class RareBlockChances {
 
     private BlockStateRandomizer blockChances;
 
-    public BlockState getRandomRareBlock(Random random) {
-        return blockChances.get(random);
+    public BlockState getRandomRareBlock(RandomSource randomSource) {
+        return blockChances.get(randomSource);
     }
 }

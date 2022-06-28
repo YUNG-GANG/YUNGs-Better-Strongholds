@@ -2,21 +2,21 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 /**
  * Gives armor stands random armor depending on the type of armor
@@ -24,7 +24,7 @@ import java.util.Random;
  */
 public class ArmorStandProcessor extends StructureEntityProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-    public static final Codec<ArmorStandProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
@@ -35,7 +35,7 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
                                                                StructurePlaceSettings structurePlaceSettings) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:armor_stand")) {
             ListTag armorItems = globalEntityInfo.nbt.getList("ArmorItems", 10);
-            Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+            RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Type depends on the helmet and nothing else
             String helmet;
@@ -105,6 +105,6 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.ARMORSTAND_PROCESSOR;
+        return StructureProcessorTypeModule.ARMORSTAND_PROCESSOR;
     }
 }

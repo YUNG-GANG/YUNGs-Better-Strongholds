@@ -2,11 +2,12 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
 
 /**
  * Fills item frames with a random item.
@@ -24,7 +24,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 public class ItemFrameProcessor extends StructureProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
-    public static final Codec<ItemFrameProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
@@ -34,7 +34,7 @@ public class ItemFrameProcessor extends StructureProcessor {
                                                                StructurePlaceSettings structurePlaceSettings,
                                                                StructureTemplate template) {
         if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
-            Random random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
+            RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Determine which pool we are grabbing from
             String item;
@@ -80,6 +80,6 @@ public class ItemFrameProcessor extends StructureProcessor {
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.ITEMFRAME_PROCESSOR;
+        return StructureProcessorTypeModule.ITEMFRAME_PROCESSOR;
     }
 }

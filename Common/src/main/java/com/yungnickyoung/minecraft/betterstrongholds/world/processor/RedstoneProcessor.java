@@ -2,7 +2,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorModule;
+import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,6 +54,6 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
     }
 
     protected StructureProcessorType<?> getType() {
-        return StructureProcessorModule.REDSTONE_PROCESSOR;
+        return StructureProcessorTypeModule.REDSTONE_PROCESSOR;
     }
 }

@@ -1,10 +1,9 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
 import com.yungnickyoung.minecraft.yungsapi.world.ItemRandomizer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-
-import java.util.Random;
 
 /**
  * Singleton class holding ItemRandomizers for items in item frames.
@@ -61,11 +60,11 @@ public class ItemFrameChances {
     private ItemRandomizer armouryItems;
     private ItemRandomizer storageItems;
 
-    public Item getArmouryItem(Random random) {
-        return armouryItems.get(random);
+    public Item getArmouryItem(RandomSource randomSource) {
+        return armouryItems.get(randomSource);
     }
 
-    public Item getStorageItem(Random random) {
-        return storageItems.get(random);
+    public Item getStorageItem(RandomSource randomSource) {
+        return storageItems.get(randomSource);
     }
 }
