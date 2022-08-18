@@ -1,0 +1,104 @@
+{
+ "betterstrongholds.commands.locate.stronghold": "Використовуй /locate betterstrongholds:stronghold !",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.title": "YUNG's Кращі цитаделі",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds": "YUNG's Кращі цитаделі",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general": "Головні налаштування",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.@Tooltip": "Головні налаштування.",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings": "Часткове налаштування",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.@Tooltip": "Керування окремими частинами/кімнатами у цитаделі",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions": "Білий список світів",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[0]": "Список світів, які матимуть кращі цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[1]": "Список має містити значення, розділені комами, у квадратних дужках.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[2]": "Записи повинні містити просторове ім'я моду.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[3]": "Наприклад: \"[minecraft:overworld, minecraft:the_nether, undergarden:undergarden]\"",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.whitelistedDimensions.@Tooltip[4]": "За замовчуванням:§6 \"[minecraft:overworld]\"",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes": "Чорний список біомів",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[0]": "Список біомів, які не матимуть кращі цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[1]": "Список має містити значення, розділені комами, у квадратних дужках.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[2]": "Записи повинні містити просторове ім'я моду.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[3]": "Наприклад: \"[minecraft:plains, byg:alps]\"",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.blacklistedBiomes.@Tooltip[4]": "За замовчуванням:§6 \"[minecraft:ocean, minecraft:frozen_ocean, minecraft:deep_ocean, minecraft:warm_ocean, minecraft:lukewarm_ocean, minecraft:cold_ocean, minecraft:deep_lukewarm_ocean, minecraft:deep_cold_ocean, minecraft:deep_frozen_ocean, minecraft:beach, minecraft:snowy_beach, minecraft:river, minecraft:frozen_river]\"",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY": "Цитаделі мін. Y ",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[0]": "Мінімальне значення Y, за якого може з’явитися §6Початкова кімната §fу цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[1]": "Зверніть увагу, що різні частини фортеці можуть простягатися вище або нижче цього значення.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMinY.@Tooltip[2]": "За замовчуванням:§6 -30",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY": "Цитаделі макс. Y",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[0]": "Максимальне значення Y, за якого може з’явитися §6Початкова кімната §fу цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[1]": "Зверніть увагу, що різні частини фортеці можуть простягатися вище або нижче цього значення.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdStartMaxY.@Tooltip[2]": "За замовчуванням:§6 31",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY": "Будь-яка частина макс. Y",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[0]": "Максимальне значення Y, за якого може з’явитися §6Будь-яка §fчастина фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[1]": "Якщо будь-яка частина перевищує вказане значення Y, вона не з'явиться",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[2]": "",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[3]": "Іншими словами, це чітка межа, вище якої не може генеруватися жодна частина цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdMaxY.@Tooltip[4]": "За замовчуванням:§6 60",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize": "Розмір цитаделі",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[0]": "Максимальна кількість §6Кімнат§f, які фортеця згенерує з центру.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[1]": "Це число контролює загальний розмір твердинь. Більше число = більша цитадель.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[2]": "§6ДУЖЕ §fрекомендуємо, щоб це число було парним.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.strongholdSize.@Tooltip[3]": "За-замовчуванням:§6 16",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal": "Коефіцієнт появи павутиння (Всюди)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[0]": "Коефіцієнт появи павутиння в різних частинах цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[1]": "За-замовчуванням:§6 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner": "Коефіцієнт появи павутиння (Спавнер)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[0]": "Коефіцієнт появи павутиння навколо спавнерів павуків у бібліотеках.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[1]": "За-замовчуванням:§6 0.3",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate": "Коефіцієнт появи смолоскипів",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate.@Tooltip[0]": "Коефіцієнт появи §6смолоскипів §fу всій цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.torchSpawnRate.@Tooltip[1]": "За-замовчуванням:§6 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate": "Коефіцієнт появи ліхтарів ",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[0]": "Коефіцієнт появи §6ліхтарів §fу всій цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[1]": "За-замовчуванням:§6 0.2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount": "Макс. кількість Великих бібліотек",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount.@Tooltip[0]": "Максимальна кількість §6Великих бібліотек§f, котрі можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.grandLibraryMaxCount.@Tooltip[1]": "За-замовчуванням:§6 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount": "Макс. кількість Малих бібліотек",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[0]": "Максимальна кількість §6Малих бібліотек§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[1]": "Зверніть увагу, що ці кімнати відрізняються від Великої бібліотеки, оскільки вони менші",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[2]": "і більш поширені (за-замовчуванням).",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.smallLibraryMaxCount.@Tooltip[3]": "За-замовчуванням:§6 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount": "Макс. кількість в'язниць",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount.@Tooltip[0]": "Максимальна кількість §6В'язниць§f, які можуть з'явитися в одній цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.prisonMaxCount.@Tooltip[1]": "За-замовчуванням:§6 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount": "Макс. кількість команд-кімнат (Acarii)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount.@Tooltip[0]": "Максимальна кількість §6Команд-кімнат (Acarii)§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdAcariiMaxCount.@Tooltip[1]": "За-замовчуванням:§6 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount": "Макс. кількість команд-кімнат (YUNG)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount.@Tooltip[0]": "Максимальна кількість §6Команд-кімнат (YUNG)§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.cmdYungMaxCount.@Tooltip[1]": "За-замовчуванням:§6 1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount": "Макс. кількість кімнат зі скарбами",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount.@Tooltip[0]": "Максимальна кількість §6Кімнат зі скарбами§f, які можуть з’явитися в одній цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.treasureRoomMaxCount.@Tooltip[1]": "За-замовчуванням:§6 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount": "Макс. кількість збройових кімнат (Велика)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount.@Tooltip[0]": "Максимальна кількість §6Великих збройових кімнат§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armouryLargeRoomMaxCount.@Tooltip[1]": "За-замовчуванням:§6 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount": "Макс. кількість збройових кімнат (Мала)",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount.@Tooltip[0]": "Максимальна кількість §6Малих збройових кімнат§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.armourySmallRoomMaxCount.@Tooltip[1]": "За-замовчуванням:§6 2",
+
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount": "Макс. кількість порталів",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount.@Tooltip[0]": "Максимальна кількість §6Порталів§f, які можуть з’явитися в одній фортеці.",
+ "text.autoconfig.betterstrongholds-fabric-1_18.option.betterStrongholds.pieceSettings.portalRoomMaxCount.@Tooltip[1]": "За-замовчуванням:§6 1"
+}
