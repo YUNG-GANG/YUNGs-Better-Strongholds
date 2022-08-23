@@ -1,0 +1,27 @@
+{
+ "betterstrongholds.commands.locate.stronghold": "Використовуй /locate structure betterstrongholds:stronghold !",
+ "Use /locate structure betterstrongholds:stronghold instead!": "Використовуй /locate structure betterstrongholds:stronghold !",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.title": "YUNG's Кращі цитаделі",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds": "YUNG's Кращі цитаделі",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general": "Головні налаштування",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.@Tooltip": "Головні налаштування.",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceNormal": "Коефіцієнт появи павутиння (Всюди)",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[0]": "Коефіцієнт появи павутиння в різних частинах цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[1]": "За-замовчуванням:§6 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceSpawner": "Коефіцієнт появи павутиння (Спавнер)",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[0]": "Коефіцієнт появи павутиння навколо спавнерів павуків у бібліотеках.",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[1]": "За-замовчуванням:§6 0.3",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.torchSpawnRate": "Коефіцієнт появи смолоскипів",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.torchSpawnRate.@Tooltip[0]": "Коефіцієнт появи §6смолоскипів §fу всій цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.torchSpawnRate.@Tooltip[1]": "За-замовчуванням:§6 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.lanternSpawnRate": "Коефіцієнт появи ліхтарів ",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[0]": "Коефіцієнт появи §6ліхтарів §fу всій цитаделі.",
+ "text.autoconfig.betterstrongholds-fabric-1_19.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[1]": "За-замовчуванням:§6 0.2"
+}
