@@ -59,6 +59,11 @@ public class ItemFrameProcessor extends StructureProcessor {
                 }
             }
 
+            // Required to suppress dumb log spam
+            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
+            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
+            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+
             // Randomize rotation
             int randomRotation = random.nextInt(8);
             newNBT.putByte("ItemRotation", (byte) randomRotation);
