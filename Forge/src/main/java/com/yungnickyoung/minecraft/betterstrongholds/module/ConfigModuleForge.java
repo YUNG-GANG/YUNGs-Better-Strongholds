@@ -34,11 +34,13 @@ public class ConfigModuleForge {
 
     private static void onWorldLoad(LevelEvent.Load event) {
         bakeConfig();
+        loadJSON();
     }
 
     private static void onConfigChange(ModConfigEvent event) {
         if (event.getConfig().getSpec() == BSConfigForge.SPEC) {
             bakeConfig();
+            loadJSON();
         }
     }
 
