@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world;
 
-import com.yungnickyoung.minecraft.yungsapi.world.ItemRandomizer;
+import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.ItemRandomizer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

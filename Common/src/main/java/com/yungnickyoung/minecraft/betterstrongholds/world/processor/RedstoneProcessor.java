@@ -3,10 +3,10 @@ package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
-import com.yungnickyoung.minecraft.yungsapi.world.processor.ISafeWorldModifier;
+import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +25,7 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
     public static final RedstoneProcessor INSTANCE = new RedstoneProcessor(Blocks.STONE_BRICKS);
     public static final Codec<RedstoneProcessor> CODEC = RecordCodecBuilder.create(codecBuilder -> codecBuilder
             .group(
-                    Registry.BLOCK.byNameCodec()
+                    BuiltInRegistries.BLOCK.byNameCodec()
                             .fieldOf("below_block")
                             .orElse(Blocks.STONE_BRICKS)
                             .forGetter(processor -> processor.belowBlock))

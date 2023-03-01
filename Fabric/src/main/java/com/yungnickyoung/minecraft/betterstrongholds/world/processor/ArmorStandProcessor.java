@@ -6,7 +6,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTy
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.RandomSource;
@@ -51,8 +51,8 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
             // Boots
             String bootsString = isRare
-                    ? Registry.ITEM.getKey(ArmorStandChances.get().getRareBoots(random)).toString()
-                    : Registry.ITEM.getKey(ArmorStandChances.get().getCommonBoots(random)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareBoots(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonBoots(random)).toString();
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
             CompoundTag bootsTagNBT = new CompoundTag();
@@ -61,8 +61,8 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
 
             // Leggings
             String leggingsString = isRare
-                    ? Registry.ITEM.getKey(ArmorStandChances.get().getRareLeggings(random)).toString()
-                    : Registry.ITEM.getKey(ArmorStandChances.get().getCommonLeggings(random)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareLeggings(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonLeggings(random)).toString();
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
             CompoundTag leggingsTagNBT = new CompoundTag();
@@ -71,8 +71,8 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
 
             // Chestplate
             String chesplateString = isRare
-                    ? Registry.ITEM.getKey(ArmorStandChances.get().getRareChestplate(random)).toString()
-                    : Registry.ITEM.getKey(ArmorStandChances.get().getCommonChestplate(random)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareChestplate(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonChestplate(random)).toString();
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
             CompoundTag chestplateTagNBT = new CompoundTag();
@@ -81,8 +81,8 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
 
             // Helmet
             String helmetString = isRare
-                    ? Registry.ITEM.getKey(ArmorStandChances.get().getRareHelmet(random)).toString()
-                    : Registry.ITEM.getKey(ArmorStandChances.get().getCommonHelmet(random)).toString();
+                    ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareHelmet(random)).toString()
+                    : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonHelmet(random)).toString();
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
             ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
             CompoundTag helmetTagNBT = new CompoundTag();

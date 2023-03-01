@@ -5,7 +5,6 @@ import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -13,6 +12,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -48,12 +48,12 @@ public class ItemFrameProcessor extends StructureProcessor {
             // Set the item in the item frame's NBT
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
             if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
+                String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
+                String randomItemString = ForgeRegistries.ITEMS.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }

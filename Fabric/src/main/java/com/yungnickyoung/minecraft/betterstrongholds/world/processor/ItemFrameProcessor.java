@@ -6,7 +6,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTy
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.yungsapi.world.processor.StructureEntityProcessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -47,12 +47,12 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
             // Set the item in the item frame's NBT
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
             if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
+                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }
             } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
-                String randomItemString = Registry.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
+                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
                 }

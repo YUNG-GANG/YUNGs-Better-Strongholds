@@ -6,8 +6,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.module.StructurePlacementTy
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.chunk.ChunkGeneratorStructureState;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
 import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
@@ -52,7 +51,8 @@ public class BetterStrongholdsPlacement extends RandomSpreadStructurePlacement {
     }
 
     @Override
-    protected boolean isPlacementChunk(ChunkGenerator chunkGenerator, RandomState randomState, long seed, int chunkX, int chunkZ) {
+    protected boolean isPlacementChunk(ChunkGeneratorStructureState chunkGeneratorStructureState, int chunkX, int chunkZ) {
+        long seed = chunkGeneratorStructureState.getLevelSeed();
         ChunkPos chunkPos = this.getPotentialStructureChunk(seed, chunkX, chunkZ);
         if (chunkPos.x == chunkX && chunkPos.z == chunkZ) {
             int chunkDistance = (int) Math.sqrt((chunkX * chunkX) + (chunkZ * chunkZ));

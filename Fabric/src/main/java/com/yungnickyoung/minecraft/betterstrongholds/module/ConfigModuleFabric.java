@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
-    public static final String VERSION_PATH = "fabric-1_19";
+    public static final String VERSION_PATH = "fabric-1_19_3";
 
     public static void init() {
         initCustomFiles();

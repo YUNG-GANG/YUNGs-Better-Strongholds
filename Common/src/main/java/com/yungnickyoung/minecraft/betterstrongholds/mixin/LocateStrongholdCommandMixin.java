@@ -3,7 +3,7 @@ package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +26,7 @@ public class LocateStrongholdCommandMixin {
 
     @Inject(method = "locateStructure", at = @At(value = "HEAD"))
     private static void overrideLocateVanillaStronghold(CommandSourceStack cmdSource,
-                                                        ResourceOrTagLocationArgument.Result<Structure> result,
+                                                        ResourceOrTagKeyArgument.Result<Structure> result,
                                                         CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<Structure>> optional = result.unwrap().left();
         if (optional.isPresent() && optional.get().location().equals(new ResourceLocation("stronghold"))) {

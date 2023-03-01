@@ -6,8 +6,7 @@
   "refmap": "betterstrongholds.refmap.json",
   "mixins": [
     "DisableVanillaStrongholdsMixin",
-    "LocateStrongholdCommandMixin",
-    "accessor.SinglePoolElementAccessor"
+    "LocateStrongholdCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
