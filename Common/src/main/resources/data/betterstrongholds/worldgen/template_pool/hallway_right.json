@@ -1,0 +1,54 @@
+{
+  "name": "betterstrongholds:hallway_right",
+  "fallback": "betterstrongholds:terminators",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "betterstrongholds:hallways/hallway_2",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "betterstrongholds:hallways/hallway_3",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "betterstrongholds:hallways/hallway_4",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:hallways/hallway_turn",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "betterstrongholds:hallways/grand_junction_stairs",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "is_priority": true,
+        "name": "grand_junction_stairs_right",
+        "max_count": 1,
+        "element_type": "yungsapi:yung_single_element"
+      }
+    }
+  ]
+}
