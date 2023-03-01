@@ -4,7 +4,7 @@
   "step": "strongholds",
   "start_pool": "betterstrongholds:starts",
   "start_jigsaw_name": "betterstrongholds:stronghold_anchor",
-  "size": 16,
+  "size": 15,
   "start_height": {
     "type": "minecraft:uniform",
     "min_inclusive": {

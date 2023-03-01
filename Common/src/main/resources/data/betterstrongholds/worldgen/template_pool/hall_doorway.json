@@ -21,7 +21,7 @@
         "location": "betterstrongholds:hall_doorways/hall_doorway",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -30,7 +30,7 @@
         "location": "betterstrongholds:hall_doorways/hall_doorway_2torch",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -39,7 +39,7 @@
         "location": "betterstrongholds:hall_doorways/hall_doorway_banner",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -48,7 +48,7 @@
         "location": "betterstrongholds:hall_doorways/hall_doorway_small",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -57,7 +57,7 @@
         "location": "betterstrongholds:hall_doorways/hall_door_wood",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
@@ -66,7 +66,7 @@
         "location": "betterstrongholds:hall_doorways/hall_door_iron",
         "processors": "betterstrongholds:main",
         "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
+        "element_type": "yungsapi:yung_single_element"
       }
     },
     {
