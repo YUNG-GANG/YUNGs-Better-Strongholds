@@ -44,10 +44,10 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.REDSTONE_WIRE)) {
-            Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, blockInfoGlobal.pos.below());
-            if (belowBlockState.isEmpty() || !belowBlockState.get().isFaceSturdy(levelReader, blockInfoGlobal.pos.below(), Direction.UP)) {
-                setBlockStateSafe(levelReader, blockInfoGlobal.pos.below(), belowBlock.defaultBlockState());
+        if (blockInfoGlobal.state().is(Blocks.REDSTONE_WIRE)) {
+            Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, blockInfoGlobal.pos().below());
+            if (belowBlockState.isEmpty() || !belowBlockState.get().isFaceSturdy(levelReader, blockInfoGlobal.pos().below(), Direction.UP)) {
+                setBlockStateSafe(levelReader, blockInfoGlobal.pos().below(), belowBlock.defaultBlockState());
             }
         }
         return blockInfoGlobal;

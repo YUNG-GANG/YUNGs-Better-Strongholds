@@ -40,10 +40,10 @@ public class WaterloggedProcessor extends StructureProcessor implements ISafeWor
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         // Check if block is waterloggable and not intended to be waterlogged
-        if (blockInfoGlobal.state.hasProperty(BlockStateProperties.WATERLOGGED) && !blockInfoGlobal.state.getValue(BlockStateProperties.WATERLOGGED)) {
-            ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().hasProperty(BlockStateProperties.WATERLOGGED) && !blockInfoGlobal.state().getValue(BlockStateProperties.WATERLOGGED)) {
+            ChunkPos currentChunkPos = new ChunkPos(blockInfoGlobal.pos());
             ChunkAccess currentChunk = levelReader.getChunk(currentChunkPos.x, currentChunkPos.z);
-            int sectionYIndex = currentChunk.getSectionIndex(blockInfoGlobal.pos.getY());
+            int sectionYIndex = currentChunk.getSectionIndex(blockInfoGlobal.pos().getY());
 
             // Validate chunk section index. Sometimes the index is -1. Not sure why, but this will
             // at least prevent the game from crashing.
@@ -53,14 +53,14 @@ public class WaterloggedProcessor extends StructureProcessor implements ISafeWor
 
             LevelChunkSection currChunkSection = currentChunk.getSection(sectionYIndex);
 
-            if (getFluidStateSafe(levelReader, blockInfoGlobal.pos).is(FluidTags.WATER)) {
-                setBlockStateSafe(levelReader, blockInfoGlobal.pos, Blocks.STONE_BRICKS.defaultBlockState());
+            if (getFluidStateSafe(levelReader, blockInfoGlobal.pos()).is(FluidTags.WATER)) {
+                setBlockStateSafe(levelReader, blockInfoGlobal.pos(), Blocks.STONE_BRICKS.defaultBlockState());
             }
 
             // Remove water in adjacent blocks
             BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
             for (Direction direction : Direction.values()) {
-                mutable.set(blockInfoGlobal.pos).move(direction);
+                mutable.set(blockInfoGlobal.pos()).move(direction);
                 if (currentChunkPos.x != mutable.getX() >> 4 || currentChunkPos.z != mutable.getZ() >> 4) {
                     currentChunkPos = new ChunkPos(mutable);
                     currentChunk = levelReader.getChunk(currentChunkPos.x, currentChunkPos.z);

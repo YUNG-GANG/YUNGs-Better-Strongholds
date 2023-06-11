@@ -28,11 +28,11 @@ public class OreProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.NETHER_GOLD_ORE) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().getBlock() == Blocks.NETHER_GOLD_ORE) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             // Randomly select ore from list
             BlockState oreBlock = OreChances.get().getRandomOre(randomSource);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, oreBlock, blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), oreBlock, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

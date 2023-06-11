@@ -26,11 +26,11 @@ public class TorchProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.TORCH) || blockInfoGlobal.state.is(Blocks.WALL_TORCH)) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().is(Blocks.TORCH) || blockInfoGlobal.state().is(Blocks.WALL_TORCH)) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             double replacementChance = getReplacementChance();
             if (randomSource.nextDouble() > replacementChance)
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

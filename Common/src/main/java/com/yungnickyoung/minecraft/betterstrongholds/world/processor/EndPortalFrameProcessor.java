@@ -26,13 +26,13 @@ public class EndPortalFrameProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.END_PORTAL_FRAME)) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().is(Blocks.END_PORTAL_FRAME)) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             if (randomSource.nextFloat() < 0.1f)
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(
-                        blockInfoGlobal.pos,
-                        blockInfoGlobal.state.setValue(EndPortalFrameBlock.HAS_EYE, true),
-                        blockInfoGlobal.nbt);
+                        blockInfoGlobal.pos(),
+                        blockInfoGlobal.state().setValue(EndPortalFrameBlock.HAS_EYE, true),
+                        blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

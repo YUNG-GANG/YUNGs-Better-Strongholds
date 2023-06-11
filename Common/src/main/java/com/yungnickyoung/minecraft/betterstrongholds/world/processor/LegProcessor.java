@@ -45,20 +45,20 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state.is(Blocks.ORANGE_STAINED_GLASS)) {
-            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(blockInfoGlobal.pos))) {
+        if (blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state().is(Blocks.ORANGE_STAINED_GLASS)) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(blockInfoGlobal.pos()))) {
                 return blockInfoGlobal;
             }
 
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Replace the glass itself
-            blockInfoGlobal = blockInfoGlobal.state.is(Blocks.YELLOW_STAINED_GLASS)
-                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, stoneBrickSelector.get(randomSource), blockInfoGlobal.nbt)
-                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.CYAN_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt);
+            blockInfoGlobal = blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS)
+                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), stoneBrickSelector.get(randomSource), blockInfoGlobal.nbt())
+                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.CYAN_TERRACOTTA.defaultBlockState(), blockInfoGlobal.nbt());
 
             // Reusable mutable
-            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos.mutable().move(Direction.DOWN); // Move down since we already processed the first block
+            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable().move(Direction.DOWN); // Move down since we already processed the first block
             BlockState currBlockState = levelReader.getBlockState(mutable);
 
             int yBelow = 1;

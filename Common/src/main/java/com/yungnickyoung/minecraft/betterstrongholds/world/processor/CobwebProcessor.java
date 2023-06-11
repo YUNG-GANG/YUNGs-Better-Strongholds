@@ -30,13 +30,13 @@ public class CobwebProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.TRIPWIRE) || blockInfoGlobal.state.is(Blocks.COBWEB)) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
-            double replacementChance = getReplacementChance(blockInfoGlobal.state);
+        if (blockInfoGlobal.state().is(Blocks.TRIPWIRE) || blockInfoGlobal.state().is(Blocks.COBWEB)) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+            double replacementChance = getReplacementChance(blockInfoGlobal.state());
             if (randomSource.nextDouble() < replacementChance)
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.COBWEB.defaultBlockState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.COBWEB.defaultBlockState(), blockInfoGlobal.nbt());
             else
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

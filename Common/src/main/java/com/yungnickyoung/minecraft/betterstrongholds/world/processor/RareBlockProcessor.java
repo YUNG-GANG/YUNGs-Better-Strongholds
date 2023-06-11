@@ -28,11 +28,11 @@ public class RareBlockProcessor extends StructureProcessor {
                                                              StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.getBlock() == Blocks.PURPUR_BLOCK) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos);
+        if (blockInfoGlobal.state().getBlock() == Blocks.PURPUR_BLOCK) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             // Randomly select ore from list
             BlockState rareBlock = RareBlockChances.get().getRandomRareBlock(randomSource);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, rareBlock, blockInfoGlobal.nbt);
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), rareBlock, blockInfoGlobal.nbt());
         }
         return blockInfoGlobal;
     }

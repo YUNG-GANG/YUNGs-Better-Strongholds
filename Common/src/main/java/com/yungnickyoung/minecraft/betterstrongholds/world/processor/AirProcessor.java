@@ -26,11 +26,11 @@ public class AirProcessor extends StructureProcessor implements ISafeWorldModifi
                                                 StructureTemplate.StructureBlockInfo blockInfoLocal,
                                                 StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                 StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state.is(Blocks.CYAN_CONCRETE)) {
-            if (isBlockStateAirSafe(levelReader, blockInfoGlobal.pos)) {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt);
+        if (blockInfoGlobal.state().is(Blocks.CYAN_CONCRETE)) {
+            if (isBlockStateAirSafe(levelReader, blockInfoGlobal.pos())) {
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt());
             } else {
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos, Blocks.STONE_BRICKS.defaultBlockState(), blockInfoGlobal.nbt);
+                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.STONE_BRICKS.defaultBlockState(), blockInfoGlobal.nbt());
             }
         }
         return blockInfoGlobal;
