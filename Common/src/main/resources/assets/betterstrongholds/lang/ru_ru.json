@@ -1,0 +1,27 @@
+{
+ "betterstrongholds.commands.locate.stronghold": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
+ "Use /locate structure betterstrongholds:stronghold instead!": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.title": "Улучшенные крепости YUNG'а",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds": "Улучшенные крепости YUNG'а",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general": "Общие настройки",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.@Tooltip": "Общие настройки",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal": "Частота появления паутины (НОРМАЛЬНАЯ)",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[0]": "Частота, с которой паутина будет появляться в различных частях крепости.",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[1]": "По умолчанию: 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner": "Частота появления паутины (У РАССАДНИКОВ)",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[0]": "Частота, с которой паутина будет появляться вокруг рассадников пауков в библиотеках.",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[1]": "По умолчанию: 0.3",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate": "Частота появления факелов",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate.@Tooltip[0]": "Скорость, с которой факелы появляются по всей крепости.",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate.@Tooltip[1]": "По умолчанию: 0.1",
+
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate": "Частота появления фонарей",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[0]": "Частота, с которой фонари появляются по всей крепости.",
+ "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[1]": "По умолчанию: 0.2"
+}
