@@ -36,5 +36,14 @@
   "mixins": [
     "betterstrongholds.mixins.json",
     "betterstrongholds_fabric.mixins.json"
-  ]
+  ],
+  "custom": {
+    "catalogue": {
+      "icon": {
+        "image": "catalogue_icon.png"
+      },
+      "banner": "logo.png",
+      "background": "catalogue_background.png"
+    }
+  }
 }
