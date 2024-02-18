@@ -1,47 +1,75 @@
 {
-  "parent": "minecraft:story/enter_the_nether",
-  "display": {
-    "icon": {
-      "item": "minecraft:ender_eye"
+    "parent": "minecraft:story/enter_the_nether",
+    "display": {
+        "icon": {
+            "item": "minecraft:ender_eye"
+        },
+        "title": {
+            "translate": "advancements.story.follow_ender_eye.title"
+        },
+        "description": {
+            "translate": "advancements.story.follow_ender_eye.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
     },
-    "title": {
-      "translate": "advancements.story.follow_ender_eye.title"
-    },
-    "description": {
-      "translate": "advancements.story.follow_ender_eye.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "in_stronghold": {
-      "trigger": "yungsapi:structure_location",
-      "conditions": {
-        "location": {
-          "feature": "minecraft:stronghold"
+    "criteria": {
+        "in_stronghold": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "location": {
+                                "structure": "minecraft:stronghold"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "in_stronghold_betterstrongholds": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "location": {
+                                "structure": "betterstrongholds:stronghold"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "in_gate_endrem": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "location": {
+                                "structure": "endrem:end_gate"
+                            }
+                        }
+                    }
+                ]
+            }
         }
-      }
     },
-    "in_stronghold_betterstrongholds": {
-      "trigger": "yungsapi:structure_location",
-      "conditions": {
-        "feature": "betterstrongholds:stronghold"
-      }
-    },
-    "in_gate_endrem": {
-      "trigger": "yungsapi:structure_location",
-      "conditions": {
-        "feature": "endrem:end_gate"
-      }
-    }
-  },
-  "requirements": [
-    [
-      "in_stronghold",
-      "in_stronghold_betterstrongholds",
-      "in_gate_endrem"
+    "requirements": [
+        [
+            "in_stronghold",
+            "in_stronghold_betterstrongholds",
+            "in_gate_endrem"
+        ]
     ]
-  ]
 }
