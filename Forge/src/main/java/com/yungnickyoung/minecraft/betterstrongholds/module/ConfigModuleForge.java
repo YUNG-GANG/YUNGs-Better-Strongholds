@@ -23,11 +23,11 @@ import java.nio.file.Paths;
 
 public class ConfigModuleForge {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
-    public static final String VERSION_PATH = "forge-1_20";
+    public static final String VERSION_PATH = "forge-1_20_4";
 
     public static void init() {
         initCustomFiles();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BSConfigForge.SPEC, "betterstrongholds-forge-1_20.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BSConfigForge.SPEC, "betterstrongholds-forge-1_20_4.toml");
         MinecraftForge.EVENT_BUS.addListener(ConfigModuleForge::onWorldLoad);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ConfigModuleForge::onConfigChange);
     }
