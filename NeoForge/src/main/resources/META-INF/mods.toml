@@ -29,7 +29,7 @@ issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issue
 
 [[dependencies.${mod_id}]]
     modId="yungsapi"
-    versionRange="[${mc_version}-Forge-${yungsapi_version},)"
+    versionRange="[${mc_version}-NeoForge-${yungsapi_version},)"
     type="required"
     ordering="NONE"
     side="BOTH"
