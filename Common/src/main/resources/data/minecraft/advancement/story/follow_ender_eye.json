@@ -25,8 +25,7 @@
               "location": {
                 "structures": [
                   "minecraft:stronghold",
-                  "betterstrongholds:stronghold",
-                  "endrem:end_gate"
+                  "betterstrongholds:stronghold"
                 ]
               }
             }
