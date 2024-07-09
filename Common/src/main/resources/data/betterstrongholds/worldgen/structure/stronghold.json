@@ -14,8 +14,15 @@
       "absolute": 11
     }
   },
-  "max_distance_from_center": 128,
+  "max_distance_from_center": 116,
   "max_y": 60,
   "spawn_overrides": {},
-  "liquid_settings": "ignore_waterlogging"
+  "liquid_settings": "ignore_waterlogging",
+  "enhanced_terrain_adaptation": {
+    "type": "yungsapi:custom",
+    "kernel_size": 24,
+    "kernel_distance": 24,
+    "top": "bury",
+    "bottom": "bury"
+  }
 }
