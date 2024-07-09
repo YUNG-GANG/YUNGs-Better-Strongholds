@@ -1,6 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.placement;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructurePlacementTypeModule;
 import net.minecraft.core.Vec3i;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 import java.util.Optional;
 
 public class BetterStrongholdsPlacement extends RandomSpreadStructurePlacement {
-    public static final Codec<BetterStrongholdsPlacement> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+    public static final MapCodec<BetterStrongholdsPlacement> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Vec3i.offsetCodec(16).optionalFieldOf("locate_offset", Vec3i.ZERO).forGetter(BetterStrongholdsPlacement::locateOffset),
             StructurePlacement.FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", StructurePlacement.FrequencyReductionMethod.DEFAULT).forGetter(BetterStrongholdsPlacement::frequencyReductionMethod),
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("frequency", 1.0F).forGetter(BetterStrongholdsPlacement::frequency),

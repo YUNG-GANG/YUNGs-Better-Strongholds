@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
  */
 public class RareBlockProcessor extends StructureProcessor {
     public static final RareBlockProcessor INSTANCE = new RareBlockProcessor();
-    public static final Codec<RareBlockProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<RareBlockProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,

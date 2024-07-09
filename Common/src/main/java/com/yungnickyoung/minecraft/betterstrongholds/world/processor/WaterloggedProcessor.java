@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ import java.util.Optional;
  */
 public class WaterloggedProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final WaterloggedProcessor INSTANCE = new WaterloggedProcessor();
-    public static final Codec<WaterloggedProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<WaterloggedProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     /**
      * Workaround for https://bugs.mojang.com/browse/MC-130584

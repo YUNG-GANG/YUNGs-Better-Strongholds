@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ArmorStandProcessor extends StructureEntityProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
-    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(ServerLevelAccessor serverLevelAccessor,
@@ -53,42 +53,50 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             String bootsString = isRare
                     ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareBoots(random)).toString()
                     : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonBoots(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
-            CompoundTag bootsTagNBT = new CompoundTag();
-            bootsTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
+            if (!bootsString.equals("minecraft:air")) {
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(0)).putString("id", bootsString);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(0)).putByte("Count", (byte) 1);
+                CompoundTag bootsTagNBT = new CompoundTag();
+                bootsTagNBT.putInt("Damage", 0);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(0)).put("tag", bootsTagNBT);
+            }
 
             // Leggings
             String leggingsString = isRare
                     ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareLeggings(random)).toString()
                     : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonLeggings(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
-            CompoundTag leggingsTagNBT = new CompoundTag();
-            leggingsTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
+            if (!leggingsString.equals("minecraft:air")) {
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(1)).putString("id", leggingsString);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(1)).putByte("Count", (byte) 1);
+                CompoundTag leggingsTagNBT = new CompoundTag();
+                leggingsTagNBT.putInt("Damage", 0);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(1)).put("tag", leggingsTagNBT);
+            }
 
             // Chestplate
             String chesplateString = isRare
                     ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareChestplate(random)).toString()
                     : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonChestplate(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
-            CompoundTag chestplateTagNBT = new CompoundTag();
-            chestplateTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
+            if (!chesplateString.equals("minecraft:air")) {
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
+                CompoundTag chestplateTagNBT = new CompoundTag();
+                chestplateTagNBT.putInt("Damage", 0);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).put("tag", chestplateTagNBT);
+            }
 
             // Helmet
             String helmetString = isRare
                     ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareHelmet(random)).toString()
                     : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonHelmet(random)).toString();
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
-            CompoundTag helmetTagNBT = new CompoundTag();
-            helmetTagNBT.putInt("Damage", 0);
-            ((CompoundTag)newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
-            globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
+            if (!helmetString.equals("minecraft:air")) {
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(3)).putString("id", helmetString);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(3)).putByte("Count", (byte) 1);
+                CompoundTag helmetTagNBT = new CompoundTag();
+                helmetTagNBT.putInt("Damage", 0);
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(3)).put("tag", helmetTagNBT);
+                globalEntityInfo = new StructureTemplate.StructureEntityInfo(globalEntityInfo.pos, globalEntityInfo.blockPos, newNBT);
+            }
         }
         return globalEntityInfo;
     }

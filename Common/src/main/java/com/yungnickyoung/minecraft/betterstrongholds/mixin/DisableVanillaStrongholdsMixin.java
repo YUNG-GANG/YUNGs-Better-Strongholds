@@ -44,28 +44,28 @@ public class DisableVanillaStrongholdsMixin {
         }
     }
 
-    /**
-     * Fixes a NPE being thrown as a result of no valid vanilla stronghold positions being found when using an Eye of Ender.
-     * When this function is called w/ vanilla strongholds, we use an absurd position in the return value that should never impact
-     * normal gameplay.
-     * This should allow {@link ChunkGenerator#findNearestMapStructure} to continue as normal in virtually any circumstance.
-     */
-    @Inject(
-            method = "getNearestGeneratedStructure(Ljava/util/Set;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/core/BlockPos;ZLnet/minecraft/world/level/levelgen/structure/placement/ConcentricRingsStructurePlacement;)Lcom/mojang/datafixers/util/Pair;",
-            at = @At(value = "HEAD"),
-            cancellable = true)
-    public void betterstrongholds_disableVanillaStrongholds2(Set<Holder<Structure>> structureHolders,
-                     ServerLevel serverLevel,
-                     StructureManager structureManager,
-                     BlockPos blockPos,
-                     boolean bl,
-                     ConcentricRingsStructurePlacement structurePlacement,
-                     CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir
-    ) {
-        for (Holder<Structure> structureHolder : structureHolders) {
-            if (structureHolder.is(new ResourceLocation("stronghold"))) {
-                cir.setReturnValue(Pair.of(new BlockPos(29000000, 0, 29000000), structureHolder));
-            }
-        }
-    }
+//    /**
+//     * Fixes a NPE being thrown as a result of no valid vanilla stronghold positions being found when using an Eye of Ender.
+//     * When this function is called w/ vanilla strongholds, we use an absurd position in the return value that should never impact
+//     * normal gameplay.
+//     * This should allow {@link ChunkGenerator#findNearestMapStructure} to continue as normal in virtually any circumstance.
+//     */
+//    @Inject(
+//            method = "getNearestGeneratedStructure(Ljava/util/Set;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/core/BlockPos;ZLnet/minecraft/world/level/levelgen/structure/placement/ConcentricRingsStructurePlacement;)Lcom/mojang/datafixers/util/Pair;",
+//            at = @At(value = "HEAD"),
+//            cancellable = true)
+//    public void betterstrongholds_disableVanillaStrongholds2(Set<Holder<Structure>> structureHolders,
+//                     ServerLevel serverLevel,
+//                     StructureManager structureManager,
+//                     BlockPos blockPos,
+//                     boolean bl,
+//                     ConcentricRingsStructurePlacement structurePlacement,
+//                     CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir
+//    ) {
+//        for (Holder<Structure> structureHolder : structureHolders) {
+//            if (structureHolder.is(ResourceLocation.withDefaultNamespace("stronghold"))) {
+//                cir.setReturnValue(Pair.of(new BlockPos(29000000, 0, 29000000), structureHolder));
+//            }
+//        }
+//    }
 }

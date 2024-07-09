@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.api.world.randomize.BlockStateRandomizer;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
@@ -31,7 +31,7 @@ import java.util.Optional;
  */
 public class LegProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final LegProcessor INSTANCE = new LegProcessor();
-    public static final Codec<LegProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<LegProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     private final BlockStateRandomizer stoneBrickSelector = new BlockStateRandomizer(Blocks.STONE_BRICKS.defaultBlockState())
         .addBlock(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 0.3f)

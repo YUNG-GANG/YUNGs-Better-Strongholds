@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
  */
 public class EndPortalFrameProcessor extends StructureProcessor {
     public static final EndPortalFrameProcessor INSTANCE = new EndPortalFrameProcessor();
-    public static final Codec<EndPortalFrameProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<EndPortalFrameProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,

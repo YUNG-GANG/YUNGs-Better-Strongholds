@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class ItemFrameProcessor extends StructureProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
-    public static final Codec<StructureProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
@@ -51,11 +51,15 @@ public class ItemFrameProcessor extends StructureProcessor {
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
+                } else {
+                    newNBT.remove("Item");
                 }
             } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
                     newNBT.getCompound("Item").putString("id", randomItemString);
+                } else {
+                    newNBT.remove("Item");
                 }
             }
 

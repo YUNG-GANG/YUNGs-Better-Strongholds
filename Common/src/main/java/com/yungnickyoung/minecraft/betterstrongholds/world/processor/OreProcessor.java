@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
  */
 public class OreProcessor extends StructureProcessor {
     public static final OreProcessor INSTANCE = new OreProcessor();
-    public static final Codec<OreProcessor> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<OreProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,

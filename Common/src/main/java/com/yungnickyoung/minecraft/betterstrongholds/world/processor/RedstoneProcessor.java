@@ -1,6 +1,6 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.structure.processor.ISafeWorldModifier;
@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 public class RedstoneProcessor extends StructureProcessor implements ISafeWorldModifier {
     public static final RedstoneProcessor INSTANCE = new RedstoneProcessor(Blocks.STONE_BRICKS);
-    public static final Codec<RedstoneProcessor> CODEC = RecordCodecBuilder.create(codecBuilder -> codecBuilder
+    public static final MapCodec<RedstoneProcessor> CODEC = RecordCodecBuilder.mapCodec(codecBuilder -> codecBuilder
             .group(
                     BuiltInRegistries.BLOCK.byNameCodec()
                             .fieldOf("below_block")

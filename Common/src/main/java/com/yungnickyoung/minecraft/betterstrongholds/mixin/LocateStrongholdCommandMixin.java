@@ -29,7 +29,7 @@ public class LocateStrongholdCommandMixin {
                                                         ResourceOrTagKeyArgument.Result<Structure> result,
                                                         CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<Structure>> optional = result.unwrap().left();
-        if (optional.isPresent() && optional.get().location().equals(new ResourceLocation("stronghold"))) {
+        if (optional.isPresent() && optional.get().location().equals(ResourceLocation.withDefaultNamespace("stronghold"))) {
             throw OLD_STRONGHOLD_EXCEPTION.create();
         }
     }

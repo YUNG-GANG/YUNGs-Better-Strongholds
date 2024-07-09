@@ -8,7 +8,7 @@ import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.loading.FMLPaths;
@@ -23,11 +23,11 @@ import java.nio.file.Paths;
 
 public class ConfigModuleNeoForge {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
-    public static final String VERSION_PATH = "neoforge-1_20_4";
+    public static final String VERSION_PATH = "neoforge-1_21";
 
-    public static void init() {
+    public static void init(ModContainer container) {
         initCustomFiles();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BSConfigNeoForge.SPEC, "betterstrongholds-neoforge-1_20_4.toml");
+        container.registerConfig(ModConfig.Type.COMMON, BSConfigNeoForge.SPEC, "betterstrongholds-neoforge-1_21.toml");
         NeoForge.EVENT_BUS.addListener(ConfigModuleNeoForge::onWorldLoad);
         BetterStrongholdsNeoForge.loadingContextEventBus.addListener(ConfigModuleNeoForge::onConfigChange);
     }
@@ -80,11 +80,11 @@ public class ConfigModuleNeoForge {
                             This directory is for a few additional options for YUNG's Better Strongholds.
                             Options provided may vary by version.
                             This directory contains subdirectories for supported versions. The first time you run Better Strongholds, a version subdirectory will be created if that version supports advanced options.
-                            For example, the first time you use Better Strongholds for MC 1.20.4 on NeoForge, the 'neoforge-1_20_4' subdirectory will be created in this folder.
+                            For example, the first time you use Better Strongholds for MC 1.20.4 on NeoForge, the 'neoforge-1_21' subdirectory will be created in this folder.
                             If no subdirectory for your version is created, then that version probably does not support the additional options.
 
                             NOTE -- MOST OPTIONS CAN BE FOUND IN A CONFIG FILE OUTSIDE THIS FOLDER!
-                            For example, on NeoForge 1.20.4 the file is 'betterstrongholds-neoforge-1_20_4.toml'.""";
+                            For example, on NeoForge 1.20.4 the file is 'betterstrongholds-neoforge-1_21.toml'.""";
             try {
                 Files.write(path, readmeText.getBytes());
             } catch (IOException e) {
