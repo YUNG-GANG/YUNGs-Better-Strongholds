@@ -24,9 +24,6 @@ public class StructureProcessorTypeModule {
     @AutoRegister("banner_processor")
     public static StructureProcessorType<BannerProcessor> BANNER_PROCESSOR = () -> BannerProcessor.CODEC;
 
-    @AutoRegister("waterlogged_processor")
-    public static StructureProcessorType<WaterloggedProcessor> WATERLOGGED_PROCESSOR = () -> WaterloggedProcessor.CODEC;
-
     @AutoRegister("ore_processor")
     public static StructureProcessorType<OreProcessor> ORE_PROCESSOR = () -> OreProcessor.CODEC;
 

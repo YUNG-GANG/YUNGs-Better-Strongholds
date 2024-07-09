@@ -37,9 +37,6 @@
       "processor_type": "betterstrongholds:end_portal_frame_processor"
     },
     {
-      "processor_type": "betterstrongholds:waterlogged_processor"
-    },
-    {
       "rules": [
         {
           "output_state": {

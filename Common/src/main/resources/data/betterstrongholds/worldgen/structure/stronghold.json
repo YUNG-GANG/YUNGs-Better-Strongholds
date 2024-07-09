@@ -16,5 +16,6 @@
   },
   "max_distance_from_center": 128,
   "max_y": 60,
-  "spawn_overrides": {}
+  "spawn_overrides": {},
+  "liquid_settings": "ignore_waterlogging"
 }

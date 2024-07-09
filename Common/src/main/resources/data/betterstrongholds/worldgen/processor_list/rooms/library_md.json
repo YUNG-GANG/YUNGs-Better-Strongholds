@@ -22,9 +22,6 @@
       "processor_type": "betterstrongholds:leg_processor"
     },
     {
-      "processor_type": "betterstrongholds:waterlogged_processor"
-    },
-    {
       "rules": [
         {
           "output_state": {
