@@ -274,9 +274,6 @@ public class ConfigModuleFabric {
     }
 
     private static void bakeConfig(BSConfigFabric configFabric) {
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceNormal = configFabric.betterStrongholds.general.cobwebReplacementChanceNormal;
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceSpawner = configFabric.betterStrongholds.general.cobwebReplacementChanceSpawner;
-        BetterStrongholdsCommon.CONFIG.general.torchSpawnRate = configFabric.betterStrongholds.general.torchSpawnRate;
-        BetterStrongholdsCommon.CONFIG.general.lanternSpawnRate = configFabric.betterStrongholds.general.lanternSpawnRate;
+        BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = configFabric.betterStrongholds.general.enableStructureRuin;
     }
 }

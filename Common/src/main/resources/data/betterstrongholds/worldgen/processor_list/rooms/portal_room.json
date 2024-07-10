@@ -1,34 +1,16 @@
 {
   "processors": [
     {
-      "processor_type": "betterstrongholds:ruin_processor"
-    },
-    {
       "processor_type": "betterstrongholds:banner_processor"
-    },
-    {
-      "processor_type": "betterstrongholds:redstone_processor"
     },
     {
       "processor_type": "betterstrongholds:leg_processor"
     },
     {
+      "processor_type": "betterstrongholds:end_portal_frame_processor"
+    },
+    {
       "rules": [
-        {
-          "output_state": {
-            "Name": "minecraft:tnt",
-            "Properties": {
-              "unstable": "false"
-            }
-          },
-          "input_predicate": {
-            "block": "minecraft:red_stained_glass",
-            "predicate_type": "minecraft:block_match"
-          },
-          "location_predicate": {
-            "predicate_type": "minecraft:always_true"
-          }
-        },
         {
           "output_state": {
             "Name": "minecraft:mossy_stone_bricks"

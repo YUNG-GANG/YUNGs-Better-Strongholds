@@ -9,17 +9,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 @AutoRegister(BetterStrongholdsCommon.MOD_ID)
 public class StructureProcessorTypeModule {
-    @AutoRegister("air_processor")
-    public static StructureProcessorType<AirProcessor> AIR_PROCESSOR = () -> AirProcessor.CODEC;
-
-    @AutoRegister("cobweb_processor")
-    public static StructureProcessorType<CobwebProcessor> COBWEB_PROCESSOR = () -> CobwebProcessor.CODEC;
-
-    @AutoRegister("torch_processor")
-    public static StructureProcessorType<TorchProcessor> TORCH_PROCESSOR = () -> TorchProcessor.CODEC;
-
-    @AutoRegister("lantern_processor")
-    public static StructureProcessorType<LanternProcessor> LANTERN_PROCESSOR = () -> LanternProcessor.CODEC;
+    @AutoRegister("ruin_processor")
+    public static StructureProcessorType<RuinProcessor> RUIN_PROCESSOR = () -> RuinProcessor.CODEC;
 
     @AutoRegister("banner_processor")
     public static StructureProcessorType<BannerProcessor> BANNER_PROCESSOR = () -> BannerProcessor.CODEC;

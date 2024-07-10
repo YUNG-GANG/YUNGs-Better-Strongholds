@@ -1,9 +1,6 @@
 {
   "processors": [
     {
-      "processor_type": "betterstrongholds:air_processor"
-    },
-    {
       "processor_type": "betterstrongholds:banner_processor"
     },
     {

@@ -7,7 +7,7 @@
       "element": {
         "name": "portal_room",
         "location": "betterstrongholds:portal_rooms/portal_room",
-        "processors": "betterstrongholds:main",
+        "processors": "betterstrongholds:rooms/portal_room",
         "projection": "rigid",
         "max_count": 1,
         "min_required_depth": 8,

@@ -296,9 +296,6 @@ public class ConfigModuleNeoForge {
     }
 
     private static void bakeConfig() {
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceNormal = BSConfigNeoForge.general.cobwebReplacementChanceNormal.get();
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceSpawner = BSConfigNeoForge.general.cobwebReplacementChanceSpawner.get();
-        BetterStrongholdsCommon.CONFIG.general.torchSpawnRate = BSConfigNeoForge.general.torchSpawnRate.get();
-        BetterStrongholdsCommon.CONFIG.general.lanternSpawnRate = BSConfigNeoForge.general.lanternSpawnRate.get();
+        BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = BSConfigNeoForge.general.enableStructureRuin.get();
     }
 }

@@ -296,9 +296,6 @@ public class ConfigModuleForge {
     }
 
     private static void bakeConfig() {
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceNormal = BSConfigForge.general.cobwebReplacementChanceNormal.get();
-        BetterStrongholdsCommon.CONFIG.general.cobwebReplacementChanceSpawner = BSConfigForge.general.cobwebReplacementChanceSpawner.get();
-        BetterStrongholdsCommon.CONFIG.general.torchSpawnRate = BSConfigForge.general.torchSpawnRate.get();
-        BetterStrongholdsCommon.CONFIG.general.lanternSpawnRate = BSConfigForge.general.lanternSpawnRate.get();
+        BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = BSConfigForge.general.enableStructureRuin.get();
     }
 }
