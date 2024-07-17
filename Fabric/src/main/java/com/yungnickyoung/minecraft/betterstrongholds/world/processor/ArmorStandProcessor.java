@@ -74,11 +74,11 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
             }
 
             // Chestplate
-            String chesplateString = isRare
+            String chestplateString = isRare
                     ? BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getRareChestplate(random)).toString()
                     : BuiltInRegistries.ITEM.getKey(ArmorStandChances.get().getCommonChestplate(random)).toString();
-            if (!chesplateString.equals("minecraft:air")) {
-                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).putString("id", chesplateString);
+            if (!chestplateString.equals("minecraft:air")) {
+                ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).putString("id", chestplateString);
                 ((CompoundTag) newNBT.getList("ArmorItems", 10).get(2)).putByte("Count", (byte) 1);
                 CompoundTag chestplateTagNBT = new CompoundTag();
                 chestplateTagNBT.putInt("Damage", 0);

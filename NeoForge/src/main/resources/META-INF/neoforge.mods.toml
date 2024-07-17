@@ -35,4 +35,4 @@ issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issue
     side="BOTH"
 
 [[mixins]]
-    config = "betterstrongholds.mixins.json"
+    config = "${mod_id}.mixins.json"
