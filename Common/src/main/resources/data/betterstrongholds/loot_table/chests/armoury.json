@@ -19,8 +19,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 10,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 10.0
             }
           ],
           "name": "minecraft:wooden_sword"
@@ -36,8 +36,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 20,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 20.0
             }
           ],
           "name": "minecraft:iron_sword"
@@ -53,8 +53,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:diamond_sword"
@@ -110,8 +110,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 20,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 20.0
             }
           ],
           "name": "minecraft:iron_helmet"
@@ -127,8 +127,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 20,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 20.0
             }
           ],
           "name": "minecraft:iron_chestplate"
@@ -144,8 +144,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 20,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 20.0
             }
           ],
           "name": "minecraft:iron_leggings"
@@ -161,8 +161,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 20,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 20.0
             }
           ],
           "name": "minecraft:iron_boots"
@@ -178,8 +178,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:diamond_helmet"
@@ -195,8 +195,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:diamond_chestplate"
@@ -212,8 +212,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:diamond_leggings"
@@ -229,8 +229,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:diamond_boots"
@@ -251,8 +251,8 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             }
           ],
           "name": "minecraft:bow"

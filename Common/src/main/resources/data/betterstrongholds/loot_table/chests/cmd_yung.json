@@ -14,12 +14,13 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot",
+              "levels": 30.0
             },
             {
               "function": "minecraft:set_name",
-              "name": "YUNG's Better Sword"
+              "name": "YUNG's Better Sword",
+              "target": "item_name"
             }
           ],
           "name": "minecraft:diamond_sword"
