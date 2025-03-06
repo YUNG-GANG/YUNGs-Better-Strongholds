@@ -297,5 +297,6 @@ public class ConfigModuleForge {
 
     private static void bakeConfig() {
         BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = BSConfigForge.general.enableStructureRuin.get();
+        BetterStrongholdsCommon.CONFIG.general.filledPortalFrameChance = BSConfigForge.general.filledPortalFrameChance.get().floatValue();
     }
 }

@@ -282,5 +282,6 @@ public class ConfigModuleFabric {
 
     private static void bakeConfig(BSConfigFabric configFabric) {
         BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = configFabric.betterStrongholds.general.enableStructureRuin;
+        BetterStrongholdsCommon.CONFIG.general.filledPortalFrameChance = configFabric.betterStrongholds.general.filledPortalFrameChance;
     }
 }

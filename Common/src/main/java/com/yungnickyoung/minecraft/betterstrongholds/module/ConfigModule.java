@@ -5,5 +5,6 @@ public class ConfigModule {
 
     public static class General {
         public boolean enableStructureRuin = false;
+        public float filledPortalFrameChance = 0.1f;
     }
 }

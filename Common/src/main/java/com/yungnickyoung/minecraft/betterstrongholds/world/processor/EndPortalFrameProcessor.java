@@ -1,6 +1,7 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.MapCodec;
+import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -28,7 +29,7 @@ public class EndPortalFrameProcessor extends StructureProcessor {
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.END_PORTAL_FRAME)) {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
-            if (randomSource.nextFloat() < 0.1f)
+            if (randomSource.nextFloat() < BetterStrongholdsCommon.CONFIG.general.filledPortalFrameChance)
                 blockInfoGlobal = new StructureTemplate.StructureBlockInfo(
                         blockInfoGlobal.pos(),
                         blockInfoGlobal.state().setValue(EndPortalFrameBlock.HAS_EYE, true),

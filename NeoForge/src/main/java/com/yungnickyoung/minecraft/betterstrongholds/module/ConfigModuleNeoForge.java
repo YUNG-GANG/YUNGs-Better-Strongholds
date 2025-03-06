@@ -297,5 +297,6 @@ public class ConfigModuleNeoForge {
 
     private static void bakeConfig() {
         BetterStrongholdsCommon.CONFIG.general.enableStructureRuin = BSConfigNeoForge.general.enableStructureRuin.get();
+        BetterStrongholdsCommon.CONFIG.general.filledPortalFrameChance = BSConfigNeoForge.general.filledPortalFrameChance.get().floatValue();
     }
 }

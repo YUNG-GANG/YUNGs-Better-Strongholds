@@ -5,4 +5,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class ConfigGeneralFabric {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean enableStructureRuin = false;
+
+    @ConfigEntry.Gui.Tooltip(count = 1)
+    public float filledPortalFrameChance = 0.1f;;
 }
