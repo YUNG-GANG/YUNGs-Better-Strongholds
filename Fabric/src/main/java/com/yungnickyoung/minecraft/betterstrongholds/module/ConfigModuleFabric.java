@@ -6,10 +6,12 @@ import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
+import com.yungnickyoung.minecraft.yungsapi.api.autoregister.AutoRegister;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.InteractionResult;
 
@@ -19,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@AutoRegister(BetterStrongholdsCommon.MOD_ID)
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
     public static final String VERSION_PATH = "fabric-1_21";
@@ -29,10 +32,14 @@ public class ConfigModuleFabric {
         AutoConfig.getConfigHolder(BSConfigFabric.class).registerSaveListener(ConfigModuleFabric::bakeConfig);
         AutoConfig.getConfigHolder(BSConfigFabric.class).registerLoadListener(ConfigModuleFabric::bakeConfig);
         bakeConfig(AutoConfig.getConfigHolder(BSConfigFabric.class).get());
+
+        // Reload JSON files when server starts to ensure modded blocks and items load properly
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> ConfigModuleFabric.reloadJSON());
     }
 
     private static InteractionResult bakeConfig(ConfigHolder<BSConfigFabric> configHolder, BSConfigFabric configFabric) {
         bakeConfig(configFabric);
+        reloadJSON();
         return InteractionResult.SUCCESS;
     }
 
@@ -40,10 +47,10 @@ public class ConfigModuleFabric {
         createDirectory();
         createBaseReadMe();
         createJsonReadMe();
-        loadJSON();
+        reloadJSON();
     }
 
-    private static void loadJSON() {
+    private static void reloadJSON() {
         loadOresJSON();
         loadRareBlocksJSON();
         loadArmorStandsJSON();
