@@ -32,7 +32,7 @@ public class OreProcessor extends StructureProcessor {
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
             // Randomly select ore from list
             BlockState oreBlock = OreChances.get().getRandomOre(randomSource);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), oreBlock, blockInfoGlobal.nbt());
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), oreBlock, null);
         }
         return blockInfoGlobal;
     }

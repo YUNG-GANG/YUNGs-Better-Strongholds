@@ -48,7 +48,7 @@ public class RuinProcessor extends StructureProcessor implements ISafeWorldModif
             return blockInfoGlobal;
         }
         if (!safeBlocks.contains(blockInfoGlobal.state()) && worldGenRegion.getChunk(blockInfoGlobal.pos()).getBlockState(blockInfoGlobal.pos()).isAir()) {
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), blockInfoGlobal.nbt());
+            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), null);
         }
 
         return blockInfoGlobal;
