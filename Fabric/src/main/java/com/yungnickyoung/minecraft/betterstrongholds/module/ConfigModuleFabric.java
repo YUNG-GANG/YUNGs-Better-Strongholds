@@ -6,7 +6,6 @@ import com.yungnickyoung.minecraft.betterstrongholds.world.ArmorStandChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.OreChances;
 import com.yungnickyoung.minecraft.betterstrongholds.world.RareBlockChances;
-import com.yungnickyoung.minecraft.yungsapi.api.autoregister.AutoRegister;
 import com.yungnickyoung.minecraft.yungsapi.io.JSON;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -21,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@AutoRegister(BetterStrongholdsCommon.MOD_ID)
 public class ConfigModuleFabric {
     public static final String CUSTOM_CONFIG_PATH = "betterstrongholds";
     public static final String VERSION_PATH = "fabric-1_21";
