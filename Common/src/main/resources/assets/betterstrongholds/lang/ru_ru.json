@@ -1,11 +1,18 @@
 {
- "betterstrongholds.commands.locate.stronghold": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
- "Use /locate structure betterstrongholds:stronghold instead!": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
+  "betterstrongholds.commands.locate.stronghold": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
+  "Use /locate structure betterstrongholds:stronghold instead!": "Используйте /locate structure betterstrongholds:stronghold вместо этого!",
 
- "text.autoconfig.betterstrongholds-fabric-1_21.title": "Улучшенные крепости YUNG'а",
+  "text.autoconfig.betterstrongholds-fabric-1_21.title": "Улучшенные крепости YUNG'а",
 
- "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds": "Улучшенные крепости YUNG'а",
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds": "Улучшенные крепости YUNG'а",
 
- "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general": "Общие настройки",
- "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.@Tooltip": "Общие настройки"
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general": "Общие настройки",
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.@Tooltip": "Общие настройки",
+
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.enableStructureRuin": "Разрешить разрушение структуры",
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.enableStructureRuin.@Tooltip[0]": "Разрешить крепостям быть немного разрушенными малыми пещерами-спагетти.",
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.enableStructureRuin.@Tooltip[1]": "Обратите внимание, что большие пещеры не повлияют на них.",
+
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.filledPortalFrameChance": "Шанс заполнения портальной рамки",
+  "text.autoconfig.betterstrongholds-fabric-1_21.option.betterStrongholds.general.filledPortalFrameChance.@Tooltip": "Шанс появления каждого блока рамки портала в Энд уже заполненным оком Эндера."
 }
