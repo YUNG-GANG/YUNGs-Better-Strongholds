@@ -63,8 +63,8 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
 
             int yBelow = 1;
 
-            while (mutable.getY() > levelReader.getMinBuildHeight()
-                    && mutable.getY() < levelReader.getMaxBuildHeight()
+            while (mutable.getY() > levelReader.getMinY()
+                    && mutable.getY() < levelReader.getMaxY()
                     && (currBlockState.isAir() || !levelReader.getFluidState(mutable).isEmpty())) {
                 // Place block in vertical pillar
                 levelReader.getChunk(mutable).setBlockState(mutable, stoneBrickSelector.get(randomSource), false);

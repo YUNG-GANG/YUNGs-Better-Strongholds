@@ -56,4 +56,4 @@ plugins {
 }
 
 rootProject.name = 'betterstrongholds'
-include("Common", "Fabric", "Forge", "NeoForge")
+include("Common", "Fabric", "NeoForge")
