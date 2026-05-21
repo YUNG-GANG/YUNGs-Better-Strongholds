@@ -46,7 +46,7 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state().is(Blocks.ORANGE_STAINED_GLASS)) {
-            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(blockInfoGlobal.pos()))) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
                 return blockInfoGlobal;
             }
 
@@ -67,7 +67,7 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                     && mutable.getY() < levelReader.getMaxY()
                     && (currBlockState.isAir() || !levelReader.getFluidState(mutable).isEmpty())) {
                 // Place block in vertical pillar
-                levelReader.getChunk(mutable).setBlockState(mutable, stoneBrickSelector.get(randomSource), false);
+                levelReader.getChunk(mutable).setBlockState(mutable, stoneBrickSelector.get(randomSource));
 
                 // Generate rafters
                 if (yBelow == 1) {

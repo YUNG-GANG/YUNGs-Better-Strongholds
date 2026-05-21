@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -33,13 +34,13 @@ public class ItemFrameProcessor extends StructureProcessor {
                                                                StructureTemplate.StructureEntityInfo globalEntityInfo,
                                                                StructurePlaceSettings structurePlaceSettings,
                                                                StructureTemplate template) {
-        if (globalEntityInfo.nbt.getString("id").equals("minecraft:item_frame")) {
+        if (globalEntityInfo.nbt.getStringOr("id", "").equals("minecraft:item_frame")) {
             RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Determine which pool we are grabbing from
             String item;
             try {
-                item = globalEntityInfo.nbt.getCompound("Item").get("id").toString();
+                item = globalEntityInfo.nbt.getCompoundOrEmpty("Item").get("id").toString();
             } catch (Exception e) {
                 BetterStrongholdsCommon.LOGGER.info("Unable to randomize item frame at {}", globalEntityInfo.blockPos);
                 return globalEntityInfo;
@@ -50,14 +51,14 @@ public class ItemFrameProcessor extends StructureProcessor {
             if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.getCompound("Item").putString("id", randomItemString);
+                    newNBT.put("Item", Util.make(newNBT.getCompoundOrEmpty("Item"), tag -> tag.putString("id", randomItemString)));
                 } else {
                     newNBT.remove("Item");
                 }
             } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
                 String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
                 if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.getCompound("Item").putString("id", randomItemString);
+                    newNBT.put("Item", Util.make(newNBT.getCompoundOrEmpty("Item"), tag -> tag.putString("id", randomItemString)));
                 } else {
                     newNBT.remove("Item");
                 }

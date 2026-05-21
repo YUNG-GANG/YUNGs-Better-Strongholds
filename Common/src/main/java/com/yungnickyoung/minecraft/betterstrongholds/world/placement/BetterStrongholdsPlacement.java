@@ -55,7 +55,7 @@ public class BetterStrongholdsPlacement extends RandomSpreadStructurePlacement {
     protected boolean isPlacementChunk(ChunkGeneratorStructureState chunkGeneratorStructureState, int chunkX, int chunkZ) {
         long seed = chunkGeneratorStructureState.getLevelSeed();
         ChunkPos chunkPos = this.getPotentialStructureChunk(seed, chunkX, chunkZ);
-        if (chunkPos.x == chunkX && chunkPos.z == chunkZ) {
+        if (chunkPos.x() == chunkX && chunkPos.z() == chunkZ) {
             int chunkDistance = (int) Math.sqrt((chunkX * chunkX) + (chunkZ * chunkZ));
 
             // Offset the distance so that the first ring is closer to spawn

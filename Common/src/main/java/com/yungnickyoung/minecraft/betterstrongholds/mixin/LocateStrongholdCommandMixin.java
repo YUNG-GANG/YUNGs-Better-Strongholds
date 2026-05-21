@@ -6,7 +6,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +31,7 @@ public class LocateStrongholdCommandMixin {
                                                         ResourceOrTagKeyArgument.Result<Structure> result,
                                                         CallbackInfoReturnable<Integer> ci) throws CommandSyntaxException {
         Optional<ResourceKey<Structure>> optional = result.unwrap().left();
-        if (optional.isPresent() && optional.get().location().equals(ResourceLocation.withDefaultNamespace("stronghold"))) {
+        if (optional.isPresent() && optional.get().identifier().equals(Identifier.withDefaultNamespace("stronghold"))) {
             throw OLD_STRONGHOLD_EXCEPTION.create();
         }
     }
