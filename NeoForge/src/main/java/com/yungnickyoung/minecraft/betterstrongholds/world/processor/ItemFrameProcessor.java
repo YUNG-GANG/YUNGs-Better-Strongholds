@@ -1,73 +1,67 @@
 package com.yungnickyoung.minecraft.betterstrongholds.world.processor;
 
 import com.mojang.serialization.MapCodec;
-import com.yungnickyoung.minecraft.betterstrongholds.BetterStrongholdsCommon;
 import com.yungnickyoung.minecraft.betterstrongholds.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.betterstrongholds.world.ItemFrameChances;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Util;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Fills item frames with a random item.
  * The type of random item depends on the item already in the frame.
  */
-@ParametersAreNonnullByDefault
+
 public class ItemFrameProcessor extends StructureProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
     public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
-    public StructureTemplate.StructureEntityInfo processEntity(LevelReader levelReader,
-                                                               BlockPos structurePiecePos,
-                                                               StructureTemplate.StructureEntityInfo localEntityInfo,
-                                                               StructureTemplate.StructureEntityInfo globalEntityInfo,
-                                                               StructurePlaceSettings structurePlaceSettings,
-                                                               StructureTemplate template) {
+    public StructureTemplate.@Nullable StructureEntityInfo processEntity(LevelReader levelReader,
+                                                                         BlockPos structurePiecePos,
+                                                                         StructureTemplate.StructureEntityInfo localEntityInfo,
+                                                                         StructureTemplate.StructureEntityInfo globalEntityInfo,
+                                                                         StructurePlaceSettings structurePlaceSettings,
+                                                                         StructureTemplate template) {
         if (globalEntityInfo.nbt.getStringOr("id", "").equals("minecraft:item_frame")) {
             RandomSource random = structurePlaceSettings.getRandom(globalEntityInfo.blockPos);
 
             // Determine which pool we are grabbing from
-            String item;
-            try {
-                item = globalEntityInfo.nbt.getCompoundOrEmpty("Item").get("id").toString();
-            } catch (Exception e) {
-                BetterStrongholdsCommon.LOGGER.info("Unable to randomize item frame at {}", globalEntityInfo.blockPos);
-                return globalEntityInfo;
-            }
+            String item = globalEntityInfo.nbt.getCompoundOrEmpty("Item").getStringOr("id", "");
 
             // Set the item in the item frame's NBT
             CompoundTag newNBT = globalEntityInfo.nbt.copy();
-            if (item.equals("\"minecraft:iron_sword\"")) { // Armoury pool
-                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getArmouryItem(random)).toString();
-                if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.put("Item", Util.make(newNBT.getCompoundOrEmpty("Item"), tag -> tag.putString("id", randomItemString)));
-                } else {
-                    newNBT.remove("Item");
-                }
-            } else if (item.equals("\"minecraft:bread\"")) { // Storage pool
-                String randomItemString = BuiltInRegistries.ITEM.getKey(ItemFrameChances.get().getStorageItem(random)).toString();
-                if (!randomItemString.equals("minecraft:air")) {
-                    newNBT.put("Item", Util.make(newNBT.getCompoundOrEmpty("Item"), tag -> tag.putString("id", randomItemString)));
-                } else {
-                    newNBT.remove("Item");
-                }
+            if (!newNBT.contains("Item")) {
+                newNBT.put("Item", new CompoundTag());
             }
+            var newItemNbt = newNBT.getCompound("Item").orElseThrow();
+            String randomItemString = switch (item) {
+                case "minecraft:iron_sword" -> // Armory pool
+                        BuiltInRegistries.ITEM.getKey(
+                                ItemFrameChances.get().getArmouryItem(random)).toString();
+                case "minecraft:bread" ->      // Storage pool
+                        BuiltInRegistries.ITEM.getKey(
+                                ItemFrameChances.get().getStorageItem(random)).toString();
+                default -> "minecraft:air";
+            };
+
+            if (randomItemString.equals("minecraft:air")) {
+                return null;
+            }
+            newItemNbt.putString("id", randomItemString);
 
             // Required to suppress dumb log spam
-            newNBT.putInt("TileX", globalEntityInfo.blockPos.getX());
-            newNBT.putInt("TileY", globalEntityInfo.blockPos.getY());
-            newNBT.putInt("TileZ", globalEntityInfo.blockPos.getZ());
+            newNBT.store("block_pos", BlockPos.CODEC, globalEntityInfo.blockPos);
 
             // Randomize rotation
             int randomRotation = random.nextInt(8);
@@ -78,18 +72,17 @@ public class ItemFrameProcessor extends StructureProcessor {
         return globalEntityInfo;
     }
 
-    @Nullable
     @Override
-    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
-                                                             BlockPos jigsawPiecePos,
-                                                             BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                             StructurePlaceSettings structurePlacementData) {
+    public StructureTemplate.@Nullable StructureBlockInfo processBlock(LevelReader levelReader,
+                                                                       BlockPos jigsawPiecePos,
+                                                                       BlockPos jigsawPieceBottomCenterPos,
+                                                                       StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                                       StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                                       StructurePlaceSettings structurePlacementData) {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override protected StructureProcessorType<?> getType() {
         return StructureProcessorTypeModule.ITEMFRAME_PROCESSOR;
     }
 }
