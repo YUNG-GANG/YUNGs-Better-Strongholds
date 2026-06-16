@@ -16,7 +16,70 @@
       }
     },
     {
-      "weight": 1100,
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 50,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_doorway",
         "processors": "betterstrongholds:main",
@@ -43,7 +106,7 @@
       }
     },
     {
-      "weight": 200,
+      "weight": 150,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_doorway_small",
         "processors": "betterstrongholds:main",
@@ -52,7 +115,25 @@
       }
     },
     {
-      "weight": 250,
+      "weight": 50,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_doorway_small",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 150,
+      "element": {
+        "location": "betterstrongholds:hall_doorways/hall_door_wood",
+        "processors": "betterstrongholds:main",
+        "projection": "rigid",
+        "element_type": "yungsapi:yung_single_element"
+      }
+    },
+    {
+      "weight": 100,
       "element": {
         "location": "betterstrongholds:hall_doorways/hall_door_wood",
         "processors": "betterstrongholds:main",
