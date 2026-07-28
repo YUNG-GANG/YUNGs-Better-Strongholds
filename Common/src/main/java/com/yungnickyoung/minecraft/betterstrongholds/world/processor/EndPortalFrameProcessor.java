@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 /**
  * Randomly fills some end portal frames w/ eyes of ender.
  */
-public class EndPortalFrameProcessor extends StructureProcessor {
+public class EndPortalFrameProcessor implements StructureProcessor {
     public static final EndPortalFrameProcessor INSTANCE = new EndPortalFrameProcessor();
     public static final MapCodec<EndPortalFrameProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -24,21 +24,22 @@ public class EndPortalFrameProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().is(Blocks.END_PORTAL_FRAME)) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+        if (blockInfo.state().is(Blocks.END_PORTAL_FRAME)) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
             if (randomSource.nextFloat() < BetterStrongholdsCommon.CONFIG.general.filledPortalFrameChance)
-                blockInfoGlobal = new StructureTemplate.StructureBlockInfo(
-                        blockInfoGlobal.pos(),
-                        blockInfoGlobal.state().setValue(EndPortalFrameBlock.HAS_EYE, true),
-                        blockInfoGlobal.nbt());
+                blockInfo = new StructureTemplate.StructureBlockInfo(
+                        blockInfo.pos(),
+                        blockInfo.state().setValue(EndPortalFrameBlock.HAS_EYE, true),
+                        blockInfo.nbt());
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.END_PORTAL_FRAME_PROCESSOR;
     }
 }

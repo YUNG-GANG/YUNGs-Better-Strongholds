@@ -22,7 +22,7 @@ import java.util.List;
  * Replaces blocks with air where air exists in the world already.
  * Intended to give walls and other pieces a ruined appearance that opens up the structure to caves.
  */
-public class RuinProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class RuinProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final MapCodec<RuinProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
             .group(
                     BlockState.CODEC.listOf().optionalFieldOf("safe_blocks", new ArrayList<>()).forGetter(config -> config.safeBlocks))
@@ -38,23 +38,24 @@ public class RuinProcessor extends StructureProcessor implements ISafeWorldModif
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                 BlockPos jigsawPiecePos,
                                                 BlockPos jigsawPieceBottomCenterPos,
-                                                StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                BlockPos pivotPos,
+                                                StructureTemplate.StructureBlockInfo blockInfo,
                                                 StructurePlaceSettings structurePlacementData) {
         if (!BetterStrongholdsCommon.CONFIG.general.enableStructureRuin) {
-            return blockInfoGlobal;
+            return blockInfo;
         }
         if (!(levelReader instanceof WorldGenRegion worldGenRegion)) {
-            return blockInfoGlobal;
+            return blockInfo;
         }
-        if (!safeBlocks.contains(blockInfoGlobal.state()) && worldGenRegion.getChunk(blockInfoGlobal.pos()).getBlockState(blockInfoGlobal.pos()).isAir()) {
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.AIR.defaultBlockState(), null);
+        if (!safeBlocks.contains(blockInfo.state()) && worldGenRegion.getChunk(blockInfo.pos()).getBlockState(blockInfo.pos()).isAir()) {
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), Blocks.AIR.defaultBlockState(), null);
         }
 
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.RUIN_PROCESSOR;
     }
 }
