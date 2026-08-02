@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.Optional;
@@ -21,7 +20,7 @@ import java.util.Optional;
 /**
  * Ensures redstone doesn't spawn floating in the air.
  */
-public class RedstoneProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class RedstoneProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final RedstoneProcessor INSTANCE = new RedstoneProcessor(Blocks.STONE_BRICKS);
     public static final MapCodec<RedstoneProcessor> CODEC = RecordCodecBuilder.mapCodec(codecBuilder -> codecBuilder
             .group(
@@ -41,7 +40,7 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.REDSTONE_WIRE)) {
@@ -53,7 +52,7 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.REDSTONE_PROCESSOR;
     }
 }

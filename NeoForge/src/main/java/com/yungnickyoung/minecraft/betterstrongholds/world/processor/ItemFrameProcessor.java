@@ -12,7 +12,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jspecify.annotations.Nullable;
 
@@ -22,7 +21,7 @@ import org.jspecify.annotations.Nullable;
  * The type of random item depends on the item already in the frame.
  */
 
-public class ItemFrameProcessor extends StructureProcessor {
+public class ItemFrameProcessor implements StructureProcessor {
     public static final ItemFrameProcessor INSTANCE = new ItemFrameProcessor();
     public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -76,13 +75,13 @@ public class ItemFrameProcessor extends StructureProcessor {
     public StructureTemplate.@Nullable StructureBlockInfo processBlock(LevelReader levelReader,
                                                                        BlockPos jigsawPiecePos,
                                                                        BlockPos jigsawPieceBottomCenterPos,
-                                                                       StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                                       BlockPos templateRelativePos,
                                                                        StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                                        StructurePlaceSettings structurePlacementData) {
         return blockInfoGlobal;
     }
 
-    @Override protected StructureProcessorType<?> getType() {
+    @Override public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.ITEMFRAME_PROCESSOR;
     }
 }
