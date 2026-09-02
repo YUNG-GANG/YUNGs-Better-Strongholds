@@ -10,7 +10,7 @@ public class Services {
     public static final IProcessorProvider PROCESSORS = load(IProcessorProvider.class);
 
     public static <T> T load(Class<T> clazz) {
-        final T loadedService = ServiceLoader.load(clazz)
+        final T loadedService = ServiceLoader.load(clazz, Services.class.getClassLoader())
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
         BetterStrongholdsCommon.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
