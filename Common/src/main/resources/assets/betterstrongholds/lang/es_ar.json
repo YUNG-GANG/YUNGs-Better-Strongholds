@@ -1,0 +1,27 @@
+{
+  "betterstrongholds.commands.locate.stronghold": "¡Usá /locate structure betterstrongholds:stronghold en su lugar!",
+  "Use /locate structure betterstrongholds:stronghold instead!": "¡Usá /locate structure betterstrongholds:stronghold en su lugar!",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.title": "YUNG's Better Strongholds",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds": "YUNG's Better Strongholds",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general": "Configuración general",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.@Tooltip": "Configuraciones generales.",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal": "Frecuencia de telarañas (NORMAL)",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[0]": "Frecuencia con la que aparecen telarañas en distintas partes de la fortaleza.",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceNormal.@Tooltip[1]": "Por defecto: 0.1",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner": "Frecuencia de telarañas (GENERADOR)",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[0]": "Frecuencia con la que aparecen telarañas alrededor de generadores de arañas en bibliotecas.",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.cobwebReplacementChanceSpawner.@Tooltip[1]": "Por defecto: 0.3",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate": "Frecuencia de antorchas",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate.@Tooltip[0]": "Frecuencia con la que aparecen antorchas en toda la fortaleza.",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.torchSpawnRate.@Tooltip[1]": "Por defecto: 0.1",
+
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate": "Frecuencia de faroles",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[0]": "Frecuencia con la que aparecen faroles en toda la fortaleza.",
+  "text.autoconfig.betterstrongholds-fabric-1_20.option.betterStrongholds.general.lanternSpawnRate.@Tooltip[1]": "Por defecto: 0.2"
+}
