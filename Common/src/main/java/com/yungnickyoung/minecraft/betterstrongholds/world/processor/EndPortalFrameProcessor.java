@@ -10,13 +10,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EndPortalFrameBlock;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 /**
  * Randomly fills some end portal frames w/ eyes of ender.
  */
-public class EndPortalFrameProcessor extends StructureProcessor {
+public class EndPortalFrameProcessor implements StructureProcessor {
     public static final EndPortalFrameProcessor INSTANCE = new EndPortalFrameProcessor();
     public static final MapCodec<EndPortalFrameProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -24,7 +23,7 @@ public class EndPortalFrameProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().is(Blocks.END_PORTAL_FRAME)) {
@@ -38,7 +37,7 @@ public class EndPortalFrameProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.END_PORTAL_FRAME_PROCESSOR;
     }
 }
