@@ -11,6 +11,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
@@ -29,7 +30,7 @@ import java.util.Optional;
 /**
  * Dynamically generates legs below the stronghold.
  */
-public class LegProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class LegProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final LegProcessor INSTANCE = new LegProcessor();
     public static final MapCodec<LegProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -42,23 +43,23 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state().is(Blocks.ORANGE_STAINED_GLASS)) {
-            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
-                return blockInfoGlobal;
+        if (blockInfo.state().is(Blocks.STAINED_GLASS.pick(DyeColor.YELLOW)) || blockInfo.state().is(Blocks.STAINED_GLASS.pick(DyeColor.ORANGE))) {
+            if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfo.pos()))) {
+                return blockInfo;
             }
 
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
 
             // Replace the glass itself
-            blockInfoGlobal = blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS)
-                    ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), stoneBrickSelector.get(randomSource), null)
-                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.CYAN_TERRACOTTA.defaultBlockState(), null);
+            blockInfo = blockInfo.state().is(Blocks.STAINED_GLASS.pick(DyeColor.YELLOW))
+                    ? new StructureTemplate.StructureBlockInfo(blockInfo.pos(), stoneBrickSelector.get(randomSource), null)
+                    : new StructureTemplate.StructureBlockInfo(blockInfo.pos(), Blocks.DYED_TERRACOTTA.pick(DyeColor.CYAN).defaultBlockState(), null);
 
             // Reusable mutable
-            BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable().move(Direction.DOWN); // Move down since we already processed the first block
+            BlockPos.MutableBlockPos mutable = blockInfo.pos().mutable().move(Direction.DOWN); // Move down since we already processed the first block
             BlockState currBlockState = levelReader.getBlockState(mutable);
 
             int yBelow = 1;
@@ -137,10 +138,11 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
                 yBelow++;
             }
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.LEG_PROCESSOR;
     }
 }

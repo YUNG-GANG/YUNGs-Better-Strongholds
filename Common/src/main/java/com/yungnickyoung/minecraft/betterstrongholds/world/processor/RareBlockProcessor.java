@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
  * Replaces purpur blocks with a random rare block
  * The chance of a given block being chosen is determined by the config.
  */
-public class RareBlockProcessor extends StructureProcessor {
+public class RareBlockProcessor implements StructureProcessor {
     public static final RareBlockProcessor INSTANCE = new RareBlockProcessor();
     public static final MapCodec<RareBlockProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -25,19 +25,20 @@ public class RareBlockProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().getBlock() == Blocks.PURPUR_BLOCK) {
-            RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
+        if (blockInfo.state().getBlock() == Blocks.PURPUR_BLOCK) {
+            RandomSource randomSource = structurePlacementData.getRandom(blockInfo.pos());
             // Randomly select ore from list
             BlockState rareBlock = RareBlockChances.get().getRandomRareBlock(randomSource);
-            blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), rareBlock, null);
+            blockInfo = new StructureTemplate.StructureBlockInfo(blockInfo.pos(), rareBlock, null);
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.RARE_BLOCK_PROCESSOR;
     }
 }

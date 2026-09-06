@@ -74,16 +74,17 @@ public class ItemFrameProcessor extends StructureEntityProcessor {
     }
 
     @Override
-    public StructureTemplate.@Nullable StructureBlockInfo processBlock(LevelReader levelReader,
-                                                                       BlockPos jigsawPiecePos,
-                                                                       BlockPos jigsawPieceBottomCenterPos,
-                                                                       StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                                       StructureTemplate.StructureBlockInfo blockInfoGlobal,
-                                                                       StructurePlaceSettings structurePlacementData) {
-        return blockInfoGlobal;
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
+                                                             BlockPos jigsawPiecePos,
+                                                             BlockPos jigsawPieceBottomCenterPos,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
+                                                             StructurePlaceSettings structurePlacementData) {
+        return blockInfo;
     }
 
-    @Override protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.ITEMFRAME_PROCESSOR;
     }
 }
