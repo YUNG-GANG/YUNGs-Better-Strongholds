@@ -4,8 +4,7 @@
   "package": "com.yungnickyoung.minecraft.betterstrongholds.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "DisableVanillaStrongholdsMixin",
-    "LocateStrongholdCommandMixin"
+    "DisableVanillaStrongholdsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
