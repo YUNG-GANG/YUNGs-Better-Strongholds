@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.List;
  * Replaces blocks with air where air exists in the world already.
  * Intended to give walls and other pieces a ruined appearance that opens up the structure to caves.
  */
-public class RuinProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class RuinProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final MapCodec<RuinProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
             .group(
                     BlockState.CODEC.listOf().optionalFieldOf("safe_blocks", new ArrayList<>()).forGetter(config -> config.safeBlocks))
@@ -38,7 +37,7 @@ public class RuinProcessor extends StructureProcessor implements ISafeWorldModif
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                 BlockPos jigsawPiecePos,
                                                 BlockPos jigsawPieceBottomCenterPos,
-                                                StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                BlockPos templateRelativePos,
                                                 StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                 StructurePlaceSettings structurePlacementData) {
         if (!BetterStrongholdsCommon.CONFIG.general.enableStructureRuin) {
@@ -54,7 +53,7 @@ public class RuinProcessor extends StructureProcessor implements ISafeWorldModif
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.RUIN_PROCESSOR;
     }
 }

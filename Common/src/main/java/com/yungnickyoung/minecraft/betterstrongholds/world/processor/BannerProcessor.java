@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.List;
@@ -25,13 +24,13 @@ import java.util.List;
 /**
  * Replaces gray wall banners with a random banner from a pool of banners.
  */
-public class BannerProcessor extends StructureProcessor {
+public class BannerProcessor implements StructureProcessor {
     public static final BannerProcessor INSTANCE = new BannerProcessor();
     public static final MapCodec<BannerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
     // All banners
     public static final Banner ENDERMAN_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.MAGENTA_WALL_BANNER.defaultBlockState())
+        .blockState(Blocks.WALL_BANNER.magenta().defaultBlockState())
         .pattern(BannerPatterns.STRIPE_SMALL, DyeColor.WHITE)
         .pattern(BannerPatterns.STRIPE_TOP, DyeColor.BLACK)
         .pattern(BannerPatterns.HALF_HORIZONTAL_MIRROR, DyeColor.BLACK)
@@ -41,7 +40,7 @@ public class BannerProcessor extends StructureProcessor {
         .build();
 
     public static final Banner WITHER_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.BLACK_WALL_BANNER.defaultBlockState())
+        .blockState(Blocks.WALL_BANNER.black().defaultBlockState())
         .pattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.GRAY)
         .pattern(BannerPatterns.STRIPE_CENTER, DyeColor.BLACK)
         .pattern(BannerPatterns.HALF_HORIZONTAL, DyeColor.GRAY)
@@ -50,7 +49,7 @@ public class BannerProcessor extends StructureProcessor {
         .build();
 
     public static final Banner PORTAL_WALL_BANNER = new Banner.Builder()
-        .blockState(Blocks.PURPLE_WALL_BANNER.defaultBlockState())
+        .blockState(Blocks.WALL_BANNER.purple().defaultBlockState())
         .pattern(BannerPatterns.STRIPE_SMALL, DyeColor.MAGENTA)
         .pattern(BannerPatterns.BRICKS, DyeColor.PURPLE)
         .pattern(BannerPatterns.CURLY_BORDER, DyeColor.MAGENTA)
@@ -67,12 +66,12 @@ public class BannerProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() instanceof AbstractBannerBlock) {
             // Make sure we only operate on the placeholder banners
-            if (blockInfoGlobal.state().getBlock() == Blocks.GRAY_WALL_BANNER && (blockInfoGlobal.nbt().get("patterns") == null || blockInfoGlobal.nbt().getListOrEmpty("patterns").isEmpty())) {
+            if (blockInfoGlobal.state().getBlock() == Blocks.WALL_BANNER.gray() && (blockInfoGlobal.nbt().get("patterns") == null || blockInfoGlobal.nbt().getListOrEmpty("patterns").isEmpty())) {
                 Banner banner = getRandomBanner(structurePlacementData.getRandom(blockInfoGlobal.pos()));
                 Direction facing = blockInfoGlobal.state().getValue(BlockStateProperties.HORIZONTAL_FACING);
                 BlockState newState = banner.getState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
@@ -84,7 +83,7 @@ public class BannerProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.BANNER_PROCESSOR;
     }
 
