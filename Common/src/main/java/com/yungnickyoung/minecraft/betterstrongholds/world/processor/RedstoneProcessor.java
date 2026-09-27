@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * Ensures redstone doesn't spawn floating in the air.
  */
-public class RedstoneProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class RedstoneProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final RedstoneProcessor INSTANCE = new RedstoneProcessor(Blocks.STONE_BRICKS);
     public static final MapCodec<RedstoneProcessor> CODEC = RecordCodecBuilder.mapCodec(codecBuilder -> codecBuilder
             .group(
@@ -41,19 +41,20 @@ public class RedstoneProcessor extends StructureProcessor implements ISafeWorldM
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().is(Blocks.REDSTONE_WIRE)) {
-            Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, blockInfoGlobal.pos().below());
-            if (belowBlockState.isEmpty() || !belowBlockState.get().isFaceSturdy(levelReader, blockInfoGlobal.pos().below(), Direction.UP)) {
-                setBlockStateSafe(levelReader, blockInfoGlobal.pos().below(), belowBlock.defaultBlockState());
+        if (blockInfo.state().is(Blocks.REDSTONE_WIRE)) {
+            Optional<BlockState> belowBlockState = getBlockStateSafe(levelReader, blockInfo.pos().below());
+            if (belowBlockState.isEmpty() || !belowBlockState.get().isFaceSturdy(levelReader, blockInfo.pos().below(), Direction.UP)) {
+                setBlockStateSafe(levelReader, blockInfo.pos().below(), belowBlock.defaultBlockState());
             }
         }
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.REDSTONE_PROCESSOR;
     }
 }

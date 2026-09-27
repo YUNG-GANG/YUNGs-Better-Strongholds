@@ -89,18 +89,18 @@ public class ArmorStandProcessor extends StructureEntityProcessor {
         newEquipment.put(key, bootsTag);
     }
 
-    @Nullable
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
-                                                             StructureTemplate.StructureBlockInfo blockInfoGlobal,
+                                                             BlockPos pivotPos,
+                                                             StructureTemplate.StructureBlockInfo blockInfo,
                                                              StructurePlaceSettings structurePlacementData) {
-        return blockInfoGlobal;
+        return blockInfo;
     }
 
-    @Override protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.ARMORSTAND_PROCESSOR;
     }
 }
