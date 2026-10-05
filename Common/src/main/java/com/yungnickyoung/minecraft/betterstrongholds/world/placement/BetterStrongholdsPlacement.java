@@ -8,20 +8,19 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.ChunkGeneratorStructureState;
+import net.minecraft.world.level.levelgen.structure.placement.AbstractSpreadingStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
-import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
-import net.minecraft.world.level.levelgen.structure.placement.StructurePlacementType;
 
 import java.util.Optional;
 
 public class BetterStrongholdsPlacement extends RandomSpreadStructurePlacement {
     public static final MapCodec<BetterStrongholdsPlacement> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Vec3i.offsetCodec(16).optionalFieldOf("locate_offset", Vec3i.ZERO).forGetter(BetterStrongholdsPlacement::locateOffset),
-            StructurePlacement.FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", StructurePlacement.FrequencyReductionMethod.DEFAULT).forGetter(BetterStrongholdsPlacement::frequencyReductionMethod),
+            AbstractSpreadingStructurePlacement.FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", AbstractSpreadingStructurePlacement.FrequencyReductionMethod.DEFAULT).forGetter(BetterStrongholdsPlacement::frequencyReductionMethod),
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("frequency", 1.0F).forGetter(BetterStrongholdsPlacement::frequency),
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("salt").forGetter(BetterStrongholdsPlacement::salt),
-            StructurePlacement.ExclusionZone.CODEC.optionalFieldOf("exclusion_zone").forGetter(BetterStrongholdsPlacement::exclusionZone),
+            AbstractSpreadingStructurePlacement.ExclusionZone.CODEC.optionalFieldOf("exclusion_zone").forGetter(BetterStrongholdsPlacement::exclusionZone),
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("spacing").forGetter(BetterStrongholdsPlacement::spacing),
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("separation").forGetter(BetterStrongholdsPlacement::separation),
             RandomSpreadType.CODEC.optionalFieldOf("spread_type", RandomSpreadType.LINEAR).forGetter(BetterStrongholdsPlacement::spreadType),
@@ -80,8 +79,9 @@ public class BetterStrongholdsPlacement extends RandomSpreadStructurePlacement {
     }
 
     @Override
-    public StructurePlacementType<?> type() {
-        return StructurePlacementTypeModule.BETTER_STRONGHOLD_PLACEMENT;
+    @SuppressWarnings("unchecked")
+    public MapCodec<RandomSpreadStructurePlacement> codec() {
+        return (MapCodec<RandomSpreadStructurePlacement>) (MapCodec<?>) StructurePlacementTypeModule.BETTER_STRONGHOLD_PLACEMENT;
     }
 
     public int chunkDistanceToFirstRing() {

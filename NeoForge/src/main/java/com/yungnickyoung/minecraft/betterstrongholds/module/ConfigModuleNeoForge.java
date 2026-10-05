@@ -27,7 +27,7 @@ public class ConfigModuleNeoForge {
 
     public static void init(ModContainer container) {
         initCustomFiles();
-        container.registerConfig(ModConfig.Type.COMMON, BSConfigNeoForge.SPEC, "betterstrongholds-neoforge-1_21.toml");
+        container.registerConfig(ModConfig.Type.LOCAL, BSConfigNeoForge.SPEC, "betterstrongholds-neoforge-1_21.toml");
         NeoForge.EVENT_BUS.addListener(ConfigModuleNeoForge::onWorldLoad);
         BetterStrongholdsNeoForge.loadingContextEventBus.addListener(ConfigModuleNeoForge::onConfigChange);
     }

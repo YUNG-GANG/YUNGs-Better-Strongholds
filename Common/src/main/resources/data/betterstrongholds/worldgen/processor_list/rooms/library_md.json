@@ -16,7 +16,7 @@
       "rules": [
         {
           "output_state": {
-            "Name": "minecraft:mossy_stone_bricks"
+            "id": "minecraft:mossy_stone_bricks"
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
@@ -29,7 +29,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:cracked_stone_bricks"
+            "id": "minecraft:cracked_stone_bricks"
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
@@ -42,7 +42,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:infested_stone_bricks"
+            "id": "minecraft:infested_stone_bricks"
           },
           "input_predicate": {
             "block": "minecraft:stone_bricks",
@@ -55,7 +55,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:chest",
@@ -68,7 +68,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:cobweb",
@@ -81,7 +81,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:cobweb"
+            "id": "minecraft:cobweb"
           },
           "input_predicate": {
             "block": "minecraft:tripwire",
@@ -94,7 +94,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:tripwire",
@@ -106,7 +106,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:torch",
@@ -119,7 +119,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:wall_torch",
@@ -132,7 +132,7 @@
         },
         {
           "output_state": {
-            "Name": "minecraft:air"
+            "id": "minecraft:air"
           },
           "input_predicate": {
             "block": "minecraft:lantern",

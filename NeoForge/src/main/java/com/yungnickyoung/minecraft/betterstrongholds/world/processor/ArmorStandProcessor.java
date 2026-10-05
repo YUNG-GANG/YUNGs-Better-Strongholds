@@ -11,7 +11,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
@@ -21,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * they are already wearing.
  */
 @NullMarked
-public class ArmorStandProcessor extends StructureProcessor {
+public class ArmorStandProcessor implements StructureProcessor {
     public static final ArmorStandProcessor INSTANCE = new ArmorStandProcessor();
     public static final MapCodec<StructureProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -95,13 +94,13 @@ public class ArmorStandProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         return blockInfoGlobal;
     }
 
-    @Override protected StructureProcessorType<?> getType() {
+    @Override public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.ARMORSTAND_PROCESSOR;
     }
 }

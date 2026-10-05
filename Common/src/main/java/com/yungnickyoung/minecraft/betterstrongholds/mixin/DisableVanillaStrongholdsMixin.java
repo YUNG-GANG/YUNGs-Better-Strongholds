@@ -1,11 +1,11 @@
 package com.yungnickyoung.minecraft.betterstrongholds.mixin;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.SectionPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
@@ -32,8 +32,8 @@ public class DisableVanillaStrongholdsMixin {
             long seed,
             ChunkAccess chunkAccess,
             ChunkPos chunkPos,
-            SectionPos sectionPos,
             ResourceKey<Level> levelResourceKey,
+            Climate.Sampler climateSampler,
             CallbackInfoReturnable<Boolean> cir
     ) {
         if (structureSetEntry.structure().value().type() == StructureType.STRONGHOLD) {

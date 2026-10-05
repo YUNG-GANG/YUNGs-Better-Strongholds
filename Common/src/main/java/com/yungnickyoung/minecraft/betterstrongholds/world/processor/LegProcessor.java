@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import java.util.Optional;
@@ -29,7 +29,7 @@ import java.util.Optional;
 /**
  * Dynamically generates legs below the stronghold.
  */
-public class LegProcessor extends StructureProcessor implements ISafeWorldModifier {
+public class LegProcessor implements StructureProcessor, ISafeWorldModifier {
     public static final LegProcessor INSTANCE = new LegProcessor();
     public static final MapCodec<LegProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -42,10 +42,10 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
-        if (blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS) || blockInfoGlobal.state().is(Blocks.ORANGE_STAINED_GLASS)) {
+        if (blockInfoGlobal.state().is(Blocks.STAINED_GLASS.pick(DyeColor.YELLOW)) || blockInfoGlobal.state().is(Blocks.STAINED_GLASS.pick(DyeColor.ORANGE))) {
             if (levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(ChunkPos.containing(blockInfoGlobal.pos()))) {
                 return blockInfoGlobal;
             }
@@ -53,9 +53,9 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
             RandomSource randomSource = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
             // Replace the glass itself
-            blockInfoGlobal = blockInfoGlobal.state().is(Blocks.YELLOW_STAINED_GLASS)
+            blockInfoGlobal = blockInfoGlobal.state().is(Blocks.STAINED_GLASS.pick(DyeColor.YELLOW))
                     ? new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), stoneBrickSelector.get(randomSource), null)
-                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.CYAN_TERRACOTTA.defaultBlockState(), null);
+                    : new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.DYED_TERRACOTTA.pick(DyeColor.CYAN).defaultBlockState(), null);
 
             // Reusable mutable
             BlockPos.MutableBlockPos mutable = blockInfoGlobal.pos().mutable().move(Direction.DOWN); // Move down since we already processed the first block
@@ -140,7 +140,7 @@ public class LegProcessor extends StructureProcessor implements ISafeWorldModifi
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.LEG_PROCESSOR;
     }
 }

@@ -10,8 +10,8 @@
       "rules": [
         {
           "output_state": {
-            "Name": "minecraft:tnt",
-            "Properties": {
+            "id": "minecraft:tnt",
+            "properties": {
               "unstable": "false"
             }
           },

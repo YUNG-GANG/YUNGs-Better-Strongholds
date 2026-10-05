@@ -10,7 +10,8 @@ issueTrackerURL="https://github.com/yungnickyoung/YUNGs-Better-Strongholds/issue
     credits="${mod_credits}"
 	authors="YUNGNICKYOUNG, Acarii"
     description="${mod_description}"
-	logoFile="logo.png"
+	bannerFile="logo.png"
+	iconFile="icon.png"
     displayURL="https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds"
 
 [modproperties.${mod_id}]
